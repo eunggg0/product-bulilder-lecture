@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="오늘의 픽 전체 추천 목록 - 영화, 드라마, 책, 게임 100개의 엄선된 추천 작품을 확인하세요.">
+  <meta property="og:title" content="전체 추천 목록 - 오늘의 픽">
+  <meta property="og:description" content="영화, 드라마, 책, 게임 100개의 엄선된 추천 목록">
+  <meta property="og:site_name" content="오늘의 픽">
+  <title>전체 추천 목록 - 오늘의 픽</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0B4FES1V9K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0B4FES1V9K');
+  </script>
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-1445713983400242">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1445713983400242" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .list-hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    .list-hero h1 { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+    .list-hero p { color: var(--text-muted); }
+
+    .list-tabs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .list-search {
+      max-width: 400px;
+      margin: 0 auto 28px;
+      padding: 0 20px;
+    }
+
+    .list-search input {
+      width: 100%;
+      padding: 12px 18px;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.95rem;
+      background: var(--card-bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .list-search input:focus { border-color: var(--primary); }
+    .list-search input::placeholder { color: var(--text-muted); }
+
+    .list-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .list-count {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .list-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .list-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(108,99,255,0.15);
+    }
+
+    .list-card-img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .list-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .list-card-img .fallback-emoji {
+      width: 100%;
+      aspect-ratio: 2/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background: linear-gradient(135deg, var(--bg), var(--border));
+    }
+
+    .list-card-body {
+      padding: 12px 14px;
+    }
+
+    .list-card-body .lc-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 50px;
+      color: #fff;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .lc-badge.movie { background: var(--movie); }
+    .lc-badge.drama { background: var(--drama); color: #333; }
+    .lc-badge.book { background: var(--book); }
+    .lc-badge.game { background: var(--game); }
+
+    .list-card-body h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .list-card-body .lc-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .list-card-body .lc-rating {
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 600px) {
+      .list-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .list-hero h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html">🎲 오늘의 픽</a>
+      <nav>
+        <a href="index.html">홈</a>
+        <a href="list.html" style="color:var(--primary)">전체목록</a>
+        <a href="about.html">소개</a>
+        <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="다크모드 전환">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 상단 광고 -->
+  <div class="ad-container ad-top">
+    <div class="ad-placeholder"><span>광고</span></div>
+  </div>
+
+  <div class="list-hero">
+    <h1>📋 전체 추천 목록</h1>
+    <p>영화 · 드라마 · 책 · 게임 총 <strong>100개</strong>의 엄선된 추천 작품</p>
+  </div>
+
+  <!-- 검색 -->
+  <div class="list-search">
+    <input type="text" id="searchInput" placeholder="🔍 작품명 검색..." oninput="renderList()">
+  </div>
+
+  <!-- 카테고리 탭 -->
+  <div class="list-tabs">
+    <button class="tab active" data-category="all" onclick="setCategory(this, 'all')">전체</button>
+    <button class="tab" data-category="movie" onclick="setCategory(this, 'movie')">🎬 영화</button>
+    <button class="tab" data-category="drama" onclick="setCategory(this, 'drama')">📺 드라마</button>
+    <button class="tab" data-category="book" onclick="setCategory(this, 'book')">📚 책</button>
+    <button class="tab" data-category="game" onclick="setCategory(this, 'game')">🎮 게임</button>
+  </div>
+
+  <div class="list-container">
+    <!-- 중간 광고 -->
+    <div class="ad-container ad-middle" style="padding:0 0 20px">
+      <div class="ad-placeholder"><span>광고</span></div>
+    </div>
+
+    <div class="list-count" id="listCount"></div>
+    <div class="list-grid" id="listGrid"></div>
+  </div>
+
+  <!-- 하단 광고 -->
+  <div class="ad-container ad-bottom">
+    <div class="ad-placeholder"><span>광고</span></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2025 오늘의 픽 | <a href="privacy.html">개인정보처리방침</a> | <a href="about.html">소개</a></p>
+      <p class="footer-desc">매일 새로운 영화, 드라마, 책, 게임을 추천해드립니다.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
+    const TMDB_IMG = "https://image.tmdb.org/t/p/w300";
+    const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
+    const categoryLabel = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
+    const posterCache = {};
+
+    let currentCategory = "all";
+
+    function setCategory(el, cat) {
+      document.querySelectorAll(".list-tabs .tab").forEach(t => t.classList.remove("active"));
+      el.classList.add("active");
+      currentCategory = cat;
+      renderList();
+    }
+
+    function renderList() {
+      const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+      const grid = document.getElementById("listGrid");
+      const countEl = document.getElementById("listCount");
+
+      const categories = currentCategory === "all" ? ["movie", "drama", "book", "game"] : [currentCategory];
+      let items = [];
+      categories.forEach(cat => {
+        recommendations[cat].forEach(item => items.push({ ...item, cat }));
+      });
+
+      if (keyword) {
+        items = items.filter(item =>
+          item.title.toLowerCase().includes(keyword) ||
+          item.genre.toLowerCase().includes(keyword) ||
+          item.tags.some(t => t.toLowerCase().includes(keyword))
+        );
+      }
+
+      countEl.textContent = `총 ${items.length}개`;
+
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="no-results">검색 결과가 없어요 😢</div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(item => `
+        <div class="list-card" onclick="window.location.href='detail.html?category=${item.cat}&title=${encodeURIComponent(item.title)}'">
+          <div class="list-card-img">
+            <img
+              id="img_${item.cat}_${encodeURIComponent(item.title)}"
+              src=""
+              alt="${item.title}"
+              style="display:none"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            >
+            <div class="fallback-emoji" id="emoji_${item.cat}_${encodeURIComponent(item.title)}">${item.emoji}</div>
+          </div>
+          <div class="list-card-body">
+            <span class="lc-badge ${item.cat}">${categoryLabel[item.cat]}</span>
+            <h3>${item.title}</h3>
+            <div class="lc-meta">
+              ${item.year} · <span class="lc-rating">⭐ ${item.rating}</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      // 이미지 비동기 로딩
+      items.forEach(item => loadImage(item));
+    }
+
+    async function loadImage(item) {
+      const cacheKey = `${item.cat}_${item.title}`;
+      let imageUrl = posterCache[cacheKey];
+
+      if (imageUrl === undefined) {
+        if (item.cat === "movie" || item.cat === "drama") {
+          const endpoint = item.cat === "drama" ? "tv" : "movie";
+          try {
+            const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+            const data = await res.json();
+            const poster = data.results?.[0]?.poster_path;
+            imageUrl = poster ? `${TMDB_IMG}${poster}` : "";
+          } catch { imageUrl = ""; }
+        } else if (item.cat === "book") {
+          try {
+            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(item.title)}&maxResults=1`);
+            const data = await res.json();
+            const img = data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
+            imageUrl = img ? img.replace("zoom=1", "zoom=3").replace("http://", "https://") : "";
+          } catch { imageUrl = ""; }
+        } else if (item.cat === "game") {
+          if (item.steamId) {
+            imageUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`;
+          } else {
+            try {
+              const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(item.title)}&key=${RAWG_KEY}&page_size=1`);
+              const data = await res.json();
+              imageUrl = data.results?.[0]?.background_image || "";
+            } catch { imageUrl = ""; }
+          }
+        } else {
+          imageUrl = "";
+        }
+        posterCache[cacheKey] = imageUrl;
+      }
+
+      if (imageUrl) {
+        const imgEl = document.getElementById(`img_${item.cat}_${encodeURIComponent(item.title)}`);
+        const emojiEl = document.getElementById(`emoji_${item.cat}_${encodeURIComponent(item.title)}`);
+        if (imgEl) {
+          imgEl.src = imageUrl;
+          imgEl.style.display = "block";
+          if (emojiEl) emojiEl.style.display = "none";
+        }
+      }
+    }
+
+    // 다크모드
+    function toggleDark() {
+      const isDark = document.body.classList.toggle("dark");
+      document.getElementById("darkToggle").textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark ? "on" : "off");
+    }
+    const savedMode = localStorage.getItem("darkMode");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (savedMode === "on" || (savedMode === null && prefersDark)) {
+      document.body.classList.add("dark");
+      document.getElementById("darkToggle").textContent = "☀️";
+    }
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+      if (localStorage.getItem("darkMode") === null) {
+        document.body.classList.toggle("dark", e.matches);
+        document.getElementById("darkToggle").textContent = e.matches ? "☀️" : "🌙";
+      }
+    });
+
+    // 초기 렌더링
+    renderList();
+  </script>
+</body>
+</html>

@@ -15,6 +15,13 @@
     <priority>0.5</priority>
   </url>
 
+  <url>
+    <loc>https://today-pick.vercel.app/list.html</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- 영화 -->
   <url><loc>https://today-pick.vercel.app/detail.html?category=movie&amp;title=%EA%B8%B0%EC%83%9D%EC%B6%A9</loc><priority>0.7</priority></url>
   <url><loc>https://today-pick.vercel.app/detail.html?category=movie&amp;title=%EC%9D%B8%ED%84%B0%EC%8A%A4%ED%85%94%EB%9D%BC</loc><priority>0.7</priority></url>
