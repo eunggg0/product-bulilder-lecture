@@ -7,22 +7,24 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .privacy-container { max-width: 700px; margin: 40px auto; padding: 0 20px; }
-    .privacy-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(108,99,255,.10); border: 1px solid #e8e8f0; }
+    .privacy-card { background: var(--card-bg); border-radius: 16px; padding: 40px; box-shadow: var(--shadow); border: 1px solid var(--border); }
     .privacy-card h1 { font-size: 1.6rem; color: #6c63ff; margin-bottom: 8px; }
     .privacy-card .date { color: #aaa; font-size: 0.9rem; margin-bottom: 24px; }
-    .privacy-card h2 { font-size: 1.1rem; color: #2d2d2d; margin: 24px 0 8px; border-left: 4px solid #6c63ff; padding-left: 10px; }
+    .privacy-card h2 { font-size: 1.1rem; color: var(--text); margin: 24px 0 8px; border-left: 4px solid #6c63ff; padding-left: 10px; }
     .privacy-card p, .privacy-card li { color: #555; line-height: 1.8; font-size: 0.95rem; }
+    body.dark .privacy-card p, body.dark .privacy-card li { color: #aaa; }
     .privacy-card ul { padding-left: 20px; margin-top: 6px; }
   </style>
 </head>
 <body>
   <header>
     <div class="header-inner">
-      <div class="logo">🎲 오늘의 픽</div>
+      <a class="logo" href="index.html">🎲 오늘의 픽</a>
       <nav>
         <a href="index.html">홈</a>
         <a href="about.html">소개</a>
         <a href="privacy.html">개인정보처리방침</a>
+        <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="다크모드 전환">🌙</button>
       </nav>
     </div>
   </header>
@@ -80,5 +82,24 @@
       <p>© 2025 오늘의 픽 | <a href="privacy.html">개인정보처리방침</a> | <a href="about.html">소개</a></p>
     </div>
   </footer>
+  <script>
+    function toggleDark() {
+      const isDark = document.body.classList.toggle("dark");
+      document.getElementById("darkToggle").textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark ? "on" : "off");
+    }
+    const savedMode = localStorage.getItem("darkMode");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (savedMode === "on" || (savedMode === null && prefersDark)) {
+      document.body.classList.add("dark");
+      document.getElementById("darkToggle").textContent = "☀️";
+    }
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+      if (localStorage.getItem("darkMode") === null) {
+        document.body.classList.toggle("dark", e.matches);
+        document.getElementById("darkToggle").textContent = e.matches ? "☀️" : "🌙";
+      }
+    });
+  </script>
 </body>
 </html>

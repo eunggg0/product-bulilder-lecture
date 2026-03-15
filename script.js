@@ -16,46 +16,67 @@ document.querySelectorAll(".tab").forEach(tab => {
 });
 
 function pickRandom() {
-  // 카테고리 결정
-  const categories = ["movie", "drama", "book", "game"];
-  let cat = currentCategory === "all"
-    ? categories[Math.floor(Math.random() * categories.length)]
-    : currentCategory;
-
-  const pool = recommendations[cat];
-
-  // 직전 항목 제외
-  let filtered = pool.filter(item => !lastItem || item.title !== lastItem.title);
-  if (filtered.length === 0) filtered = pool;
-
-  const item = filtered[Math.floor(Math.random() * filtered.length)];
-  lastItem = item;
-
-  // 카드 업데이트
   const card = document.getElementById("recCard");
-  card.classList.remove("animate");
-  void card.offsetWidth; // reflow
-  card.classList.add("animate");
 
-  document.getElementById("cardBadge").textContent = `${categoryEmoji[cat]} ${categoryLabel[cat]}`;
-  document.getElementById("cardBadge").className = `card-badge ${cat}`;
-  document.getElementById("cardPoster").textContent = item.emoji;
-  document.getElementById("cardTitle").textContent = item.title;
-  document.getElementById("cardMeta").innerHTML =
-    `<span>📅 ${item.year}</span><span>🎭 ${item.genre}</span><span>⭐ ${item.rating}</span><span>📍 ${item.where}</span>`;
-  document.getElementById("cardDesc").textContent = item.desc;
+  // 스켈레톤 로딩 시작
+  card.classList.add("loading");
+  document.getElementById("cardBadge").textContent = "";
+  document.getElementById("cardPoster").textContent = "";
+  document.getElementById("cardTitle").innerHTML = `<span class="skeleton skeleton-title"></span>`;
+  document.getElementById("cardMeta").innerHTML = `<span class="skeleton skeleton-meta"></span>`;
+  document.getElementById("cardDesc").innerHTML = `
+    <span class="skeleton skeleton-line"></span>
+    <span class="skeleton skeleton-line"></span>
+    <span class="skeleton skeleton-line short"></span>`;
+  document.getElementById("cardTags").innerHTML = "";
 
-  const tagsEl = document.getElementById("cardTags");
-  tagsEl.innerHTML = item.tags.map(t => `<span class="tag">#${t}</span>`).join("");
+  setTimeout(() => {
+    // 카테고리 결정
+    const categories = ["movie", "drama", "book", "game"];
+    let cat = currentCategory === "all"
+      ? categories[Math.floor(Math.random() * categories.length)]
+      : currentCategory;
 
-  // 통계 업데이트
-  stats[cat]++;
-  updateStats();
+    const pool = recommendations[cat];
 
-  // 히스토리 추가
-  history.unshift({ ...item, cat });
-  if (history.length > 5) history.pop();
-  updateHistory();
+    // 직전 항목 제외
+    let filtered = pool.filter(item => !lastItem || item.title !== lastItem.title);
+    if (filtered.length === 0) filtered = pool;
+
+    const item = filtered[Math.floor(Math.random() * filtered.length)];
+    lastItem = item;
+
+    // 스켈레톤 해제 + 카드 업데이트
+    card.classList.remove("loading");
+    card.classList.remove("animate");
+    void card.offsetWidth;
+    card.classList.add("animate");
+
+    document.getElementById("cardBadge").textContent = `${categoryEmoji[cat]} ${categoryLabel[cat]}`;
+    document.getElementById("cardBadge").className = `card-badge ${cat}`;
+    document.getElementById("cardPoster").textContent = item.emoji;
+    document.getElementById("cardTitle").textContent = item.title;
+    document.getElementById("cardMeta").innerHTML =
+      `<span>📅 ${item.year}</span><span>🎭 ${item.genre}</span><span>⭐ ${item.rating}</span><span>📍 ${item.where}</span>`;
+    document.getElementById("cardDesc").textContent = item.desc;
+
+    const tagsEl = document.getElementById("cardTags");
+    tagsEl.innerHTML = item.tags.map(t => `<span class="tag">#${t}</span>`).join("");
+
+    // 통계 업데이트
+    stats[cat]++;
+    updateStats();
+
+    // 히스토리 추가
+    history.unshift({ ...item, cat });
+    if (history.length > 5) history.pop();
+    updateHistory();
+
+    // 카드 클릭 → 상세 페이지
+    card.style.cursor = "pointer";
+    card.dataset.category = cat;
+    card.dataset.title = item.title;
+  }, 600);
 }
 
 function updateStats() {
@@ -74,13 +95,23 @@ function updateHistory() {
     return;
   }
   list.innerHTML = history.map(item => `
-    <div class="history-item">
+    <div class="history-item" style="cursor:pointer"
+      onclick="window.location.href='detail.html?category=${item.cat}&title=${encodeURIComponent(item.title)}'">
       <span class="h-emoji">${item.emoji}</span>
       <span class="h-title">${item.title}</span>
       <span class="h-badge ${item.cat}">${categoryLabel[item.cat]}</span>
     </div>
   `).join("");
 }
+
+// 추천 카드 클릭 이벤트
+document.getElementById("recCard").addEventListener("click", function () {
+  const cat = this.dataset.category;
+  const title = this.dataset.title;
+  if (cat && title) {
+    window.location.href = `detail.html?category=${cat}&title=${encodeURIComponent(title)}`;
+  }
+});
 
 function shareRecommendation() {
   if (!lastItem) {
