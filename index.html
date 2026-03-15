@@ -64,7 +64,10 @@
         <!-- 추천 카드 -->
         <div class="recommendation-card" id="recCard">
           <div class="card-badge" id="cardBadge">🎬 영화</div>
-          <div class="card-poster" id="cardPoster">🎬</div>
+          <div class="card-poster-wrap">
+            <img class="card-poster-img" id="cardImg" src="" alt="" style="display:none" onerror="this.style.display='none';document.getElementById('cardPoster').style.display='block'">
+            <div class="card-poster" id="cardPoster">🎬</div>
+          </div>
           <div class="card-info">
             <h2 id="cardTitle">추천 버튼을 눌러보세요!</h2>
             <div class="card-meta" id="cardMeta"></div>

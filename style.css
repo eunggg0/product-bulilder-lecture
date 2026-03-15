@@ -224,6 +224,23 @@ main {
 .card-badge.book { background: var(--book); }
 .card-badge.game { background: var(--game); }
 
+.card-poster-wrap {
+  min-width: 120px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-poster-img {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  display: block;
+}
+
 .card-poster {
   font-size: 5rem;
   min-width: 100px;
@@ -460,6 +477,8 @@ footer a:hover { color: #fff; }
 @media (max-width: 600px) {
   .hero h1 { font-size: 1.5rem; }
   .recommendation-card { flex-direction: column; align-items: center; text-align: center; padding: 24px; }
+  .card-poster-wrap { width: 100px; min-width: 100px; }
+  .card-poster-img { width: 100px; height: 150px; }
   .card-poster { font-size: 4rem; }
   .card-tags { justify-content: center; }
   .btn-group { flex-direction: column; }

@@ -9,6 +9,7 @@ const recommendations = {
       desc: "봉준호 감독의 아카데미 수상작. 반지하에 사는 가난한 기택 가족과 부유한 박 사장 가족의 충격적인 이야기. 계층 간 갈등을 날카롭게 풀어낸 걸작.",
       tags: ["아카데미", "봉준호", "한국영화", "스릴러"],
       where: "넷플릭스",
+      image: "https://upload.wikimedia.org/wikipedia/en/5/51/Parasite_%282019_film%29.png",
     },
     {
       title: "인터스텔라",
@@ -19,6 +20,7 @@ const recommendations = {
       desc: "크리스토퍼 놀란 감독의 우주 여행 서사시. 인류의 생존을 위해 우주로 떠난 아버지의 이야기. 웅장한 스케일과 감동적인 부녀 서사.",
       tags: ["SF", "놀란", "우주", "감동"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg",
     },
     {
       title: "올드보이",
@@ -29,6 +31,7 @@ const recommendations = {
       desc: "박찬욱 감독의 복수 3부작 중 하나. 15년간 이유도 모른 채 감금된 남자의 충격적인 복수극. 칸 영화제 심사위원 대상 수상작.",
       tags: ["박찬욱", "미스터리", "칸영화제", "한국영화"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/1/15/Oldboykoreanposter.jpg",
     },
     {
       title: "어벤져스: 엔드게임",
@@ -39,6 +42,7 @@ const recommendations = {
       desc: "마블 시네마틱 유니버스의 집대성. 타노스의 핑거스냅 이후 남은 히어로들의 마지막 전투. 22편의 마블 영화의 완벽한 피날레.",
       tags: ["마블", "히어로", "액션", "SF"],
       where: "디즈니+",
+      image: "https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg",
     },
     {
       title: "쇼생크 탈출",
@@ -49,6 +53,7 @@ const recommendations = {
       desc: "억울하게 투옥된 앤디의 20년에 걸친 희망과 우정의 이야기. IMDb 역대 1위를 오랫동안 지킨 불멸의 명작.",
       tags: ["명작", "감동", "우정", "희망"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
     },
     {
       title: "범죄도시",
@@ -59,6 +64,7 @@ const recommendations = {
       desc: "마동석 주연의 시원한 액션 범죄물. 조선족 조직의 범죄를 단속하는 형사 마석도의 이야기. 통쾌한 액션으로 큰 인기를 얻었다.",
       tags: ["마동석", "액션", "통쾌", "한국영화"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "인사이드 아웃 2",
@@ -69,6 +75,7 @@ const recommendations = {
       desc: "픽사의 감동 애니메이션 속편. 라일리의 청소년기를 맞아 새로운 감정들이 등장하는 이야기. 불안, 당혹감 등 새로운 캐릭터들이 매력적.",
       tags: ["픽사", "애니메이션", "가족", "감동"],
       where: "디즈니+",
+      image: "https://upload.wikimedia.org/wikipedia/en/2/2f/Inside_Out_2_%28film%29.jpg",
     },
     {
       title: "콘크리트 유토피아",
@@ -79,6 +86,7 @@ const recommendations = {
       desc: "대지진으로 폐허가 된 서울에서 유일하게 살아남은 아파트 주민들의 이야기. 재난 상황에서 드러나는 인간의 이기심과 연대.",
       tags: ["재난", "한국영화", "사회비판", "이병헌"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "탑건: 매버릭",
@@ -89,6 +97,7 @@ const recommendations = {
       desc: "1986년 원작의 36년 만의 속편. 톰 크루즈가 다시 돌아온 전설적인 파일럿 이야기. 압도적인 실제 항공 촬영과 감동적인 드라마.",
       tags: ["톰크루즈", "액션", "속편", "항공"],
       where: "넷플릭스",
+      image: "https://upload.wikimedia.org/wikipedia/en/6/6b/Top_Gun_Maverick_Poster.jpg",
     },
     {
       title: "서울의 봄",
@@ -99,6 +108,7 @@ const recommendations = {
       desc: "1979년 12·12 군사 반란을 다룬 역사 드라마. 황정민과 정우성의 대립이 압도적이다. 한국 역사의 뼈아픈 장면을 생생하게 재현.",
       tags: ["역사", "한국영화", "황정민", "1000만"],
       where: "왓챠",
+      image: "",
     },
     {
       title: "반지의 제왕: 왕의 귀환",
@@ -109,6 +119,7 @@ const recommendations = {
       desc: "피터 잭슨의 판타지 3부작 완결편. 아카데미 11개 부문 수상. 중간계의 운명을 건 최후의 전투를 담은 불멸의 서사시.",
       tags: ["판타지", "아카데미", "명작", "서사시"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/2/2e/The_Lord_of_the_Rings_-_The_Return_of_the_King_%282003%29.jpg",
     },
     {
       title: "다크 나이트",
@@ -119,6 +130,7 @@ const recommendations = {
       desc: "히스 레저의 전설적인 조커 연기로 유명한 놀란의 배트맨 2편. 선과 악의 경계를 무너뜨리는 철학적 슈퍼히어로 영화.",
       tags: ["놀란", "배트맨", "조커", "명작"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg",
     },
     {
       title: "이터널 선샤인",
@@ -129,6 +141,7 @@ const recommendations = {
       desc: "헤어진 연인의 기억을 지우는 시술을 배경으로 한 독창적인 로맨스. 짐 캐리와 케이트 윈슬렛의 연기가 빛나는 감성 SF.",
       tags: ["로맨스", "SF", "감성", "명작"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/d/d4/Eternal_sunshine_of_the_spotless_mind_ver2.jpg",
     },
     {
       title: "라라랜드",
@@ -139,6 +152,7 @@ const recommendations = {
       desc: "꿈을 쫓는 두 남녀의 아름답고 슬픈 사랑 이야기. 아카데미 6개 부문 수상. 매혹적인 음악과 색감이 오래도록 기억되는 영화.",
       tags: ["뮤지컬", "아카데미", "로맨스", "음악"],
       where: "넷플릭스",
+      image: "https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png",
     },
     {
       title: "괴물",
@@ -149,6 +163,7 @@ const recommendations = {
       desc: "봉준호 감독의 한강 괴수 영화. 딸을 납치한 괴물을 쫓는 가족의 이야기. 사회 비판과 가족애를 버무린 독특한 장르 영화.",
       tags: ["봉준호", "한국영화", "괴수", "가족"],
       where: "왓챠",
+      image: "",
     },
     {
       title: "소울",
@@ -159,6 +174,7 @@ const recommendations = {
       desc: "픽사의 철학적인 애니메이션. 재즈 음악가의 영혼이 태어나기 전 세계로 떠나는 이야기. 삶의 의미를 묻는 깊이 있는 작품.",
       tags: ["픽사", "철학", "음악", "애니메이션"],
       where: "디즈니+",
+      image: "https://upload.wikimedia.org/wikipedia/en/3/39/Soul_Poster.jpeg",
     },
     {
       title: "위플래쉬",
@@ -169,6 +185,7 @@ const recommendations = {
       desc: "최고의 드러머를 꿈꾸는 청년과 악마 같은 교수의 이야기. 극도의 긴장감과 몰입감이 끝까지 유지되는 음악 드라마.",
       tags: ["음악", "드럼", "성장", "긴장"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/1/1b/Whiplash_%282013_film%29.jpg",
     },
     {
       title: "극한직업",
@@ -179,6 +196,7 @@ const recommendations = {
       desc: "마약 범죄 조직을 잡기 위해 치킨집을 차린 형사들의 이야기. 한국 역대 흥행 2위. 웃음과 액션의 완벽한 조화.",
       tags: ["코미디", "한국영화", "1000만", "액션"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "미나리",
@@ -189,6 +207,7 @@ const recommendations = {
       desc: "미국 아칸소로 이민 간 한국 가족의 이야기. 아카데미 여우조연상 수상. 이민자의 삶과 가족의 의미를 잔잔하게 그린 작품.",
       tags: ["가족", "이민", "아카데미", "감동"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/b/b5/Minari_film_poster.jpg",
     },
     {
       title: "매트릭스",
@@ -199,6 +218,7 @@ const recommendations = {
       desc: "현실이 가상이라는 충격적인 설정. 빨간 약과 파란 약, 불릿 타임 등 영화 역사에 길이 남을 장면들을 탄생시킨 SF 걸작.",
       tags: ["SF", "액션", "명작", "철학"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg",
     },
     {
       title: "조커",
@@ -209,6 +229,7 @@ const recommendations = {
       desc: "호아킨 피닉스의 압도적인 연기로 탄생한 악당 탄생기. 사회에서 소외된 한 남자가 어떻게 조커가 되었는가를 그린 충격적 작품.",
       tags: ["호아킨피닉스", "악당", "스릴러", "아카데미"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg",
     },
     {
       title: "파묘",
@@ -219,6 +240,7 @@ const recommendations = {
       desc: "묫자리에서 비롯된 저주를 다룬 한국형 오컬트 호러. 장재현 감독, 최민식, 유해진, 김고은 주연. 한국 무속 신앙을 기반으로 한 공포.",
       tags: ["공포", "오컬트", "한국영화", "1000만"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "그래비티",
@@ -229,6 +251,7 @@ const recommendations = {
       desc: "산드라 블록과 조지 클루니 주연의 우주 생존 영화. 우주 공간에서의 고립과 생존을 그린 시각적으로 경이로운 걸작.",
       tags: ["SF", "우주", "생존", "아카데미"],
       where: "왓챠",
+      image: "https://upload.wikimedia.org/wikipedia/en/0/07/Gravity_by_Alfonso_Cuar%C3%B3n.jpg",
     },
     {
       title: "헝거게임",
@@ -239,6 +262,7 @@ const recommendations = {
       desc: "디스토피아 세계에서 매년 열리는 생존 게임에 참가하는 캣니스의 이야기. 제니퍼 로렌스 주연으로 큰 인기를 얻은 시리즈.",
       tags: ["SF", "디스토피아", "생존", "시리즈"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "노량: 죽음의 바다",
@@ -249,6 +273,7 @@ const recommendations = {
       desc: "이순신 3부작의 완결편. 노량 해전을 배경으로 한 마지막 전투. 김윤석의 이순신 연기와 압도적인 해전 장면이 인상적.",
       tags: ["역사", "이순신", "한국영화", "해전"],
       where: "왓챠",
+      image: "",
     },
   ],
 
@@ -262,6 +287,7 @@ const recommendations = {
       desc: "456억 원의 상금을 위해 456명의 사람들이 목숨을 건 게임에 참가하는 이야기. 넷플릭스 역대 최고 시청 기록을 세운 한국 드라마.",
       tags: ["넷플릭스", "서바이벌", "스릴러", "세계적흥행"],
       where: "넷플릭스",
+      image: "https://upload.wikimedia.org/wikipedia/en/b/b2/Squid_Game_S1_poster.jpg",
     },
     {
       title: "이상한 변호사 우영우",
@@ -272,6 +298,7 @@ const recommendations = {
       desc: "자폐 스펙트럼 장애를 가진 천재 변호사 우영우의 성장 이야기. 따뜻하고 유쾌한 스토리로 큰 사랑을 받았다.",
       tags: ["법정", "힐링", "ENA", "박은빈"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "더 글로리",
@@ -282,6 +309,7 @@ const recommendations = {
       desc: "처절한 학교폭력 피해자의 치밀한 복수극. 송혜교의 냉혹한 연기와 탄탄한 스토리로 전 세계적 화제를 모았다.",
       tags: ["복수", "송혜교", "넷플릭스", "학폭"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "나의 해방일지",
@@ -292,6 +320,7 @@ const recommendations = {
       desc: "경기도 산포에서 서울로 출퇴근하는 평범한 남매 삼 남매와 의문의 남자 구씨의 이야기. 진짜 해방이 무엇인지 묻는 드라마.",
       tags: ["힐링", "감성", "로맨스", "일상"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "재벌집 막내아들",
@@ -302,6 +331,7 @@ const recommendations = {
       desc: "그룹 비서에서 재벌가 막내아들로 환생한 남자의 복수와 성공 이야기. 사이다 전개로 큰 인기를 끌었다.",
       tags: ["회귀", "재벌", "복수", "사이다"],
       where: "JTBC",
+      image: "",
     },
     {
       title: "무빙",
@@ -312,6 +342,7 @@ const recommendations = {
       desc: "숨겨진 초능력자 부모의 과거와 그 자식들의 이야기. 디즈니+에서 공개된 한국판 히어로 드라마. 탄탄한 스토리와 화려한 액션.",
       tags: ["디즈니+", "히어로", "액션", "초능력"],
       where: "디즈니+",
+      image: "",
     },
     {
       title: "악귀",
@@ -322,6 +353,7 @@ const recommendations = {
       desc: "악귀에 씌인 여자와 귀신이 보이는 민속학자의 이야기. 한국 무속 신앙을 바탕으로 한 공포 스릴러.",
       tags: ["공포", "미스터리", "한국무속", "스릴러"],
       where: "SBS",
+      image: "",
     },
     {
       title: "눈물의 여왕",
@@ -332,6 +364,7 @@ const recommendations = {
       desc: "이혼 위기의 부부가 다시 사랑을 찾아가는 이야기. 김수현, 김지원 주연으로 tvN 역대 시청률 2위를 기록한 로맨스 드라마.",
       tags: ["로맨스", "tvN", "김수현", "김지원"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "미스터 션샤인",
@@ -342,6 +375,7 @@ const recommendations = {
       desc: "구한말 시대를 배경으로 한 이병헌, 김태리 주연의 대서사시. 나라를 지키려는 사람들의 이야기와 애틋한 러브스토리.",
       tags: ["역사", "로맨스", "tvN", "이병헌"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "비밀의 숲",
@@ -352,6 +386,7 @@ const recommendations = {
       desc: "감정을 느끼지 못하는 검사와 열정적인 형사의 콤비가 거대한 비리를 파헤치는 수사극. 완벽한 스토리 구조로 역대 최고 범죄 드라마로 꼽힌다.",
       tags: ["수사극", "스릴러", "tvN", "조승우"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "응답하라 1988",
@@ -362,6 +397,7 @@ const recommendations = {
       desc: "1988년 서울 쌍문동 골목길 다섯 가족의 이야기. 역대 케이블 드라마 최고 시청률 기록. 그 시절의 따뜻한 감성을 완벽하게 재현.",
       tags: ["힐링", "가족", "레트로", "tvN"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "킹덤",
@@ -372,6 +408,7 @@ const recommendations = {
       desc: "조선시대를 배경으로 한 좀비 드라마. 왕세자가 죽음의 역병과 정치 음모에 맞서는 이야기. 한국 사극과 좀비 장르의 완벽한 결합.",
       tags: ["좀비", "조선", "넷플릭스", "공포"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "스물다섯 스물하나",
@@ -382,6 +419,7 @@ const recommendations = {
       desc: "IMF 시절 꿈을 향해 달려가는 두 청춘의 이야기. 김태리, 남주혁 주연. 아름다운 청춘의 순간과 첫사랑을 담은 감성 드라마.",
       tags: ["청춘", "로맨스", "tvN", "감성"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "브레이킹 배드",
@@ -392,6 +430,7 @@ const recommendations = {
       desc: "말기암 선고를 받은 고등학교 화학교사가 마약 제조에 뛰어드는 이야기. 역대 최고의 미국 드라마 중 하나로 평가받는 불멸의 명작.",
       tags: ["미국드라마", "범죄", "명작", "넷플릭스"],
       where: "넷플릭스",
+      image: "https://upload.wikimedia.org/wikipedia/en/8/8b/Breaking_Bad_S1_DVD_cover.jpg",
     },
     {
       title: "체르노빌",
@@ -402,6 +441,7 @@ const recommendations = {
       desc: "1986년 체르노빌 원전 폭발 사고를 다룬 HBO 미니시리즈. IMDb 역대 최고점을 기록한 작품. 역사적 사실을 충격적으로 재현.",
       tags: ["역사", "HBO", "미니시리즈", "충격"],
       where: "왓챠",
+      image: "",
     },
     {
       title: "슬기로운 의사생활",
@@ -412,6 +452,7 @@ const recommendations = {
       desc: "대학병원 의사들의 일상과 우정을 담은 따뜻한 의학 드라마. 신원호 감독, tvN. 음악과 감동이 어우러진 힐링 드라마.",
       tags: ["의학", "힐링", "tvN", "우정"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "사랑의 불시착",
@@ -422,6 +463,7 @@ const recommendations = {
       desc: "패러글라이딩 사고로 북한에 불시착한 재벌 상속녀와 북한 장교의 러브스토리. 전 세계에서 큰 인기를 얻은 한국 로맨스 드라마.",
       tags: ["로맨스", "북한", "넷플릭스", "현빈"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "빈센조",
@@ -432,6 +474,7 @@ const recommendations = {
       desc: "이탈리아 마피아 변호사로 활동하던 한국인이 귀국해 악당들과 싸우는 이야기. 송중기 주연. 통쾌한 사이다 전개와 유머가 넘치는 드라마.",
       tags: ["사이다", "송중기", "tvN", "범죄"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "갯마을 차차차",
@@ -442,6 +485,7 @@ const recommendations = {
       desc: "서울 출신 치과의사와 바닷마을 만능 청년의 로맨스. 아름다운 바닷가 마을을 배경으로 한 따뜻하고 귀여운 힐링 드라마.",
       tags: ["힐링", "로맨스", "tvN", "바다"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "나쁜 엄마",
@@ -452,6 +496,7 @@ const recommendations = {
       desc: "아들에게 모든 것을 쏟아부은 엄마와 교통사고로 아이가 된 아들의 이야기. 라미란과 이도현의 명연기. 눈물샘을 자극하는 가족 드라마.",
       tags: ["가족", "감동", "JTBC", "라미란"],
       where: "JTBC",
+      image: "",
     },
     {
       title: "폭싹 속았수다",
@@ -462,6 +507,7 @@ const recommendations = {
       desc: "제주도를 배경으로 한 두 남녀의 70년에 걸친 인생 이야기. 박보검, 아이유 주연. 넷플릭스에서 공개돼 전 세계적 반향을 일으킨 작품.",
       tags: ["넷플릭스", "제주", "아이유", "박보검"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "마이 디어 미스터",
@@ -472,6 +518,7 @@ const recommendations = {
       desc: "힘든 삶을 살아가는 두 어른의 위로와 치유의 이야기. 이선균, 아이유 주연. 잔잔하지만 깊이 있는 감동을 주는 드라마.",
       tags: ["위로", "힐링", "아이유", "tvN"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "지금 거신 전화는",
@@ -482,6 +529,7 @@ const recommendations = {
       desc: "현재와 과거를 연결하는 전화기를 통해 연쇄 살인마를 잡으려는 두 사람의 이야기. 전종서, 유연석 주연의 타임슬립 스릴러.",
       tags: ["타임슬립", "스릴러", "넷플릭스", "미스터리"],
       where: "넷플릭스",
+      image: "",
     },
     {
       title: "펜트하우스",
@@ -492,6 +540,7 @@ const recommendations = {
       desc: "한국 최고의 주거 공간을 둘러싼 세 가족의 욕망과 복수의 이야기. 김소연, 엄기준, 유진 주연. 자극적인 막장 전개로 화제가 된 드라마.",
       tags: ["막장", "SBS", "복수", "욕망"],
       where: "SBS",
+      image: "",
     },
     {
       title: "선재 업고 튀어",
@@ -502,6 +551,7 @@ const recommendations = {
       desc: "좋아하는 가수의 죽음을 막기 위해 과거로 돌아간 여자의 이야기. 변우석, 김혜윤 주연. 설레는 로맨스와 탄탄한 스토리로 큰 인기.",
       tags: ["타임슬립", "로맨스", "tvN", "변우석"],
       where: "넷플릭스",
+      image: "",
     },
   ],
 
@@ -515,6 +565,7 @@ const recommendations = {
       desc: "한강 작가의 맨부커상 수상 소설. 어느 날 갑자기 채식을 결심한 여자와 그 주변 사람들의 이야기. 폭력과 욕망, 인간의 본성을 탐구.",
       tags: ["한강", "맨부커상", "문학", "한국소설"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "아몬드",
@@ -525,6 +576,7 @@ const recommendations = {
       desc: "감정을 느끼지 못하는 알렉시티미아를 가진 소년의 성장 이야기. 손원평 작가의 데뷔작으로 일본에서 폭발적 인기를 얻었다.",
       tags: ["손원평", "성장소설", "감동", "한국소설"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "어린 왕자",
@@ -535,6 +587,7 @@ const recommendations = {
       desc: "생텍쥐페리의 불멸의 고전. 어린 왕자와 조종사의 만남을 통해 어른들이 잊어버린 것들을 이야기한다. 전 세계 500개 언어로 번역된 명작.",
       tags: ["고전", "명작", "우화", "프랑스문학"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "82년생 김지영",
@@ -545,6 +598,7 @@ const recommendations = {
       desc: "1982년생 평범한 한국 여성의 삶을 통해 한국 사회의 성차별과 여성의 삶을 조명한 소설. 출간 당시 사회적 큰 반향을 일으켰다.",
       tags: ["조남주", "페미니즘", "사회소설", "한국소설"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "돈의 심리학",
@@ -555,6 +609,7 @@ const recommendations = {
       desc: "모건 하우절의 베스트셀러. 돈에 대한 우리의 심리와 행동을 분석하고 현명하게 투자하는 방법을 알려주는 책.",
       tags: ["재테크", "심리학", "투자", "베스트셀러"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "파친코",
@@ -565,6 +620,7 @@ const recommendations = {
       desc: "이민진 작가의 역작. 일제강점기부터 현대까지 재일교포 4대 가족의 이야기. '선자는 역사가 아니라 운명을 선택했다'는 문장으로 시작.",
       tags: ["이민진", "재일교포", "역사", "가족"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "총, 균, 쇠",
@@ -575,6 +631,7 @@ const recommendations = {
       desc: "재레드 다이아몬드의 퓰리처상 수상작. 왜 어떤 민족은 번성하고 어떤 민족은 지배받았는가? 인류 역사의 불평등을 탐구한 역작.",
       tags: ["퓰리처상", "역사", "인류학", "명저"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "해리포터와 마법사의 돌",
@@ -585,6 +642,7 @@ const recommendations = {
       desc: "J.K. 롤링의 불멸의 판타지 시리즈 1편. 호그와트 마법학교에 입학한 해리포터의 첫 번째 모험. 전 세계 5억 부 이상 판매된 역사상 가장 많이 팔린 소설 시리즈.",
       tags: ["판타지", "J.K.롤링", "시리즈", "명작"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "소년이 온다",
@@ -595,6 +653,7 @@ const recommendations = {
       desc: "한강 작가의 5·18 광주민주화운동을 다룬 소설. 노벨문학상 수상 이후 더욱 주목받는 작품. 역사의 비극 앞에 선 인간의 존엄을 그린다.",
       tags: ["한강", "노벨문학상", "광주", "역사"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "나미야 잡화점의 기적",
@@ -605,6 +664,7 @@ const recommendations = {
       desc: "시간을 초월해 고민을 들어주는 잡화점과 그 편지들을 둘러싼 따뜻한 이야기. 히가시노 게이고의 감동 소설.",
       tags: ["히가시노게이고", "일본소설", "감동", "힐링"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "연금술사",
@@ -615,6 +675,7 @@ const recommendations = {
       desc: "파울로 코엘료의 세계적 베스트셀러. 자신의 꿈을 쫓아 여행을 떠나는 양치기 소년 산티아고의 이야기. 삶의 의미와 운명을 탐구.",
       tags: ["코엘료", "우화", "꿈", "베스트셀러"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "1984",
@@ -625,6 +686,7 @@ const recommendations = {
       desc: "조지 오웰의 불멸의 디스토피아 소설. 빅브라더가 지배하는 전체주의 사회에서 살아가는 사람들의 이야기. 현대 사회에도 여전히 유효한 경고.",
       tags: ["오웰", "디스토피아", "고전", "SF"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "데미안",
@@ -635,6 +697,7 @@ const recommendations = {
       desc: "헤르만 헤세의 성장 소설. 싱클레어가 데미안을 만나며 자신을 찾아가는 여정. '새는 알에서 나오려고 투쟁한다'는 문장으로 유명.",
       tags: ["헤세", "성장소설", "고전", "철학"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "죽고 싶지만 떡볶이는 먹고 싶어",
@@ -645,6 +708,7 @@ const recommendations = {
       desc: "기분부전증을 앓는 저자가 정신과 상담을 기록한 에세이. 공감과 위로가 담긴 문장들로 많은 이들에게 사랑받았다.",
       tags: ["에세이", "심리", "위로", "베스트셀러"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "미움받을 용기",
@@ -655,6 +719,7 @@ const recommendations = {
       desc: "아들러 심리학을 바탕으로 한 일본의 베스트셀러. 타인의 시선에서 자유로워지고 자신의 삶을 사는 법을 대화 형식으로 풀어낸다.",
       tags: ["아들러", "자기계발", "심리", "일본"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "사피엔스",
@@ -665,6 +730,7 @@ const recommendations = {
       desc: "유발 하라리의 인류사 베스트셀러. 호모 사피엔스가 어떻게 지구를 지배하게 됐는지 탐구. 역사, 과학, 철학을 아우르는 방대한 지식.",
       tags: ["하라리", "인류사", "인문", "베스트셀러"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "작별인사",
@@ -675,6 +741,7 @@ const recommendations = {
       desc: "한강 작가의 SF 소설. AI와 인간이 공존하는 세계에서 자신의 정체성을 찾아가는 이야기. 노벨문학상 수상 이후 더욱 주목받는 작품.",
       tags: ["한강", "SF", "노벨문학상", "인공지능"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "불편한 편의점",
@@ -685,6 +752,7 @@ const recommendations = {
       desc: "홈리스 출신 직원과 편의점 사람들의 따뜻한 이야기. 김호연 작가의 힐링 소설. 소외된 사람들을 향한 따뜻한 시선이 담겼다.",
       tags: ["힐링", "한국소설", "베스트셀러", "따뜻"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "달러구트 꿈 백화점",
@@ -695,6 +763,7 @@ const recommendations = {
       desc: "꿈을 판매하는 백화점을 배경으로 한 판타지 소설. 이미예 작가의 데뷔작으로 따뜻하고 아기자기한 세계관이 매력적이다.",
       tags: ["판타지", "힐링", "한국소설", "베스트셀러"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "인간 실격",
@@ -705,6 +774,7 @@ const recommendations = {
       desc: "다자이 오사무의 자전적 소설. 인간 사회에 적응하지 못하는 남자의 이야기를 통해 실존적 고통을 그린다. 일본 문학의 불멸의 고전.",
       tags: ["다자이오사무", "일본소설", "고전", "실존"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "나는 나로 살기로 했다",
@@ -715,6 +785,7 @@ const recommendations = {
       desc: "김수현 작가의 에세이. 타인의 기준이 아닌 자신만의 기준으로 살아가는 법을 담은 책. 자존감과 자기 사랑에 대한 이야기.",
       tags: ["에세이", "자존감", "힐링", "베스트셀러"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "완전한 행복",
@@ -725,6 +796,7 @@ const recommendations = {
       desc: "정유정 작가의 심리 스릴러. 완벽해 보이는 가족의 숨겨진 비밀. 끝까지 예측 불가한 전개로 독자를 사로잡는다.",
       tags: ["정유정", "스릴러", "한국소설", "반전"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "코스모스",
@@ -735,6 +807,7 @@ const recommendations = {
       desc: "칼 세이건의 불멸의 과학 교양서. 우주의 광대함과 인류의 역사를 아우르는 감동적인 과학 여행. '우주는 과거에도 현재에도 미래에도 있다'.",
       tags: ["칼세이건", "우주", "과학", "명저"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "트렌드 코리아 2025",
@@ -745,6 +818,7 @@ const recommendations = {
       desc: "서울대 소비트렌드분석센터의 연간 트렌드 예측서. 2025년 한국 사회와 소비 트렌드를 분석한 실용적인 책.",
       tags: ["트렌드", "경제", "한국사회", "실용"],
       where: "교보문고",
+      image: "",
     },
     {
       title: "흰",
@@ -755,6 +829,7 @@ const recommendations = {
       desc: "한강 작가의 산문시집. 흰 것들에 대한 65개의 단상. 삶과 죽음, 기억과 상실을 아름다운 문장으로 담아낸 작품.",
       tags: ["한강", "시", "노벨문학상", "산문"],
       where: "교보문고",
+      image: "",
     },
   ],
 
@@ -768,6 +843,8 @@ const recommendations = {
       desc: "닌텐도의 역작. 하이랄 왕국 상공에 떠오른 섬들을 탐험하는 링크의 이야기. 자유도와 창의성의 극한을 보여주는 오픈월드 게임.",
       tags: ["닌텐도", "스위치", "오픈월드", "GOTY"],
       where: "닌텐도 스위치",
+      image: "",
+      steamId: "",
     },
     {
       title: "발라트로",
@@ -778,6 +855,8 @@ const recommendations = {
       desc: "포커를 기반으로 한 덱빌딩 로그라이크 게임. 혼자 개발한 인디 게임으로 GOTY 후보에 오른 기적의 게임. 중독성이 매우 강함.",
       tags: ["인디", "로그라이크", "GOTY", "카드게임"],
       where: "스팀",
+      image: "",
+      steamId: "2379780",
     },
     {
       title: "엘든 링",
@@ -788,6 +867,8 @@ const recommendations = {
       desc: "프롬소프트웨어와 조지 R.R. 마틴이 협업한 오픈월드 액션 RPG. 어둡고 방대한 세계관과 극강의 난이도로 유명. GOTY 2022 수상.",
       tags: ["FromSoftware", "GOTY", "어렵", "오픈월드"],
       where: "스팀/PS5",
+      image: "",
+      steamId: "1245620",
     },
     {
       title: "스타듀 밸리",
@@ -798,6 +879,8 @@ const recommendations = {
       desc: "회사를 떠나 농장을 운영하는 힐링 게임. 혼자 4년간 개발한 인디 게임의 전설. 작물 재배, 낚시, 마을 사람들과의 관계 등 무한한 컨텐츠.",
       tags: ["힐링", "인디", "시뮬레이션", "농장"],
       where: "스팀/모바일",
+      image: "",
+      steamId: "413150",
     },
     {
       title: "리그 오브 레전드",
@@ -808,6 +891,8 @@ const recommendations = {
       desc: "전 세계에서 가장 많이 플레이되는 게임 중 하나. 5:5 팀 전략 게임으로 150개 이상의 챔피언이 등장. 끝없는 배움과 전략의 세계.",
       tags: ["MOBA", "팀게임", "무료", "e스포츠"],
       where: "PC (무료)",
+      image: "",
+      steamId: "",
     },
     {
       title: "슈퍼 마리오 오디세이",
@@ -818,6 +903,8 @@ const recommendations = {
       desc: "닌텐도 스위치의 킬러타이틀. 마리오가 모자 캐릭터 캐피와 함께 전 세계를 여행하는 이야기. 역대 가장 재미있는 3D 마리오 게임.",
       tags: ["닌텐도", "스위치", "가족", "플랫포머"],
       where: "닌텐도 스위치",
+      image: "",
+      steamId: "",
     },
     {
       title: "하데스",
@@ -828,6 +915,8 @@ const recommendations = {
       desc: "그리스 신화를 배경으로 한 로그라이크 게임. 지옥에서 탈출하려는 자그레우스의 이야기. 죽어도 다시 도전하게 만드는 완벽한 게임플레이.",
       tags: ["로그라이크", "그리스신화", "인디", "GOTY"],
       where: "스팀/닌텐도",
+      image: "",
+      steamId: "1145360",
     },
     {
       title: "마인크래프트",
@@ -838,6 +927,8 @@ const recommendations = {
       desc: "전 세계에서 가장 많이 팔린 게임. 블록으로 세상을 만들고 탐험하는 무한한 창의성의 세계. 혼자서도, 친구들과도 즐길 수 있는 영원한 명작.",
       tags: ["샌드박스", "창의성", "가족", "멀티플레이"],
       where: "모든 플랫폼",
+      image: "",
+      steamId: "",
     },
     {
       title: "셀레스트",
@@ -848,6 +939,8 @@ const recommendations = {
       desc: "정신 건강과 자기 극복을 주제로 한 인디 플랫포머. 극강의 난이도와 감동적인 스토리가 공존하는 게임.",
       tags: ["인디", "플랫포머", "감동", "어렵"],
       where: "스팀/스위치",
+      image: "",
+      steamId: "504230",
     },
     {
       title: "포탈 2",
@@ -858,6 +951,8 @@ const recommendations = {
       desc: "포탈 건을 이용한 독창적인 퍼즐 게임. 협동 모드와 싱글 스토리 모두 훌륭하다. 역대 최고의 퍼즐 게임 중 하나로 손꼽힌다.",
       tags: ["퍼즐", "협동", "명작", "Valve"],
       where: "스팀",
+      image: "",
+      steamId: "620",
     },
     {
       title: "위처 3: 와일드 헌트",
@@ -868,6 +963,8 @@ const recommendations = {
       desc: "CD Projekt RED의 역대급 오픈월드 RPG. 게롤트의 딸 찾기 여정과 방대한 세계관. 수백 시간을 즐길 수 있는 퀄리티 높은 퀘스트들.",
       tags: ["RPG", "오픈월드", "명작", "GOTY"],
       where: "스팀/PS5",
+      image: "",
+      steamId: "292030",
     },
     {
       title: "모여봐요 동물의 숲",
@@ -878,6 +975,8 @@ const recommendations = {
       desc: "코로나 시기 전 세계를 힐링시킨 닌텐도의 생활 시뮬레이션. 무인도에서 동물 주민들과 함께 나만의 마을을 꾸미는 게임.",
       tags: ["힐링", "닌텐도", "스위치", "시뮬레이션"],
       where: "닌텐도 스위치",
+      image: "",
+      steamId: "",
     },
     {
       title: "컵헤드",
@@ -888,6 +987,8 @@ const recommendations = {
       desc: "1930년대 만화 스타일의 아트워크가 인상적인 보스 러시 게임. 극강의 난이도와 아름다운 비주얼이 공존하는 인디 명작.",
       tags: ["인디", "어렵", "아트워크", "액션"],
       where: "스팀/스위치",
+      image: "",
+      steamId: "268910",
     },
     {
       title: "언더테일",
@@ -898,6 +999,8 @@ const recommendations = {
       desc: "전투 없이도 클리어 가능한 혁신적인 RPG. 선택에 따라 완전히 달라지는 엔딩. 음악과 스토리가 감동적인 인디 게임의 전설.",
       tags: ["인디", "RPG", "감동", "명작"],
       where: "스팀",
+      image: "",
+      steamId: "391540",
     },
     {
       title: "디스코 엘리시움",
@@ -908,6 +1011,8 @@ const recommendations = {
       desc: "기억을 잃은 형사가 살인 사건을 수사하는 텍스트 중심 RPG. 압도적인 세계관과 철학적 깊이로 게임의 예술성을 한 단계 끌어올린 작품.",
       tags: ["RPG", "철학", "인디", "GOTY"],
       where: "스팀",
+      image: "",
+      steamId: "632470",
     },
     {
       title: "배틀그라운드",
@@ -918,6 +1023,8 @@ const recommendations = {
       desc: "100인 생존 배틀로얄 장르를 대중화시킨 한국산 게임. 전략적 판단과 순발력이 필요한 서바이벌 슈터. 친구들과 함께 즐기기 좋다.",
       tags: ["배틀로얄", "FPS", "한국게임", "멀티플레이"],
       where: "스팀",
+      image: "",
+      steamId: "578080",
     },
     {
       title: "스플래툰 3",
@@ -928,6 +1035,8 @@ const recommendations = {
       desc: "잉크를 뿌리며 영역을 차지하는 닌텐도의 독창적인 슈터 게임. 화려한 비주얼과 중독성 있는 멀티플레이가 특징.",
       tags: ["닌텐도", "슈터", "멀티플레이", "스위치"],
       where: "닌텐도 스위치",
+      image: "",
+      steamId: "",
     },
     {
       title: "데드 셀스",
@@ -938,6 +1047,8 @@ const recommendations = {
       desc: "메트로바니아와 로그라이크를 결합한 인디 게임. 죽을 때마다 새롭게 구성되는 맵과 무기 조합. 손에서 놓기 어려운 중독성.",
       tags: ["로그라이크", "인디", "액션", "메트로바니아"],
       where: "스팀/스위치",
+      image: "",
+      steamId: "588650",
     },
     {
       title: "서브노티카",
@@ -948,6 +1059,8 @@ const recommendations = {
       desc: "외계 행성의 바다에서 생존하는 1인칭 생존 게임. 아름다운 해저 세계 탐험과 공포스러운 심해의 공존. 독특한 분위기의 명작 인디 게임.",
       tags: ["생존", "탐험", "인디", "공포"],
       where: "스팀",
+      image: "",
+      steamId: "264710",
     },
     {
       title: "홀로우 나이트",
@@ -958,6 +1071,8 @@ const recommendations = {
       desc: "벌레들의 왕국 할로우네스트를 탐험하는 메트로바니아 게임. 아름다운 아트워크와 방대한 탐험 요소. 무료로 배포된 DLC까지 완성도가 높다.",
       tags: ["메트로바니아", "인디", "어렵", "아트워크"],
       where: "스팀/스위치",
+      image: "",
+      steamId: "367520",
     },
     {
       title: "피크민 4",
@@ -968,6 +1083,8 @@ const recommendations = {
       desc: "작은 생명체 피크민을 이끌어 탐험하는 닌텐도 게임. 전략적 사고와 귀여운 비주얼의 조합. 시리즈 최고작으로 평가받는 완성도.",
       tags: ["닌텐도", "퍼즐", "전략", "스위치"],
       where: "닌텐도 스위치",
+      image: "",
+      steamId: "",
     },
     {
       title: "오버쿡드 2",
@@ -978,6 +1095,8 @@ const recommendations = {
       desc: "최대 4인이 함께하는 요리 협동 게임. 주방에서 음식을 만들며 협력하는 게임. 친구, 연인, 가족과 함께하기 최고의 파티 게임.",
       tags: ["협동", "파티", "가족", "멀티플레이"],
       where: "스팀/스위치",
+      image: "",
+      steamId: "728880",
     },
     {
       title: "파이널 판타지 XVI",
@@ -988,6 +1107,8 @@ const recommendations = {
       desc: "시리즈 최초의 본격 액션 RPG. 어둡고 성숙한 스토리와 화려한 소환수 전투가 특징. 요시다 나오키 프로듀서의 역작.",
       tags: ["RPG", "FF시리즈", "액션", "PS5"],
       where: "PS5/PC",
+      image: "",
+      steamId: "1877960",
     },
     {
       title: "호라이즌 제로 던",
@@ -998,6 +1119,8 @@ const recommendations = {
       desc: "공룡 기계들이 지배하는 포스트아포칼립스 세계를 배경으로 한 오픈월드 RPG. 독창적인 세계관과 스릴 넘치는 사냥 전투가 매력적.",
       tags: ["오픈월드", "RPG", "소니", "PS5"],
       where: "PS5/PC",
+      image: "",
+      steamId: "1151640",
     },
     {
       title: "갓 오브 워: 라그나로크",
@@ -1008,6 +1131,8 @@ const recommendations = {
       desc: "크레토스와 아트레우스 부자의 북유럽 신화 여정 2편. 감동적인 부자 서사와 압도적인 전투. 플레이스테이션 역대 최고의 게임 중 하나.",
       tags: ["소니", "액션", "북유럽신화", "GOTY"],
       where: "PS5/PC",
+      image: "",
+      steamId: "2322010",
     },
   ],
 };

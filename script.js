@@ -1,3 +1,7 @@
+const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
+const TMDB_IMG = "https://image.tmdb.org/t/p/w300";
+const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
+
 let currentCategory = "all";
 let history = [];
 let stats = { movie: 0, drama: 0, book: 0, game: 0 };
@@ -5,6 +9,50 @@ let lastItem = null;
 
 const categoryEmoji = { movie: "🎬", drama: "📺", book: "📚", game: "🎮" };
 const categoryLabel = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
+
+// TMDB 포스터 가져오기
+async function fetchTMDBPoster(title, type) {
+  const endpoint = type === "drama" ? "tv" : "movie";
+  const url = `https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(title)}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const result = data.results?.[0];
+    return result?.poster_path ? `${TMDB_IMG}${result.poster_path}` : null;
+  } catch {
+    return null;
+  }
+}
+
+// RAWG 게임 커버 가져오기 (Steam 없는 게임용)
+async function fetchRAWGCover(title) {
+  try {
+    const url = `https://api.rawg.io/api/games?search=${encodeURIComponent(title)}&key=${RAWG_KEY}&page_size=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.results?.[0]?.background_image || "";
+  } catch {
+    return "";
+  }
+}
+
+// 책 표지 가져오기 (Google Books API - 키 불필요)
+async function fetchBookCover(title) {
+  try {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(title)}&maxResults=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const img = data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
+    if (!img) return "";
+    // 고화질로 업그레이드
+    return img.replace("zoom=1", "zoom=3").replace("http://", "https://");
+  } catch {
+    return "";
+  }
+}
+
+// 포스터 캐시
+const posterCache = {};
 
 // 탭 이벤트
 document.querySelectorAll(".tab").forEach(tab => {
@@ -54,8 +102,45 @@ function pickRandom() {
 
     document.getElementById("cardBadge").textContent = `${categoryEmoji[cat]} ${categoryLabel[cat]}`;
     document.getElementById("cardBadge").className = `card-badge ${cat}`;
-    document.getElementById("cardPoster").textContent = item.emoji;
     document.getElementById("cardTitle").textContent = item.title;
+
+    // 포스터 이미지 처리
+    const imgEl = document.getElementById("cardImg");
+    const emojiEl = document.getElementById("cardPoster");
+    emojiEl.textContent = item.emoji;
+    imgEl.style.display = "none";
+    emojiEl.style.display = "block";
+
+    // 포스터 불러오기 (비동기)
+    const cacheKey = `${cat}_${item.title}`;
+    const loadPoster = async () => {
+      let imageUrl = posterCache[cacheKey];
+
+      if (imageUrl === undefined) {
+        if (cat === "movie" || cat === "drama") {
+          imageUrl = await fetchTMDBPoster(item.title, cat) || "";
+        } else if (cat === "book") {
+          imageUrl = await fetchBookCover(item.title);
+        } else if (cat === "game") {
+          if (item.steamId) {
+            imageUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`;
+          } else {
+            imageUrl = await fetchRAWGCover(item.title) || "";
+          }
+        } else {
+          imageUrl = "";
+        }
+        posterCache[cacheKey] = imageUrl;
+      }
+
+      if (imageUrl && lastItem?.title === item.title) {
+        imgEl.src = imageUrl;
+        imgEl.alt = item.title;
+        imgEl.style.display = "block";
+        emojiEl.style.display = "none";
+      }
+    };
+    loadPoster();
     document.getElementById("cardMeta").innerHTML =
       `<span>📅 ${item.year}</span><span>🎭 ${item.genre}</span><span>⭐ ${item.rating}</span><span>📍 ${item.where}</span>`;
     document.getElementById("cardDesc").textContent = item.desc;
