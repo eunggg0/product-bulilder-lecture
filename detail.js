@@ -97,6 +97,7 @@ if (!item) {
       </div>
       <div class="detail-actions">
         <button class="btn-pick" style="flex:1" onclick="shareDetail()">📤 공유하기</button>
+        <button class="btn-kakao" onclick="kakaoShareDetail()">💬 카카오 공유</button>
         <button class="btn-share" onclick="window.location.href='index.html'">🎲 다른 추천 받기</button>
       </div>
     </div>
@@ -119,6 +120,29 @@ function shareDetail() {
   } else if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(() => alert("클립보드에 복사되었습니다!"));
   }
+}
+
+function kakaoShareDetail() {
+  if (!window.Kakao || !Kakao.isInitialized()) {
+    alert("카카오 SDK를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
+    return;
+  }
+  const url = `https://today-pick.vercel.app/detail.html?category=${category}&title=${encodeURIComponent(item.title)}`;
+  Kakao.Share.sendDefault({
+    objectType: "feed",
+    content: {
+      title: `🎲 오늘의 픽: ${item.title}`,
+      description: item.desc.slice(0, 100) + "...",
+      imageUrl: "https://today-pick.vercel.app/og-image.png",
+      link: { mobileWebUrl: url, webUrl: url },
+    },
+    buttons: [{ title: "자세히 보기", link: { mobileWebUrl: url, webUrl: url } }],
+  });
+}
+
+// 카카오 SDK 초기화
+if (window.Kakao && !Kakao.isInitialized()) {
+  Kakao.init("ee0415e0ce4c37653f918097c9f151e6");
 }
 
 function setMeta(nameOrProperty, content) {

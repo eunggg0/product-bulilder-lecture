@@ -325,6 +325,20 @@ main {
 
 .btn-share:hover { background: var(--primary); color: #fff; }
 
+.btn-kakao {
+  padding: 16px 24px;
+  background: #FEE500;
+  color: #3C1E1E;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-kakao:hover { background: #e6cf00; }
+
 /* ===== 히스토리 ===== */
 .history-section {
   margin-top: 30px;

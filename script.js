@@ -244,5 +244,33 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e =
   }
 });
 
+// 카카오 SDK 초기화
+if (window.Kakao && !Kakao.isInitialized()) {
+  Kakao.init("ee0415e0ce4c37653f918097c9f151e6");
+}
+
+function kakaoShare() {
+  if (!lastItem) {
+    alert("먼저 추천을 뽑아보세요!");
+    return;
+  }
+  if (!window.Kakao || !Kakao.isInitialized()) {
+    alert("카카오 SDK를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
+    return;
+  }
+  const cat = document.getElementById("recCard").dataset.category || "movie";
+  const url = `https://today-pick.vercel.app/detail.html?category=${cat}&title=${encodeURIComponent(lastItem.title)}`;
+  Kakao.Share.sendDefault({
+    objectType: "feed",
+    content: {
+      title: `🎲 오늘의 픽: ${lastItem.title}`,
+      description: lastItem.desc.slice(0, 100) + "...",
+      imageUrl: "https://today-pick.vercel.app/og-image.png",
+      link: { mobileWebUrl: url, webUrl: url },
+    },
+    buttons: [{ title: "자세히 보기", link: { mobileWebUrl: url, webUrl: url } }],
+  });
+}
+
 // 초기화
 initQuote();
