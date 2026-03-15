@@ -354,12 +354,12 @@ main {
 .btn-pick:active { transform: translateY(0); }
 
 .btn-share {
-  padding: 16px 24px;
+  padding: 10px 16px;
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
@@ -368,12 +368,12 @@ main {
 .btn-share:hover { background: var(--primary); color: #fff; }
 
 .btn-kakao {
-  padding: 16px 24px;
+  padding: 10px 16px;
   background: #FEE500;
   color: #3C1E1E;
   border: none;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
@@ -382,12 +382,12 @@ main {
 .btn-kakao:hover { background: #e6cf00; }
 
 .btn-twitter {
-  padding: 16px 24px;
+  padding: 10px 16px;
   background: #000;
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
