@@ -111,11 +111,22 @@ function toggleDark() {
   localStorage.setItem("darkMode", isDark ? "on" : "off");
 }
 
-// 다크모드 상태 복원
-if (localStorage.getItem("darkMode") === "on") {
+// 다크모드 상태 복원 (저장값 없으면 시스템 설정 따라감)
+const savedMode = localStorage.getItem("darkMode");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+if (savedMode === "on" || (savedMode === null && prefersDark)) {
   document.body.classList.add("dark");
   document.getElementById("darkToggle").textContent = "☀️";
 }
+
+// 시스템 다크모드 변경 감지 (수동 설정 없을 때만)
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+  if (localStorage.getItem("darkMode") === null) {
+    document.body.classList.toggle("dark", e.matches);
+    document.getElementById("darkToggle").textContent = e.matches ? "☀️" : "🌙";
+  }
+});
 
 // 초기화
 initQuote();
