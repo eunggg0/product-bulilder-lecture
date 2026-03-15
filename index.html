@@ -11,8 +11,8 @@
     gtag('js', new Date());
     gtag('config', 'G-0B4FES1V9K');
   </script>
-  <meta name="description" content="오늘 뭐 볼지 고민된다면? 매일 바뀌는 랜덤 추천 - 영화, 드라마, 책, 게임을 한 번에!">
-  <meta name="keywords" content="영화추천, 드라마추천, 책추천, 게임추천, 오늘의추천, 랜덤추천">
+  <meta name="description" content="오늘 뭐 볼지 고민된다면? 버튼 하나로 영화, 드라마, 책, 게임을 랜덤 추천! 결정 피로 없이 오늘의 픽을 받아보세요.">
+  <meta name="keywords" content="영화추천, 드라마추천, 책추천, 게임추천, 오늘의추천, 랜덤추천, 넷플릭스추천, 왓챠추천, 오늘뭐볼까, 콘텐츠추천">
   <title>오늘의 픽 - 매일 달라지는 랜덤 추천</title>
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -32,6 +32,28 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1445713983400242" crossorigin="anonymous"></script>
   <!-- Kakao SDK -->
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
+  <!-- preconnect: 외부 API 빠른 연결 -->
+  <link rel="preconnect" href="https://api.themoviedb.org">
+  <link rel="preconnect" href="https://image.tmdb.org">
+  <link rel="preconnect" href="https://www.googleapis.com">
+  <link rel="dns-prefetch" href="https://api.rawg.io">
+  <link rel="dns-prefetch" href="https://cdn.cloudflare.steamstatic.com">
+  <!-- JSON-LD 구조화 데이터 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "오늘의 픽",
+    "url": "https://today-pick.vercel.app",
+    "description": "매일 달라지는 랜덤 콘텐츠 추천 서비스 - 영화, 드라마, 책, 게임",
+    "inLanguage": "ko",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://today-pick.vercel.app/list.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -100,6 +122,9 @@
           </button>
           <button class="btn-kakao" onclick="kakaoShare()">
             💬 카카오 공유
+          </button>
+          <button class="btn-twitter" onclick="twitterShare()">
+            🐦 X 공유
           </button>
         </div>
 

@@ -243,6 +243,14 @@ document.getElementById("recCard").addEventListener("click", function () {
   }
 });
 
+function twitterShare() {
+  if (!lastItem) { alert("먼저 추천을 뽑아보세요!"); return; }
+  const cat = document.getElementById("recCard").dataset.category || "movie";
+  const url = `https://today-pick.vercel.app/detail.html?category=${cat}&title=${encodeURIComponent(lastItem.title)}`;
+  const text = `🎲 오늘의 픽 추천: ${lastItem.title}\n${lastItem.desc.slice(0, 60)}...\n\n#오늘의픽 #랜덤추천`;
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank");
+}
+
 function shareRecommendation() {
   if (!lastItem) {
     alert("먼저 추천을 뽑아보세요!");

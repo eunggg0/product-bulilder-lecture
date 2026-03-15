@@ -170,6 +170,7 @@ if (!item) {
       <div class="detail-actions">
         <button class="btn-pick" style="flex:1" onclick="shareDetail()">📤 공유하기</button>
         <button class="btn-kakao" onclick="kakaoShareDetail()">💬 카카오 공유</button>
+        <button class="btn-twitter" onclick="twitterShareDetail()">🐦 X 공유</button>
         <button id="favBtnDetail" class="btn-share" onclick="toggleFavoriteDetail()">${isFav ? "❤️" : "🤍"} 즐겨찾기</button>
         <button class="btn-share" onclick="window.location.href='index.html'">🎲 다른 추천 받기</button>
       </div>
@@ -180,6 +181,29 @@ if (!item) {
       <div class="related-list">${relatedHTML}</div>
     </div>
   `;
+}
+
+// JSON-LD 구조화 데이터 동적 생성
+if (item) {
+  const schemaTypeMap = { movie: "Movie", drama: "TVSeries", book: "Book", game: "VideoGame" };
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": schemaTypeMap[category] || "CreativeWork",
+    "name": item.title,
+    "description": item.desc,
+    "datePublished": item.year,
+    "genre": item.genre,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": item.rating,
+      "bestRating": "10",
+      "ratingCount": "100"
+    }
+  };
+  const ldScript = document.createElement("script");
+  ldScript.type = "application/ld+json";
+  ldScript.textContent = JSON.stringify(schema);
+  document.head.appendChild(ldScript);
 }
 
 // 포스터 로딩 시작
@@ -196,6 +220,12 @@ function shareDetail() {
   } else if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(() => alert("클립보드에 복사되었습니다!"));
   }
+}
+
+function twitterShareDetail() {
+  const url = `https://today-pick.vercel.app/detail.html?category=${category}&title=${encodeURIComponent(item.title)}`;
+  const text = `🎲 오늘의 픽 추천: ${item.title}\n${item.desc.slice(0, 60)}...\n\n#오늘의픽 #랜덤추천`;
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank");
 }
 
 function kakaoShareDetail() {
