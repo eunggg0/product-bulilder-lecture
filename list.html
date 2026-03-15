@@ -8,6 +8,7 @@
   <meta property="og:description" content="영화, 드라마, 책, 게임 100개의 엄선된 추천 목록">
   <meta property="og:site_name" content="오늘의 픽">
   <title>전체 추천 목록 - 오늘의 픽</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0B4FES1V9K"></script>
   <script>
@@ -173,12 +174,13 @@
   <header>
     <div class="header-inner">
       <a class="logo" href="index.html">🎲 오늘의 픽</a>
-      <nav>
+      <nav id="mainNav">
         <a href="index.html">홈</a>
         <a href="list.html" style="color:var(--primary)">전체목록</a>
         <a href="about.html">소개</a>
         <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="다크모드 전환">🌙</button>
       </nav>
+      <button class="hamburger" onclick="toggleMenu()" title="메뉴">☰</button>
     </div>
   </header>
 
@@ -362,6 +364,11 @@
         document.getElementById("darkToggle").textContent = e.matches ? "☀️" : "🌙";
       }
     });
+
+    // 햄버거 메뉴
+    function toggleMenu() {
+      document.getElementById("mainNav").classList.toggle("open");
+    }
 
     // 초기 렌더링
     renderList();

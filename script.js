@@ -2,6 +2,47 @@ const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
 const TMDB_IMG = "https://image.tmdb.org/t/p/w300";
 const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
 
+// 즐겨찾기
+let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+function toggleFavorite() {
+  if (!lastItem) { alert("먼저 추천을 뽑아보세요!"); return; }
+  const cat = document.getElementById("recCard").dataset.category;
+  if (!cat) return;
+  const key = `${cat}_${lastItem.title}`;
+  const idx = favorites.findIndex(f => f.key === key);
+  if (idx === -1) {
+    favorites.unshift({ key, cat, title: lastItem.title, emoji: lastItem.emoji, year: lastItem.year, rating: lastItem.rating });
+    document.getElementById("favBtn").textContent = "❤️";
+  } else {
+    favorites.splice(idx, 1);
+    document.getElementById("favBtn").textContent = "🤍";
+  }
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  updateFavorites();
+}
+
+function updateFavorites() {
+  const el = document.getElementById("favoritesList");
+  if (!el) return;
+  if (favorites.length === 0) {
+    el.innerHTML = `<p class="empty-history">아직 즐겨찾기가 없어요.</p>`;
+    return;
+  }
+  el.innerHTML = favorites.map(f => `
+    <div class="fav-item" onclick="window.location.href='detail.html?category=${f.cat}&title=${encodeURIComponent(f.title)}'">
+      <span class="fav-emoji">${f.emoji}</span>
+      <span class="fav-title">${f.title}</span>
+      <span style="font-size:0.8rem;color:#f59e0b">⭐${f.rating}</span>
+    </div>
+  `).join("");
+}
+
+// 햄버거 메뉴
+function toggleMenu() {
+  document.getElementById("mainNav").classList.toggle("open");
+}
+
 let currentCategory = "all";
 let history = [];
 let stats = { movie: 0, drama: 0, book: 0, game: 0 };
@@ -161,6 +202,10 @@ function pickRandom() {
     card.style.cursor = "pointer";
     card.dataset.category = cat;
     card.dataset.title = item.title;
+
+    // 즐겨찾기 버튼 상태 업데이트
+    const isFav = favorites.some(f => f.key === `${cat}_${item.title}`);
+    document.getElementById("favBtn").textContent = isFav ? "❤️" : "🤍";
   }, 600);
 }
 
@@ -274,3 +319,4 @@ function kakaoShare() {
 
 // 초기화
 initQuote();
+updateFavorites();

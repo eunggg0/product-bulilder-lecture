@@ -1,6 +1,71 @@
 const categoryEmoji = { movie: "🎬", drama: "📺", book: "📚", game: "🎮" };
 const categoryLabel = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
 
+const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
+const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
+
+// 햄버거 메뉴
+function toggleMenu() {
+  document.getElementById("mainNav")?.classList.toggle("open");
+}
+
+// 즐겨찾기 (상세 페이지)
+let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+function toggleFavoriteDetail() {
+  const key = `${category}_${item.title}`;
+  const idx = favorites.findIndex(f => f.key === key);
+  const btn = document.getElementById("favBtnDetail");
+  if (idx === -1) {
+    favorites.unshift({ key, cat: category, title: item.title, emoji: item.emoji, year: item.year, rating: item.rating });
+    if (btn) btn.textContent = "❤️ 즐겨찾기";
+  } else {
+    favorites.splice(idx, 1);
+    if (btn) btn.textContent = "🤍 즐겨찾기";
+  }
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+// 포스터 이미지 로딩
+async function loadDetailPoster() {
+  let imageUrl = "";
+  if (category === "movie" || category === "drama") {
+    const endpoint = category === "drama" ? "tv" : "movie";
+    try {
+      const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+      const data = await res.json();
+      const poster = data.results?.[0]?.poster_path;
+      imageUrl = poster ? `https://image.tmdb.org/t/p/w300${poster}` : "";
+    } catch {}
+  } else if (category === "book") {
+    try {
+      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(item.title)}&maxResults=1`);
+      const data = await res.json();
+      const img = data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
+      imageUrl = img ? img.replace("zoom=1", "zoom=3").replace("http://", "https://") : "";
+    } catch {}
+  } else if (category === "game") {
+    if (item.steamId) {
+      imageUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`;
+    } else {
+      try {
+        const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(item.title)}&key=${RAWG_KEY}&page_size=1`);
+        const data = await res.json();
+        imageUrl = data.results?.[0]?.background_image || "";
+      } catch {}
+    }
+  }
+  if (imageUrl) {
+    const imgEl = document.getElementById("detailPosterImg");
+    const emojiEl = document.getElementById("detailPosterEmoji");
+    if (imgEl) {
+      imgEl.src = imageUrl;
+      imgEl.style.display = "block";
+      if (emojiEl) emojiEl.style.display = "none";
+    }
+  }
+}
+
 // 다크모드
 function toggleDark() {
   const isDark = document.body.classList.toggle("dark");
@@ -68,9 +133,16 @@ if (!item) {
     </div>
   `).join("");
 
+  const isFav = favorites.some(f => f.key === `${category}_${item.title}`);
+
   container.innerHTML = `
     <div class="detail-hero">
-      <div class="detail-poster">${item.emoji}</div>
+      <div class="detail-poster" id="detailPosterWrap">
+        <img id="detailPosterImg" src="" alt="${item.title}"
+          onerror="this.style.display='none';document.getElementById('detailPosterEmoji').style.display='block'"
+          style="display:none;width:180px;height:270px;object-fit:cover;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2)">
+        <span id="detailPosterEmoji" style="font-size:6rem;line-height:1.2">${item.emoji}</span>
+      </div>
       <div class="detail-header">
         <span class="card-badge ${category}">${categoryEmoji[category]} ${categoryLabel[category]}</span>
         <h1>${item.title}</h1>
@@ -98,6 +170,7 @@ if (!item) {
       <div class="detail-actions">
         <button class="btn-pick" style="flex:1" onclick="shareDetail()">📤 공유하기</button>
         <button class="btn-kakao" onclick="kakaoShareDetail()">💬 카카오 공유</button>
+        <button id="favBtnDetail" class="btn-share" onclick="toggleFavoriteDetail()">${isFav ? "❤️" : "🤍"} 즐겨찾기</button>
         <button class="btn-share" onclick="window.location.href='index.html'">🎲 다른 추천 받기</button>
       </div>
     </div>
@@ -108,6 +181,9 @@ if (!item) {
     </div>
   `;
 }
+
+// 포스터 로딩 시작
+if (item) loadDetailPoster();
 
 function goToDetail(cat, encodedTitle) {
   window.location.href = `detail.html?category=${cat}&title=${encodedTitle}`;
