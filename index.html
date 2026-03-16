@@ -129,6 +129,19 @@
             <div class="card-meta" id="cardMeta"></div>
             <p class="card-desc" id="cardDesc">오늘 뭐 볼지, 뭐 읽을지, 뭐 할지 고민이라면 아래 버튼을 눌러보세요. 매일 새로운 추천이 기다리고 있어요!</p>
             <div class="card-tags" id="cardTags"></div>
+
+            <!-- 별점 & 봤어요 (카드 안) -->
+            <div class="rating-bar" id="ratingBar" style="display:none">
+              <span class="rating-label">내 별점</span>
+              <div class="star-row" id="starRow">
+                <button class="star-btn" onclick="setRating(1)">★</button>
+                <button class="star-btn" onclick="setRating(2)">★</button>
+                <button class="star-btn" onclick="setRating(3)">★</button>
+                <button class="star-btn" onclick="setRating(4)">★</button>
+                <button class="star-btn" onclick="setRating(5)">★</button>
+              </div>
+              <button class="btn-watched" id="watchedBtn" onclick="toggleWatched()">👁 이미 봤어요</button>
+            </div>
           </div>
         </div>
 
@@ -146,19 +159,6 @@
           <button class="btn-twitter" onclick="twitterShare()">
             🐦 X 공유
           </button>
-        </div>
-
-        <!-- 별점 & 봤어요 -->
-        <div class="rating-bar" id="ratingBar" style="display:none">
-          <span class="rating-label">내 별점</span>
-          <div class="star-row" id="starRow">
-            <button class="star-btn" onclick="setRating(1)">★</button>
-            <button class="star-btn" onclick="setRating(2)">★</button>
-            <button class="star-btn" onclick="setRating(3)">★</button>
-            <button class="star-btn" onclick="setRating(4)">★</button>
-            <button class="star-btn" onclick="setRating(5)">★</button>
-          </div>
-          <button class="btn-watched" id="watchedBtn" onclick="toggleWatched()">👁 이미 봤어요</button>
         </div>
 
         <!-- 카드 하단 광고 -->
