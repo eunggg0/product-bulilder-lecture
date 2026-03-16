@@ -1,5 +1,5 @@
-const categoryEmoji = { movie: "🎬", drama: "📺", book: "📚", game: "🎮" };
-const categoryLabel = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
+const categoryEmoji = { movie: "🎬", drama: "📺", anime: "✨", book: "📚", game: "🎮" };
+const categoryLabel = { movie: "영화", drama: "드라마", anime: "애니", book: "책", game: "게임" };
 
 const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
 const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
@@ -29,7 +29,20 @@ function toggleFavoriteDetail() {
 // 포스터 이미지 로딩
 async function loadDetailPoster() {
   let imageUrl = "";
-  if (category === "movie" || category === "drama") {
+  if (category === "anime") {
+    try {
+      const resTv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+      const dataTv = await resTv.json();
+      const posterTv = dataTv.results?.[0]?.poster_path;
+      if (posterTv) { imageUrl = `https://image.tmdb.org/t/p/w300${posterTv}`; }
+      else {
+        const resM = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+        const dataM = await resM.json();
+        const posterM = dataM.results?.[0]?.poster_path;
+        if (posterM) imageUrl = `https://image.tmdb.org/t/p/w300${posterM}`;
+      }
+    } catch {}
+  } else if (category === "movie" || category === "drama") {
     const endpoint = category === "drama" ? "tv" : "movie";
     try {
       const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
@@ -191,7 +204,7 @@ if (!item) {
 
 // JSON-LD 구조화 데이터 동적 생성
 if (item) {
-  const schemaTypeMap = { movie: "Movie", drama: "TVSeries", book: "Book", game: "VideoGame" };
+  const schemaTypeMap = { movie: "Movie", drama: "TVSeries", anime: "TVSeries", book: "Book", game: "VideoGame" };
   const schema = {
     "@context": "https://schema.org",
     "@type": schemaTypeMap[category] || "CreativeWork",

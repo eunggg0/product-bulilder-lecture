@@ -4,12 +4,13 @@ const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
 
 // ===== 기존 상태 (localStorage 복원) =====
 let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-let stats = JSON.parse(localStorage.getItem("pickStats") || '{"movie":0,"drama":0,"book":0,"game":0}');
+let stats = JSON.parse(localStorage.getItem("pickStats") || '{"movie":0,"drama":0,"anime":0,"book":0,"game":0}');
+if (!stats.anime) stats.anime = 0;
 let history = [];
 let lastItem = null;
 
-const categoryEmoji = { movie: "🎬", drama: "📺", book: "📚", game: "🎮" };
-const categoryLabel = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
+const categoryEmoji = { movie: "🎬", drama: "📺", anime: "✨", book: "📚", game: "🎮" };
+const categoryLabel = { movie: "영화", drama: "드라마", anime: "애니", book: "책", game: "게임" };
 
 // ===== 새 기능 상태 =====
 let ratings = JSON.parse(localStorage.getItem("ratings") || "{}");
@@ -187,7 +188,8 @@ const badgeDefs = [
   { id: "ten",      icon: "🎯", name: "10번의 도전",   desc: "10번 추천을 뽑았어요!",         cond: s => s.total >= 10 },
   { id: "fifty",    icon: "🌟", name: "50번의 탐험",   desc: "50번 추천을 뽑았어요!",         cond: s => s.total >= 50 },
   { id: "hundred",  icon: "🏆", name: "픽 마스터",     desc: "100번 추천을 뽑았어요!",        cond: s => s.total >= 100 },
-  { id: "allcat",   icon: "🌈", name: "장르 탐험가",   desc: "모든 카테고리를 경험했어요!",   cond: s => s.movie >= 1 && s.drama >= 1 && s.book >= 1 && s.game >= 1 },
+  { id: "allcat",   icon: "🌈", name: "장르 탐험가",   desc: "모든 카테고리를 경험했어요!",   cond: s => s.movie >= 1 && s.drama >= 1 && s.anime >= 1 && s.book >= 1 && s.game >= 1 },
+  { id: "animefan", icon: "✨", name: "애니 덕후",     desc: "애니를 10번 추천받았어요!",     cond: s => s.anime >= 10 },
   { id: "moviefan", icon: "🎬", name: "영화 광",       desc: "영화를 10번 추천받았어요!",     cond: s => s.movie >= 10 },
   { id: "bookworm", icon: "📚", name: "독서광",         desc: "책을 10번 추천받았어요!",       cond: s => s.book >= 10 },
   { id: "gamer",    icon: "🎮", name: "게이머",         desc: "게임을 10번 추천받았어요!",     cond: s => s.game >= 10 },
@@ -199,7 +201,7 @@ function checkBadges() {
   const total = Object.values(stats).reduce((a, b) => a + b, 0);
   const s = {
     total,
-    movie: stats.movie, drama: stats.drama, book: stats.book, game: stats.game,
+    movie: stats.movie, drama: stats.drama, anime: stats.anime || 0, book: stats.book, game: stats.game,
     ratingCount,
     watchedCount: watched.length,
   };
@@ -283,8 +285,8 @@ function updateTasteAnalysis() {
     el.innerHTML = `<p class="empty-history">3번 이상 뽑으면 분석해드려요!</p>`;
     return;
   }
-  const catNames = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
-  const tasteLabels = { movie: "영화 마니아 🎬", drama: "드라마 덕후 📺", book: "독서광 📚", game: "게이머 🎮" };
+  const catNames = { movie: "영화", drama: "드라마", anime: "애니", book: "책", game: "게임" };
+  const tasteLabels = { movie: "영화 마니아 🎬", drama: "드라마 덕후 📺", anime: "애니 덕후 ✨", book: "독서광 📚", game: "게이머 🎮" };
   const sorted = Object.entries(stats).filter(([, v]) => v > 0).sort(([, a], [, b]) => b - a);
   const [topCat] = sorted[0];
   const pct = Math.round((stats[topCat] / total) * 100);
@@ -355,7 +357,7 @@ function pickRandom() {
   document.getElementById("cardTags").innerHTML = "";
 
   setTimeout(() => {
-    const categories = ["movie", "drama", "book", "game"];
+    const categories = ["movie", "drama", "anime", "book", "game"];
     let cat = currentCategory === "all"
       ? categories[Math.floor(Math.random() * categories.length)]
       : currentCategory;
@@ -408,6 +410,8 @@ function pickRandom() {
       if (imageUrl === undefined) {
         if (cat === "movie" || cat === "drama") {
           imageUrl = await fetchTMDBPoster(item.title, cat) || "";
+        } else if (cat === "anime") {
+          imageUrl = await fetchTMDBPoster(item.title, "drama") || await fetchTMDBPoster(item.title, "movie") || "";
         } else if (cat === "book") {
           imageUrl = await fetchBookCover(item.title);
         } else if (cat === "game") {
@@ -481,6 +485,7 @@ function updateStats() {
   document.getElementById("totalCount").textContent = total;
   document.getElementById("movieCount").textContent = stats.movie;
   document.getElementById("dramaCount").textContent = stats.drama;
+  document.getElementById("animeCount").textContent = stats.anime || 0;
   document.getElementById("bookCount").textContent = stats.book;
   document.getElementById("gameCount").textContent = stats.game;
 }

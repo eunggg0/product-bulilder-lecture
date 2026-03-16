@@ -713,6 +713,7 @@ footer a:hover { color: #fff; }
 .taste-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
 .taste-bar-fill.movie { background: #6c63ff; }
 .taste-bar-fill.drama { background: #ff6584; }
+.taste-bar-fill.anime { background: #f97316; }
 .taste-bar-fill.book { background: #f59e0b; }
 .taste-bar-fill.game { background: #10b981; }
 .taste-pct { font-size: 0.75rem; color: var(--text-muted); min-width: 28px; text-align: right; }
