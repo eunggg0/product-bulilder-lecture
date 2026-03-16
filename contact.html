@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0B4FES1V9K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0B4FES1V9K');
+  </script>
+  <meta name="description" content="오늘의 픽 제휴 및 문의 - 광고, 콘텐츠 제안, 협업 문의를 남겨주세요.">
+  <title>제휴 문의 - 오늘의 픽</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-container {
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    .contact-hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .contact-hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .contact-hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .contact-types {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .contact-type-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 14px;
+      text-align: center;
+    }
+
+    .contact-type-card .ct-icon { font-size: 2rem; margin-bottom: 8px; }
+    .contact-type-card .ct-label { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .contact-type-card .ct-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+    .form-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .form-card h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .form-group label span {
+      color: #ff6584;
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(108, 99, 255, 0.4);
+    }
+
+    .form-notice {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* 제출 완료 메시지 */
+    .success-box {
+      display: none;
+      text-align: center;
+      padding: 48px 20px;
+    }
+
+    .success-box .s-icon { font-size: 4rem; margin-bottom: 16px; }
+    .success-box h3 { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .success-box p { color: var(--text-muted); line-height: 1.7; }
+
+    @media (max-width: 600px) {
+      .contact-types { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="index.html">🎲 오늘의 픽</a>
+      <nav id="mainNav">
+        <a href="index.html">홈</a>
+        <a href="list.html">전체목록</a>
+        <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="다크모드 전환">🌙</button>
+      </nav>
+      <button class="hamburger" onclick="toggleMenu()" title="메뉴">☰</button>
+    </div>
+  </header>
+
+  <div class="contact-container">
+
+    <div class="contact-hero">
+      <h1>📬 제휴 및 문의</h1>
+      <p>광고 제휴, 콘텐츠 제안, 협업 등 다양한 문의를 환영합니다.<br>보통 1~2 영업일 내로 답변드립니다.</p>
+    </div>
+
+    <div class="contact-types">
+      <div class="contact-type-card">
+        <div class="ct-icon">📢</div>
+        <div class="ct-label">광고 제휴</div>
+        <div class="ct-desc">배너, 콘텐츠<br>광고 협업</div>
+      </div>
+      <div class="contact-type-card">
+        <div class="ct-icon">🎬</div>
+        <div class="ct-label">콘텐츠 제안</div>
+        <div class="ct-desc">추천 목록에<br>작품 추가 요청</div>
+      </div>
+      <div class="contact-type-card">
+        <div class="ct-icon">🤝</div>
+        <div class="ct-label">협업 제안</div>
+        <div class="ct-desc">공동 프로젝트<br>및 기타 협업</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h2>문의 내용을 남겨주세요</h2>
+
+      <form id="contactForm" action="https://formspree.io/f/xyknnwvy" method="POST">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>이름 / 담당자<span>*</span></label>
+            <input type="text" name="name" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label>회사 / 소속</label>
+            <input type="text" name="company" placeholder="OO 주식회사 (선택)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>이메일<span>*</span></label>
+          <input type="email" name="email" placeholder="example@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>문의 유형<span>*</span></label>
+          <select name="type" required>
+            <option value="" disabled selected>문의 유형을 선택해주세요</option>
+            <option value="광고 제휴">📢 광고 제휴</option>
+            <option value="콘텐츠 제안">🎬 콘텐츠 제안</option>
+            <option value="협업 제안">🤝 협업 제안</option>
+            <option value="오류 신고">🐛 오류 신고</option>
+            <option value="기타">💬 기타 문의</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>문의 내용<span>*</span></label>
+          <textarea name="message" placeholder="문의하실 내용을 자세히 적어주세요." required></textarea>
+        </div>
+
+        <!-- 스팸 방지 (허니팟) -->
+        <input type="text" name="_gotcha" style="display:none">
+        <!-- 제출 후 이동 없이 처리 -->
+        <input type="hidden" name="_subject" value="[오늘의 픽] 새로운 제휴 문의">
+
+        <button type="submit" class="btn-submit">문의 보내기 ✉️</button>
+        <p class="form-notice">
+          제출하신 정보는 문의 답변 목적으로만 사용되며,<br>
+          <a href="privacy.html">개인정보처리방침</a>에 따라 보호됩니다.
+        </p>
+      </form>
+
+      <div class="success-box" id="successBox">
+        <div class="s-icon">🎉</div>
+        <h3>문의가 접수되었습니다!</h3>
+        <p>소중한 문의 감사합니다.<br>보통 1~2 영업일 내로 이메일로 답변드립니다.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 오늘의 픽 | <a href="privacy.html">개인정보처리방침</a> | <a href="about.html">소개</a></p>
+      <p class="footer-desc">매일 새로운 영화, 드라마, 책, 게임을 추천해드립니다.</p>
+    </div>
+  </footer>
+
+  <script>
+    // 폼 제출 처리 (AJAX)
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector(".btn-submit");
+      btn.textContent = "전송 중...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        });
+
+        if (res.ok) {
+          form.style.display = "none";
+          document.getElementById("successBox").style.display = "block";
+        } else {
+          btn.textContent = "문의 보내기 ✉️";
+          btn.disabled = false;
+          alert("전송에 실패했습니다. 다시 시도해주세요.");
+        }
+      } catch {
+        btn.textContent = "문의 보내기 ✉️";
+        btn.disabled = false;
+        alert("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    });
+
+    // 다크모드
+    function toggleDark() {
+      const isDark = document.body.classList.toggle("dark");
+      document.getElementById("darkToggle").textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("darkMode", isDark ? "on" : "off");
+    }
+    const savedMode = localStorage.getItem("darkMode");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (savedMode === "on" || (savedMode === null && prefersDark)) {
+      document.body.classList.add("dark");
+      document.getElementById("darkToggle").textContent = "☀️";
+    }
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+      if (localStorage.getItem("darkMode") === null) {
+        document.body.classList.toggle("dark", e.matches);
+        document.getElementById("darkToggle").textContent = e.matches ? "☀️" : "🌙";
+      }
+    });
+    function toggleMenu() {
+      document.getElementById("mainNav").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>
