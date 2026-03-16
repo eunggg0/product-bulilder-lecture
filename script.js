@@ -231,14 +231,22 @@ function closeBadgePopup() {
 function updateBadgeWidget() {
   const el = document.getElementById("badgeCollection");
   if (!el) return;
-  if (earnedBadges.length === 0) {
-    el.innerHTML = `<p class="empty-history">뽑기를 시작하면 뱃지를 획득해요!</p>`;
-    return;
-  }
   el.innerHTML = `<div class="badge-chips">` + badgeDefs.map(b => {
     const earned = earnedBadges.includes(b.id);
-    return `<span class="badge-chip ${earned ? "earned" : "locked"}" title="${b.name}: ${b.desc}">${earned ? b.icon : "🔒"}</span>`;
+    return `<span class="badge-chip ${earned ? "earned" : "locked"}" onclick="showBadgeInfo('${b.id}')">${earned ? b.icon : "🔒"}</span>`;
   }).join("") + `</div>`;
+}
+
+function showBadgeInfo(id) {
+  const badge = badgeDefs.find(b => b.id === id);
+  if (!badge) return;
+  const box = document.getElementById("badgeInfo");
+  const earned = earnedBadges.includes(id);
+  document.getElementById("badgeInfoIcon").textContent = earned ? badge.icon : "🔒";
+  document.getElementById("badgeInfoName").textContent = earned ? badge.name : "미획득 뱃지";
+  document.getElementById("badgeInfoDesc").textContent = earned ? badge.desc : `조건: ${badge.desc}`;
+  box.style.display = "flex";
+  box.className = "badge-info-box " + (earned ? "earned" : "locked");
 }
 
 // ===== 트렌딩 =====
@@ -575,6 +583,16 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e =
 if (window.Kakao && !Kakao.isInitialized()) {
   Kakao.init("ee0415e0ce4c37653f918097c9f151e6");
 }
+
+// ===== 사이드바 탭 =====
+document.querySelectorAll(".stab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".stab").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".stab-content").forEach(c => c.style.display = "none");
+    btn.classList.add("active");
+    document.getElementById("stab-" + btn.dataset.stab).style.display = "block";
+  });
+});
 
 // ===== 초기화 =====
 initQuote();

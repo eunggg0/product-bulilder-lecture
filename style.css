@@ -570,6 +570,51 @@ footer a:hover { color: #fff; }
   nav a { font-size: 1rem; }
 }
 
+/* ===== 사이드바 탭 ===== */
+.sidebar-tabbed { padding-bottom: 4px; }
+.stab-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+  border-bottom: 1.5px solid var(--border);
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+.stab {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.stab:hover { background: var(--bg); color: var(--text); }
+.stab.active { background: var(--primary); color: #fff; }
+.stab-content { animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* 뱃지 정보 박스 */
+.badge-info-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+}
+.badge-info-box.earned { border-color: #f59e0b; background: rgba(245,158,11,0.08); }
+.badge-info-box.locked { opacity: 0.7; }
+.badge-info-box #badgeInfoIcon { font-size: 1.6rem; flex-shrink: 0; }
+.badge-info-box strong { display: block; font-size: 0.85rem; color: var(--text); margin-bottom: 2px; }
+.badge-info-box p { color: var(--text-muted); margin: 0; line-height: 1.4; }
+
 /* ===== 기분/연도 필터 ===== */
 .filter-row {
   display: flex;

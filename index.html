@@ -183,59 +183,63 @@
         <!-- 사이드바 광고 -->
         <div class="ad-container ad-sidebar">
           <div class="ad-placeholder">
-            <!-- AdSense 광고 코드 삽입 위치 -->
             <span>광고</span>
           </div>
         </div>
 
-        <!-- 카테고리별 통계 -->
-        <div class="sidebar-widget">
-          <h4>📊 오늘의 통계</h4>
-          <ul class="stats-list" id="statsList">
-            <li>총 추천 횟수: <strong id="totalCount">0</strong>회</li>
-            <li>🎬 영화: <strong id="movieCount">0</strong>회</li>
-            <li>📺 드라마: <strong id="dramaCount">0</strong>회</li>
-            <li>📚 책: <strong id="bookCount">0</strong>회</li>
-            <li>🎮 게임: <strong id="gameCount">0</strong>회</li>
-          </ul>
+        <!-- 탭 위젯 -->
+        <div class="sidebar-widget sidebar-tabbed">
+          <div class="stab-row">
+            <button class="stab active" data-stab="stats">📊 통계</button>
+            <button class="stab" data-stab="favs">❤️ 즐겨찾기</button>
+            <button class="stab" data-stab="trend">🔥 트렌딩</button>
+            <button class="stab" data-stab="badge">🏅 뱃지</button>
+          </div>
+
+          <!-- 통계 탭 -->
+          <div class="stab-content" id="stab-stats">
+            <ul class="stats-list">
+              <li>총 추천: <strong id="totalCount">0</strong>회</li>
+              <li>🎬 영화: <strong id="movieCount">0</strong>회</li>
+              <li>📺 드라마: <strong id="dramaCount">0</strong>회</li>
+              <li>📚 책: <strong id="bookCount">0</strong>회</li>
+              <li>🎮 게임: <strong id="gameCount">0</strong>회</li>
+            </ul>
+            <div id="tasteAnalysis" style="margin-top:12px">
+              <p class="empty-history">3번 이상 뽑으면 취향을 분석해드려요!</p>
+            </div>
+          </div>
+
+          <!-- 즐겨찾기 탭 -->
+          <div class="stab-content" id="stab-favs" style="display:none">
+            <div id="favoritesList"><p class="empty-history">아직 즐겨찾기가 없어요.</p></div>
+          </div>
+
+          <!-- 트렌딩 탭 -->
+          <div class="stab-content" id="stab-trend" style="display:none">
+            <div id="trendingList"><p class="empty-history">뽑기를 시작하면 나타나요!</p></div>
+          </div>
+
+          <!-- 뱃지 탭 -->
+          <div class="stab-content" id="stab-badge" style="display:none">
+            <div id="badgeCollection"><p class="empty-history">뽑기를 시작하면 뱃지를 획득해요!</p></div>
+            <!-- 뱃지 상세 설명 -->
+            <div id="badgeInfo" class="badge-info-box" style="display:none">
+              <span id="badgeInfoIcon"></span>
+              <div>
+                <strong id="badgeInfoName"></strong>
+                <p id="badgeInfoDesc"></p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- 즐겨찾기 -->
-        <div class="sidebar-widget">
-          <h4>❤️ 즐겨찾기</h4>
-          <div id="favoritesList"><p class="empty-history">아직 즐겨찾기가 없어요.</p></div>
-        </div>
-
-        <!-- 트렌딩 TOP5 -->
-        <div class="sidebar-widget">
-          <h4>🔥 내 트렌딩 TOP5</h4>
-          <div id="trendingList"><p class="empty-history">뽑기를 시작하면 나타나요!</p></div>
-        </div>
-
-        <!-- 취향 분석 -->
-        <div class="sidebar-widget">
-          <h4>🧠 나의 취향 분석</h4>
-          <div id="tasteAnalysis"><p class="empty-history">3번 이상 뽑으면 분석해드려요!</p></div>
-        </div>
-
-        <!-- 뱃지/업적 -->
-        <div class="sidebar-widget">
-          <h4>🏅 획득한 뱃지</h4>
-          <div id="badgeCollection"><p class="empty-history">뽑기를 시작하면 뱃지를 획득해요!</p></div>
-        </div>
-
-        <!-- 작품 추천 제보 -->
-        <div class="sidebar-widget suggest-widget">
-          <h4>📝 작품 추천하기</h4>
-          <p class="empty-history" style="margin-bottom:10px">목록에 없는 작품을 알려주세요!</p>
-          <button class="btn-suggest" onclick="openSuggestModal()">추천 제보하기</button>
-        </div>
-
-        <!-- 오늘의 명언 -->
+        <!-- 명언 + 추천 제보 -->
         <div class="sidebar-widget">
           <h4>💬 오늘의 명언</h4>
           <p class="quote" id="quoteText"></p>
           <p class="quote-author" id="quoteAuthor"></p>
+          <button class="btn-suggest" style="margin-top:12px" onclick="openSuggestModal()">📝 작품 추천하기</button>
         </div>
 
         <!-- 사이드바 하단 광고 -->
