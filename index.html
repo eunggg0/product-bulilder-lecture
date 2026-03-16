@@ -96,6 +96,24 @@
       <button class="tab" data-category="game">🎮 게임</button>
     </div>
 
+    <!-- 기분/상황 & 연도 필터 -->
+    <div class="filter-row">
+      <div class="mood-filter">
+        <button class="mood-btn" data-mood="힐링">🌿 힐링</button>
+        <button class="mood-btn" data-mood="긴장감">⚡ 긴장감</button>
+        <button class="mood-btn" data-mood="웃긴거">😂 웃긴거</button>
+        <button class="mood-btn" data-mood="명작">🏆 명작</button>
+        <button class="mood-btn" data-mood="최신">✨ 최신</button>
+      </div>
+      <select id="yearFilter" class="year-select">
+        <option value="all">전체 연도</option>
+        <option value="2020s">2020년대</option>
+        <option value="2010s">2010년대</option>
+        <option value="2000s">2000년대</option>
+        <option value="1990s">90년대 이전</option>
+      </select>
+    </div>
+
     <div class="content-wrapper">
       <div class="main-content">
         <!-- 추천 카드 -->
@@ -128,6 +146,19 @@
           <button class="btn-twitter" onclick="twitterShare()">
             🐦 X 공유
           </button>
+        </div>
+
+        <!-- 별점 & 봤어요 -->
+        <div class="rating-bar" id="ratingBar" style="display:none">
+          <span class="rating-label">내 별점</span>
+          <div class="star-row" id="starRow">
+            <button class="star-btn" onclick="setRating(1)">★</button>
+            <button class="star-btn" onclick="setRating(2)">★</button>
+            <button class="star-btn" onclick="setRating(3)">★</button>
+            <button class="star-btn" onclick="setRating(4)">★</button>
+            <button class="star-btn" onclick="setRating(5)">★</button>
+          </div>
+          <button class="btn-watched" id="watchedBtn" onclick="toggleWatched()">👁 이미 봤어요</button>
         </div>
 
         <!-- 카드 하단 광고 -->
@@ -175,6 +206,31 @@
           <div id="favoritesList"><p class="empty-history">아직 즐겨찾기가 없어요.</p></div>
         </div>
 
+        <!-- 트렌딩 TOP5 -->
+        <div class="sidebar-widget">
+          <h4>🔥 내 트렌딩 TOP5</h4>
+          <div id="trendingList"><p class="empty-history">뽑기를 시작하면 나타나요!</p></div>
+        </div>
+
+        <!-- 취향 분석 -->
+        <div class="sidebar-widget">
+          <h4>🧠 나의 취향 분석</h4>
+          <div id="tasteAnalysis"><p class="empty-history">3번 이상 뽑으면 분석해드려요!</p></div>
+        </div>
+
+        <!-- 뱃지/업적 -->
+        <div class="sidebar-widget">
+          <h4>🏅 획득한 뱃지</h4>
+          <div id="badgeCollection"><p class="empty-history">뽑기를 시작하면 뱃지를 획득해요!</p></div>
+        </div>
+
+        <!-- 작품 추천 제보 -->
+        <div class="sidebar-widget suggest-widget">
+          <h4>📝 작품 추천하기</h4>
+          <p class="empty-history" style="margin-bottom:10px">목록에 없는 작품을 알려주세요!</p>
+          <button class="btn-suggest" onclick="openSuggestModal()">추천 제보하기</button>
+        </div>
+
         <!-- 오늘의 명언 -->
         <div class="sidebar-widget">
           <h4>💬 오늘의 명언</h4>
@@ -205,6 +261,50 @@
       <p class="footer-desc">매일 새로운 영화, 드라마, 책, 게임을 추천해드립니다.</p>
     </div>
   </footer>
+
+  <!-- 뱃지 달성 팝업 -->
+  <div class="badge-popup" id="badgePopup" style="display:none">
+    <div class="badge-popup-inner">
+      <p class="bp-achievement">🎉 뱃지 획득!</p>
+      <div id="badgePopupIcon" class="bp-icon"></div>
+      <div id="badgePopupName" class="bp-name"></div>
+      <div id="badgePopupDesc" class="bp-desc"></div>
+      <button class="btn-pick" style="padding:10px 32px;font-size:0.9rem;margin-top:16px" onclick="closeBadgePopup()">확인</button>
+    </div>
+  </div>
+
+  <!-- 작품 추천 제보 모달 -->
+  <div class="suggest-modal" id="suggestModal" style="display:none">
+    <div class="suggest-inner">
+      <h3>📝 작품 추천하기</h3>
+      <p>목록에 없는 작품을 추천해주세요!</p>
+      <form id="suggestForm" action="https://formspree.io/f/xyknnwvy" method="POST">
+        <input type="hidden" name="_subject" value="[오늘의 픽] 작품 추천 제보">
+        <div class="suggest-field">
+          <label>카테고리</label>
+          <select name="category">
+            <option value="영화">🎬 영화</option>
+            <option value="드라마">📺 드라마</option>
+            <option value="책">📚 책</option>
+            <option value="게임">🎮 게임</option>
+          </select>
+        </div>
+        <div class="suggest-field">
+          <label>작품 제목 *</label>
+          <input type="text" name="title" placeholder="추천하고 싶은 작품 제목" required>
+        </div>
+        <div class="suggest-field">
+          <label>추천 이유 (선택)</label>
+          <textarea name="reason" placeholder="왜 이 작품을 추천하고 싶으신가요?" rows="3"></textarea>
+        </div>
+        <div class="suggest-btns">
+          <button type="submit" class="btn-pick" style="flex:1;padding:12px;font-size:0.9rem">제출하기</button>
+          <button type="button" class="btn-share" style="padding:12px 16px;font-size:0.85rem" onclick="closeSuggestModal()">닫기</button>
+        </div>
+      </form>
+      <p class="suggest-success" id="suggestSuccess" style="display:none">✅ 제보해주셔서 감사합니다!</p>
+    </div>
+  </div>
 
   <script src="data.js"></script>
   <script src="script.js"></script>

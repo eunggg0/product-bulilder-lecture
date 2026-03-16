@@ -569,3 +569,208 @@ footer a:hover { color: #fff; }
   nav.open { display: flex; }
   nav a { font-size: 1rem; }
 }
+
+/* ===== 기분/연도 필터 ===== */
+.filter-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 20px;
+}
+.mood-filter { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+.mood-btn {
+  padding: 7px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mood-btn:hover { border-color: var(--primary); color: var(--primary); }
+.mood-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.year-select {
+  padding: 7px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* ===== 별점 & 봤어요 ===== */
+.rating-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.rating-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); white-space: nowrap; }
+.star-row { display: flex; gap: 2px; }
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.15s, transform 0.1s;
+  padding: 0 2px;
+}
+.star-btn.on { color: #f59e0b; }
+.star-btn:hover { color: #f59e0b; transform: scale(1.2); }
+.btn-watched {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+}
+.btn-watched.watched-on { background: #10b981; color: #fff; border-color: #10b981; }
+
+/* ===== 트렌딩 ===== */
+.trending-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.trending-item:hover { background: var(--bg); }
+.trending-rank { font-size: 0.75rem; font-weight: 800; color: var(--primary); min-width: 16px; }
+.trending-emoji { font-size: 1.1rem; }
+.trending-title { flex: 1; font-size: 0.82rem; font-weight: 600; color: var(--text); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.trending-count { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
+
+/* ===== 취향 분석 ===== */
+.taste-label { font-size: 0.95rem; font-weight: 800; color: var(--primary); margin-bottom: 2px; }
+.taste-sub { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px; }
+.taste-bars { display: flex; flex-direction: column; gap: 8px; }
+.taste-bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+.taste-bar-bg { flex: 1; height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.taste-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.taste-bar-fill.movie { background: #6c63ff; }
+.taste-bar-fill.drama { background: #ff6584; }
+.taste-bar-fill.book { background: #f59e0b; }
+.taste-bar-fill.game { background: #10b981; }
+.taste-pct { font-size: 0.75rem; color: var(--text-muted); min-width: 28px; text-align: right; }
+
+/* ===== 뱃지 ===== */
+.badge-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: default;
+  transition: transform 0.2s;
+  title: attr(title);
+}
+.badge-chip.earned { background: linear-gradient(135deg, #ffd700, #ffb300); box-shadow: 0 2px 8px rgba(255,179,0,0.35); }
+.badge-chip.locked { background: var(--border); opacity: 0.4; filter: grayscale(1); }
+.badge-chip.earned:hover { transform: scale(1.2); }
+
+/* 뱃지 팝업 */
+.badge-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.badge-popup-inner {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 44px 40px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+  max-width: 320px;
+  width: 90%;
+  animation: popIn 0.35s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.bp-achievement { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+.bp-icon { font-size: 3.5rem; margin-bottom: 10px; }
+.bp-name { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.bp-desc { font-size: 0.88rem; color: var(--text-muted); }
+
+/* ===== 추천 제보 ===== */
+.btn-suggest {
+  width: 100%;
+  padding: 9px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-suggest:hover { opacity: 0.88; }
+
+.suggest-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.suggest-inner {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 36px 32px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+.suggest-inner h3 { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.suggest-inner > p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
+.suggest-field { margin-bottom: 14px; }
+.suggest-field label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.suggest-field input,
+.suggest-field select,
+.suggest-field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+.suggest-field input:focus,
+.suggest-field select:focus,
+.suggest-field textarea:focus { outline: none; border-color: var(--primary); }
+.suggest-btns { display: flex; gap: 8px; margin-top: 16px; }
+.suggest-success { text-align: center; font-size: 1rem; font-weight: 700; color: #10b981; padding: 20px; }

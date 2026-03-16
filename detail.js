@@ -119,10 +119,16 @@ if (!item) {
   // 태그 렌더링
   const tagsHTML = item.tags.map(t => `<span class="tag">#${t}</span>`).join("");
 
-  // 관련 추천 3개
+  // 관련 추천 3개 (태그 기반 유사도 정렬)
   const related = recommendations[category]
     .filter(i => i.title !== item.title)
-    .sort(() => Math.random() - 0.5)
+    .map(i => ({
+      ...i,
+      score: i.tags.filter(t => item.tags.includes(t)).length * 2 +
+             (i.genre.split("/").some(g => item.genre.includes(g)) ? 2 : 0) +
+             Math.random() * 0.5
+    }))
+    .sort((a, b) => b.score - a.score)
     .slice(0, 3);
 
   const relatedHTML = related.map(r => `
