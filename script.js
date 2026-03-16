@@ -318,7 +318,7 @@ function kakaoShare() {
     content: {
       title: `🎲 오늘의 픽: ${lastItem.title}`,
       description: lastItem.desc.slice(0, 100) + "...",
-      imageUrl: "https://today-pick.vercel.app/og-image.png",
+      imageUrl: "https://today-pick.vercel.app/og-image.svg",
       link: { mobileWebUrl: url, webUrl: url },
     },
     buttons: [{ title: "자세히 보기", link: { mobileWebUrl: url, webUrl: url } }],

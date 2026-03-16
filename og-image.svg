@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c63ff"/>
+      <stop offset="100%" style="stop-color:#ff6584"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="60" y="60" width="1080" height="510" rx="32" fill="rgba(255,255,255,0.1)"/>
+  <text x="600" y="240" font-family="Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="120" text-anchor="middle" fill="white">🎲</text>
+  <text x="600" y="360" font-family="Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="72" font-weight="800" text-anchor="middle" fill="white">오늘의 픽</text>
+  <text x="600" y="440" font-family="Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="36" text-anchor="middle" fill="rgba(255,255,255,0.85)">매일 달라지는 랜덤 추천 · 영화 · 드라마 · 책 · 게임</text>
+  <text x="600" y="520" font-family="Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="28" text-anchor="middle" fill="rgba(255,255,255,0.6)">today-pick.vercel.app</text>
+</svg>
