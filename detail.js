@@ -29,14 +29,15 @@ function toggleFavoriteDetail() {
 // 포스터 이미지 로딩
 async function loadDetailPoster() {
   let imageUrl = "";
+  const searchTitle = item.enTitle || item.title;
   if (category === "anime") {
     try {
-      const resTv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+      const resTv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
       const dataTv = await resTv.json();
       const posterTv = dataTv.results?.[0]?.poster_path;
       if (posterTv) { imageUrl = `https://image.tmdb.org/t/p/w300${posterTv}`; }
       else {
-        const resM = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+        const resM = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
         const dataM = await resM.json();
         const posterM = dataM.results?.[0]?.poster_path;
         if (posterM) imageUrl = `https://image.tmdb.org/t/p/w300${posterM}`;
@@ -45,14 +46,14 @@ async function loadDetailPoster() {
   } else if (category === "movie" || category === "drama") {
     const endpoint = category === "drama" ? "tv" : "movie";
     try {
-      const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+      const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
       const data = await res.json();
       const poster = data.results?.[0]?.poster_path;
       imageUrl = poster ? `https://image.tmdb.org/t/p/w300${poster}` : "";
     } catch {}
   } else if (category === "book") {
     try {
-      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(item.title)}&maxResults=1`);
+      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(searchTitle)}&maxResults=1`);
       const data = await res.json();
       const img = data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
       imageUrl = img ? img.replace("zoom=1", "zoom=3").replace("http://", "https://") : "";
@@ -62,7 +63,7 @@ async function loadDetailPoster() {
       imageUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`;
     } else {
       try {
-        const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(item.title)}&key=${RAWG_KEY}&page_size=1`);
+        const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(searchTitle)}&key=${RAWG_KEY}&page_size=1`);
         const data = await res.json();
         imageUrl = data.results?.[0]?.background_image || "";
       } catch {}

@@ -408,16 +408,17 @@ function pickRandom() {
     (async () => {
       let imageUrl = posterCache[cacheKey];
       if (imageUrl === undefined) {
+        const searchTitle = item.enTitle || item.title;
         if (cat === "movie" || cat === "drama") {
-          imageUrl = await fetchTMDBPoster(item.title, cat) || "";
+          imageUrl = await fetchTMDBPoster(searchTitle, cat) || (item.enTitle ? await fetchTMDBPoster(item.title, cat) : "") || "";
         } else if (cat === "anime") {
-          imageUrl = await fetchTMDBPoster(item.title, "drama") || await fetchTMDBPoster(item.title, "movie") || "";
+          imageUrl = await fetchTMDBPoster(searchTitle, "drama") || await fetchTMDBPoster(searchTitle, "movie") || (item.enTitle ? "" : await fetchTMDBPoster(item.title, "drama") || await fetchTMDBPoster(item.title, "movie")) || "";
         } else if (cat === "book") {
-          imageUrl = await fetchBookCover(item.title);
+          imageUrl = await fetchBookCover(searchTitle) || (item.enTitle ? await fetchBookCover(item.title) : "") || "";
         } else if (cat === "game") {
           imageUrl = item.steamId
             ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`
-            : await fetchRAWGCover(item.title) || "";
+            : await fetchRAWGCover(searchTitle) || "";
         } else {
           imageUrl = "";
         }
