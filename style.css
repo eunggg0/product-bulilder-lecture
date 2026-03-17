@@ -692,13 +692,11 @@ footer a:hover { color: #fff; }
   padding: 5px 12px;
   border: 1.5px solid var(--border);
   border-radius: 50px;
-  background: transparent;
+  background: var(--card-bg);
   color: var(--text);
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
 }
 
 /* ===== 별점 & 봤어요 ===== */

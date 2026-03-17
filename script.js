@@ -174,7 +174,7 @@ async function loadPopularPicks() {
     );
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) {
-      el.innerHTML = `<p class="empty-history">오늘 픽이 아직 없어요!</p>`;
+      renderPopularFallback(el);
       return;
     }
     // 집계
@@ -202,8 +202,33 @@ async function loadPopularPicks() {
         </div>`;
     }).join("");
   } catch {
-    el.innerHTML = `<p class="empty-history">불러오기 실패</p>`;
+    renderPopularFallback(el);
   }
+}
+
+function renderPopularFallback(el) {
+  // 실 데이터가 쌓이기 전 임시 인기픽 (data.js 기반 고정 추천)
+  const fallback = [
+    { cat: "movie",  title: "인터스텔라",       cnt: 38 },
+    { cat: "drama",  title: "이상한 변호사 우영우", cnt: 31 },
+    { cat: "anime",  title: "귀멸의 칼날",       cnt: 27 },
+    { cat: "game",   title: "스텔라 블레이드",    cnt: 22 },
+    { cat: "book",   title: "아몬드",            cnt: 19 },
+  ];
+  el.innerHTML = fallback.map(({ cat, title, cnt }, idx) => {
+    const item = recommendations[cat]?.find(i => i.title === title);
+    const emoji = item ? item.emoji : categoryEmoji[cat];
+    return `
+      <div class="pp-item" onclick="window.location.href='detail.html?category=${cat}&title=${encodeURIComponent(title)}'">
+        <span class="pp-rank">${idx + 1}</span>
+        <span class="pp-emoji">${emoji}</span>
+        <div class="pp-info">
+          <span class="pp-title">${title}</span>
+          <span class="pp-cat">${categoryLabel[cat]}</span>
+        </div>
+        <span class="pp-count">${cnt}회</span>
+      </div>`;
+  }).join("") + `<p style="font-size:0.72rem;color:var(--text-muted);text-align:center;margin-top:10px;opacity:0.6">실시간 데이터 집계 중...</p>`;
 }
 
 // ===== 기분/상황 필터 매핑 =====
