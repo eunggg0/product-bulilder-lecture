@@ -131,19 +131,20 @@ main {
 /* ===== 히어로 ===== */
 .hero {
   text-align: center;
-  padding: 40px 20px 30px;
+  padding: 32px 20px 20px;
 }
 
 .hero h1 {
   font-size: 2rem;
   font-weight: 800;
   color: var(--primary);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.hero p {
+.hero-sub {
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
+  margin-bottom: 6px;
 }
 
 /* ===== 카테고리 탭 ===== */
@@ -310,9 +311,9 @@ main {
 
 .card-desc {
   color: #555;
-  font-size: 0.97rem;
+  font-size: 0.93rem;
   line-height: 1.7;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -326,21 +327,27 @@ main {
   font-weight: 600;
 }
 
-/* ===== 버튼 ===== */
-.btn-group {
+/* ===== 버튼 그룹 ===== */
+.btn-group-main {
   display: flex;
   gap: 12px;
-  margin: 24px 0;
+  margin: 20px 0 10px;
+}
+
+.btn-group-share {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
 .btn-pick {
   flex: 1;
-  padding: 16px 32px;
+  padding: 16px 24px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
@@ -355,43 +362,49 @@ main {
 .btn-pick:active { transform: translateY(0); }
 
 .btn-share {
-  padding: 10px 16px;
+  flex: 1;
+  padding: 10px 12px;
   background: #fff;
   color: var(--primary);
   border: 2px solid var(--primary);
   border-radius: 50px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .btn-share:hover { background: var(--primary); color: #fff; }
 
 .btn-kakao {
-  padding: 10px 16px;
+  flex: 1;
+  padding: 10px 12px;
   background: #FEE500;
   color: #3C1E1E;
   border: none;
   border-radius: 50px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .btn-kakao:hover { background: #e6cf00; }
 
 .btn-twitter {
-  padding: 10px 16px;
+  flex: 1;
+  padding: 10px 12px;
   background: #000;
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .btn-twitter:hover { background: #333; }
 
@@ -545,13 +558,22 @@ footer a:hover { color: #fff; }
 }
 
 @media (max-width: 600px) {
+  .hero { padding: 24px 16px 14px; }
   .hero h1 { font-size: 1.5rem; }
-  .recommendation-card { flex-direction: column; align-items: center; text-align: center; padding: 24px; }
+  .hero-sub { font-size: 0.9rem; }
+  .recommendation-card { flex-direction: column; align-items: center; text-align: center; padding: 20px 16px; gap: 16px; }
   .card-poster-wrap { width: 100px; min-width: 100px; }
   .card-poster-img { width: 100px; height: 150px; }
   .card-poster { font-size: 4rem; }
   .card-tags { justify-content: center; }
-  .btn-group { flex-direction: column; }
+  .ott-buttons { justify-content: center; }
+  .card-reason { justify-content: center; }
+  .btn-group-main { gap: 8px; }
+  .btn-group-share { gap: 6px; }
+  .btn-pick { font-size: 1rem; padding: 14px 20px; }
+  .btn-fate { padding: 14px 16px; font-size: 0.88rem; }
+  .btn-share, .btn-kakao, .btn-twitter, .btn-img-share { font-size: 0.78rem; padding: 9px 8px; }
+  .filter-row { border-radius: 16px; padding: 8px 10px; }
   .hamburger { display: block; }
   nav {
     display: none;
@@ -574,25 +596,30 @@ footer a:hover { color: #fff; }
 /* ===== 사이드바 탭 ===== */
 .sidebar-tabbed { padding-bottom: 4px; }
 .stab-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 4px;
   margin-bottom: 14px;
   border-bottom: 1.5px solid var(--border);
   padding-bottom: 10px;
-  flex-wrap: wrap;
 }
 .stab {
-  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 4px;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   background: transparent;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.65rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.18s;
-  white-space: nowrap;
+  line-height: 1.2;
 }
+.stab span { display: block; }
 .stab:hover { background: var(--bg); color: var(--text); }
 .stab.active { background: var(--primary); color: #fff; }
 .stab-content { animation: fadeIn 0.2s ease; }
@@ -621,17 +648,21 @@ footer a:hover { color: #fff; }
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 10px 0 20px;
+  gap: 8px;
+  margin: 8px 0 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 8px 14px;
 }
-.mood-filter { display: flex; flex-wrap: wrap; gap: 8px; flex: 1; }
+.mood-filter { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
 .mood-btn {
-  padding: 7px 14px;
+  padding: 5px 12px;
   border: 1.5px solid var(--border);
   border-radius: 50px;
-  background: var(--card-bg);
+  background: transparent;
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
@@ -639,12 +670,12 @@ footer a:hover { color: #fff; }
 .mood-btn:hover { border-color: var(--primary); color: var(--primary); }
 .mood-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 .year-select {
-  padding: 7px 14px;
+  padding: 5px 12px;
   border: 1.5px solid var(--border);
   border-radius: 50px;
-  background: var(--card-bg);
+  background: transparent;
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   appearance: none;
@@ -880,7 +911,7 @@ footer a:hover { color: #fff; }
 
 /* ===== 운명 픽 버튼 ===== */
 .btn-fate {
-  padding: 14px 22px;
+  padding: 16px 20px;
   background: linear-gradient(135deg, #a78bfa, #7c3aed);
   color: #fff;
   border: none;
@@ -889,22 +920,25 @@ footer a:hover { color: #fff; }
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 .btn-fate:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,0.4); }
 
 /* ===== 이미지 공유 버튼 ===== */
 .btn-img-share {
-  padding: 14px 22px;
+  flex: 1;
+  padding: 10px 12px;
   background: linear-gradient(135deg, #10b981, #059669);
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 0.95rem;
-  font-weight: 800;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
-.btn-img-share:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+.btn-img-share:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(16,185,129,0.4); }
 
 /* ===== 운명 픽 모달 ===== */
 .fate-modal {

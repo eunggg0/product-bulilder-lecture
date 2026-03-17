@@ -86,7 +86,7 @@
   <main>
     <section class="hero">
       <h1>오늘 뭐 할지 모르겠다면?</h1>
-      <p>버튼 하나로 오늘의 영화, 드라마, 애니, 책, 게임을 랜덤 추천해드려요.</p>
+      <p class="hero-sub">버튼 하나로 영화 · 드라마 · 애니 · 책 · 게임을 랜덤 추천해드려요.</p>
       <p class="today-counter" id="todayCounter"></p>
     </section>
 
@@ -117,6 +117,7 @@
         <option value="1990s">90년대 이전</option>
       </select>
     </div>
+
 
     <div class="content-wrapper">
       <div class="main-content">
@@ -151,26 +152,22 @@
           </div>
         </div>
 
-        <!-- 추천 버튼 -->
-        <div class="btn-group">
+        <!-- 메인 뽑기 버튼 -->
+        <div class="btn-group-main">
           <button class="btn-pick" id="pickBtn" onclick="pickRandom()">
             🎲 오늘의 픽 뽑기!
           </button>
           <button class="btn-fate" onclick="fatePick()">
-            🔮 오늘의 운명 픽
+            🔮 운명 픽
           </button>
-          <button class="btn-share" onclick="shareRecommendation()">
-            📤 공유하기
-          </button>
-          <button class="btn-img-share" onclick="shareImage()">
-            🖼 이미지 공유
-          </button>
-          <button class="btn-kakao" onclick="kakaoShare()">
-            💬 카카오 공유
-          </button>
-          <button class="btn-twitter" onclick="twitterShare()">
-            🐦 X 공유
-          </button>
+        </div>
+
+        <!-- 공유 버튼 -->
+        <div class="btn-group-share">
+          <button class="btn-share" onclick="shareRecommendation()">📤 공유</button>
+          <button class="btn-img-share" onclick="shareImage()">🖼 이미지</button>
+          <button class="btn-kakao" onclick="kakaoShare()">💬 카카오</button>
+          <button class="btn-twitter" onclick="twitterShare()">𝕏 트위터</button>
         </div>
 
         <!-- 카드 하단 광고 -->
@@ -202,11 +199,11 @@
         <!-- 탭 위젯 -->
         <div class="sidebar-widget sidebar-tabbed">
           <div class="stab-row">
-            <button class="stab active" data-stab="stats">📊 통계</button>
-            <button class="stab" data-stab="popular">🔥 인기픽</button>
-            <button class="stab" data-stab="favs">❤️ 즐겨찾기</button>
-            <button class="stab" data-stab="trend">📈 트렌딩</button>
-            <button class="stab" data-stab="badge">🏅 뱃지</button>
+            <button class="stab active" data-stab="stats" title="통계">📊<span>통계</span></button>
+            <button class="stab" data-stab="popular" title="오늘의 인기픽">🔥<span>인기픽</span></button>
+            <button class="stab" data-stab="favs" title="즐겨찾기">❤️<span>즐겨찾기</span></button>
+            <button class="stab" data-stab="trend" title="내 트렌딩">📈<span>트렌딩</span></button>
+            <button class="stab" data-stab="badge" title="뱃지">🏅<span>뱃지</span></button>
           </div>
 
           <!-- 통계 탭 -->
