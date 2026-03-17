@@ -593,7 +593,11 @@ footer a:hover { color: #fff; }
 .skeleton-line.short { width: 70%; }
 
 /* ===== 반응형 ===== */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
+  .content-wrapper { grid-template-columns: 1fr 260px; gap: 20px; }
+}
+
+@media (max-width: 780px) {
   .content-wrapper { grid-template-columns: 1fr; }
   .sidebar { display: none; }
 }
