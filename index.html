@@ -102,13 +102,11 @@
 
     <!-- 기분/상황 & 연도 필터 -->
     <div class="filter-row">
-      <div class="mood-filter">
-        <button class="mood-btn" data-mood="힐링">🌿 힐링</button>
-        <button class="mood-btn" data-mood="긴장감">⚡ 긴장감</button>
-        <button class="mood-btn" data-mood="웃긴거">😂 웃긴거</button>
-        <button class="mood-btn" data-mood="명작">🏆 명작</button>
-        <button class="mood-btn" data-mood="최신">✨ 최신</button>
-      </div>
+      <button class="mood-btn" data-mood="힐링">🌿 힐링</button>
+      <button class="mood-btn" data-mood="긴장감">⚡ 긴장감</button>
+      <button class="mood-btn" data-mood="웃긴거">😂 웃긴거</button>
+      <button class="mood-btn" data-mood="명작">🏆 명작</button>
+      <button class="mood-btn" data-mood="최신">✨ 최신</button>
       <select id="yearFilter" class="year-select">
         <option value="all">전체 연도</option>
         <option value="2020s">2020년대</option>
@@ -130,11 +128,11 @@
             <div class="card-poster" id="cardPoster">🎬</div>
           </div>
           <div class="card-info">
+            <p class="card-reason" id="cardReason"></p>
             <h2 id="cardTitle">추천 버튼을 눌러보세요!</h2>
             <div class="card-meta" id="cardMeta"></div>
             <p class="card-desc" id="cardDesc">오늘 뭐 볼지, 뭐 읽을지, 뭐 할지 고민이라면 아래 버튼을 눌러보세요. 매일 새로운 추천이 기다리고 있어요!</p>
             <div class="card-tags" id="cardTags"></div>
-            <p class="card-reason" id="cardReason"></p>
             <div class="ott-buttons" id="cardOTT"></div>
 
             <!-- 별점 & 봤어요 (카드 안) -->
@@ -152,22 +150,20 @@
           </div>
         </div>
 
-        <!-- 메인 뽑기 버튼 -->
-        <div class="btn-group-main">
+        <!-- 버튼 영역 -->
+        <div class="btn-area">
           <button class="btn-pick" id="pickBtn" onclick="pickRandom()">
             🎲 오늘의 픽 뽑기!
           </button>
-          <button class="btn-fate" onclick="fatePick()">
-            🔮 운명 픽
-          </button>
-        </div>
-
-        <!-- 공유 버튼 -->
-        <div class="btn-group-share">
-          <button class="btn-share" onclick="shareRecommendation()">📤 공유</button>
-          <button class="btn-img-share" onclick="shareImage()">🖼 이미지</button>
-          <button class="btn-kakao" onclick="kakaoShare()">💬 카카오</button>
-          <button class="btn-twitter" onclick="twitterShare()">𝕏 트위터</button>
+          <div class="btn-secondary-row">
+            <button class="btn-fate" onclick="fatePick()">🔮 오늘의 운명 픽</button>
+            <div class="share-icon-group">
+              <button class="btn-share-icon" onclick="shareRecommendation()" title="링크 공유">📤</button>
+              <button class="btn-share-icon" onclick="shareImage()" title="이미지 카드 공유">🖼</button>
+              <button class="btn-share-icon btn-share-kakao" onclick="kakaoShare()" title="카카오 공유">💬</button>
+              <button class="btn-share-icon btn-share-twitter" onclick="twitterShare()" title="X(트위터) 공유">𝕏</button>
+            </div>
+          </div>
         </div>
 
         <!-- 카드 하단 광고 -->

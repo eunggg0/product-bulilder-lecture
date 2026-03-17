@@ -327,27 +327,22 @@ main {
   font-weight: 600;
 }
 
-/* ===== 버튼 그룹 ===== */
-.btn-group-main {
+/* ===== 버튼 영역 ===== */
+.btn-area {
   display: flex;
-  gap: 12px;
-  margin: 20px 0 10px;
-}
-
-.btn-group-share {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
 }
 
 .btn-pick {
-  flex: 1;
-  padding: 16px 24px;
+  width: 100%;
+  padding: 18px 32px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s;
@@ -361,50 +356,80 @@ main {
 
 .btn-pick:active { transform: translateY(0); }
 
+.btn-secondary-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-icon-group {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.btn-share-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.btn-share-icon:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+.btn-share-icon.btn-share-kakao { background: #FEE500; border-color: #FEE500; }
+.btn-share-icon.btn-share-kakao:hover { background: #e6cf00; border-color: #e6cf00; transform: translateY(-2px); }
+.btn-share-icon.btn-share-twitter { background: #000; border-color: #000; color: #fff; }
+.btn-share-icon.btn-share-twitter:hover { background: #333; border-color: #333; transform: translateY(-2px); }
+
+/* 구버전 공유 버튼 (다른 페이지 호환) */
 .btn-share {
-  flex: 1;
-  padding: 10px 12px;
-  background: #fff;
+  padding: 10px 16px;
+  background: var(--card-bg);
   color: var(--primary);
-  border: 2px solid var(--primary);
+  border: 1.5px solid var(--border);
   border-radius: 50px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;
 }
-
-.btn-share:hover { background: var(--primary); color: #fff; }
+.btn-share:hover { border-color: var(--primary); background: var(--primary); color: #fff; }
 
 .btn-kakao {
-  flex: 1;
-  padding: 10px 12px;
+  padding: 10px 16px;
   background: #FEE500;
   color: #3C1E1E;
   border: none;
   border-radius: 50px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;
 }
-
 .btn-kakao:hover { background: #e6cf00; }
 
 .btn-twitter {
-  flex: 1;
-  padding: 10px 12px;
+  padding: 10px 16px;
   background: #000;
   color: #fff;
   border: none;
   border-radius: 50px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;
 }
 .btn-twitter:hover { background: #333; }
 
@@ -568,11 +593,9 @@ footer a:hover { color: #fff; }
   .card-tags { justify-content: center; }
   .ott-buttons { justify-content: center; }
   .card-reason { justify-content: center; }
-  .btn-group-main { gap: 8px; }
-  .btn-group-share { gap: 6px; }
-  .btn-pick { font-size: 1rem; padding: 14px 20px; }
-  .btn-fate { padding: 14px 16px; font-size: 0.88rem; }
-  .btn-share, .btn-kakao, .btn-twitter, .btn-img-share { font-size: 0.78rem; padding: 9px 8px; }
+  .btn-pick { font-size: 1rem; padding: 15px 20px; }
+  .btn-fate { padding: 10px 14px; font-size: 0.82rem; }
+  .btn-share-icon { width: 34px; height: 34px; font-size: 0.9rem; }
   .filter-row { border-radius: 16px; padding: 8px 10px; }
   .hamburger { display: block; }
   nav {
@@ -647,15 +670,11 @@ footer a:hover { color: #fff; }
 .filter-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 8px 0 18px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  padding: 8px 14px;
+  margin: 0 0 20px;
 }
-.mood-filter { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
 .mood-btn {
   padding: 5px 12px;
   border: 1.5px solid var(--border);
@@ -863,15 +882,21 @@ footer a:hover { color: #fff; }
 
 /* ===== 추천 이유 ===== */
 .card-reason {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--primary);
-  margin-top: 10px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(108, 99, 255, 0.08);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 50px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+  min-height: 22px;
 }
-.card-reason .reason-icon { font-size: 1rem; }
+.card-reason:empty { display: none; }
+.card-reason .reason-icon { font-size: 0.85rem; }
 
 /* ===== OTT 바로가기 버튼 ===== */
 .ott-buttons {
@@ -924,21 +949,7 @@ footer a:hover { color: #fff; }
 }
 .btn-fate:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,0.4); }
 
-/* ===== 이미지 공유 버튼 ===== */
-.btn-img-share {
-  flex: 1;
-  padding: 10px 12px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.btn-img-share:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(16,185,129,0.4); }
+/* btn-img-share는 이제 btn-share-icon으로 통합됨 */
 
 /* ===== 운명 픽 모달 ===== */
 .fate-modal {
