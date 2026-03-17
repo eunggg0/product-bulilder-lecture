@@ -1,0 +1,73 @@
+name: 자동 콘텐츠 업데이트
+
+on:
+  schedule:
+    # 매주 월요일 오전 9시 (KST = UTC+9 → UTC 00:00)
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 수동 실행 허용
+
+jobs:
+  update-trending:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: TMDB 트렌딩 데이터 확인
+        run: |
+          echo "=== TMDB 주간 트렌딩 영화 Top 10 ==="
+          curl -s "https://api.themoviedb.org/3/trending/movie/week?api_key=${{ secrets.TMDB_KEY }}&language=ko-KR" \
+            | node -e "
+              const d = require('fs').readFileSync('/dev/stdin','utf8');
+              const res = JSON.parse(d);
+              console.log('영화 트렌딩:');
+              res.results?.slice(0,10).forEach((m,i) => {
+                console.log(i+1+'. '+m.title+' ('+m.release_date?.slice(0,4)+') 평점:'+m.vote_average);
+              });
+            "
+
+      - name: TMDB 트렌딩 드라마 확인
+        run: |
+          echo "=== TMDB 주간 트렌딩 드라마 Top 10 ==="
+          curl -s "https://api.themoviedb.org/3/trending/tv/week?api_key=${{ secrets.TMDB_KEY }}&language=ko-KR" \
+            | node -e "
+              const d = require('fs').readFileSync('/dev/stdin','utf8');
+              const res = JSON.parse(d);
+              console.log('드라마 트렌딩:');
+              res.results?.slice(0,10).forEach((m,i) => {
+                console.log(i+1+'. '+m.name+' ('+m.first_air_date?.slice(0,4)+') 평점:'+m.vote_average);
+              });
+            "
+
+      - name: Supabase 주간 인기픽 Top 20 집계
+        run: |
+          echo "=== 지난 7일 인기픽 Top 20 ==="
+          curl -s \
+            -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/picks?picked_at=gte.$(date -d '7 days ago' -u +%Y-%m-%dT%H:%M:%SZ)&select=category,title&limit=1000" \
+            | node -e "
+              const d = require('fs').readFileSync('/dev/stdin','utf8');
+              const data = JSON.parse(d);
+              const counts = {};
+              data.forEach(({category, title}) => {
+                const key = category+'_'+title;
+                counts[key] = (counts[key] || 0) + 1;
+              });
+              const sorted = Object.entries(counts).sort(([,a],[,b])=>b-a).slice(0,20);
+              console.log('지난 7일 인기픽:');
+              sorted.forEach(([key,cnt],i) => {
+                const [cat,...rest] = key.split('_');
+                console.log(i+1+'. ['+cat+'] '+rest.join('_')+' ('+cnt+'회)');
+              });
+            "
+
+      - name: 업데이트 완료 보고
+        run: |
+          echo "✅ 자동 업데이트 점검 완료: $(date '+%Y-%m-%d %H:%M KST')"
+          echo "위 트렌딩 작품들을 data.js에 추가하는 것을 고려해보세요!"
