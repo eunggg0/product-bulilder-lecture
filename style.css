@@ -7,6 +7,7 @@
   --secondary: #ff6584;
   --movie: #ff6b6b;
   --drama: #ffd93d;
+  --anime: #a78bfa;
   --book: #6bcb77;
   --game: #4d96ff;
   --bg: #f8f9fe;
@@ -819,3 +820,237 @@ footer a:hover { color: #fff; }
 .suggest-field textarea:focus { outline: none; border-color: var(--primary); }
 .suggest-btns { display: flex; gap: 8px; margin-top: 16px; }
 .suggest-success { text-align: center; font-size: 1rem; font-weight: 700; color: #10b981; padding: 20px; }
+
+/* ===== 오늘의 픽 카운터 ===== */
+.today-counter {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+/* ===== 추천 이유 ===== */
+.card-reason {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.card-reason .reason-icon { font-size: 1rem; }
+
+/* ===== OTT 바로가기 버튼 ===== */
+.ott-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.btn-ott {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.btn-ott:hover { opacity: 0.85; transform: translateY(-1px); text-decoration: none; }
+.btn-ott-plain {
+  background: var(--border);
+  color: var(--text-muted);
+}
+
+/* ===== 슬롯 스피닝 애니메이션 ===== */
+@keyframes slotSpin {
+  0%   { transform: translateY(0);    opacity: 1; }
+  25%  { transform: translateY(-6px); opacity: 0.6; }
+  50%  { transform: translateY(0);    opacity: 1; }
+  75%  { transform: translateY(6px);  opacity: 0.6; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+.slot-spinning .card-poster,
+.slot-spinning #cardTitle {
+  animation: slotSpin 0.14s linear infinite;
+}
+
+/* ===== 운명 픽 버튼 ===== */
+.btn-fate {
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-fate:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,0.4); }
+
+/* ===== 이미지 공유 버튼 ===== */
+.btn-img-share {
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-img-share:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+
+/* ===== 운명 픽 모달 ===== */
+.fate-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.fate-inner {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 40px 32px 36px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  position: relative;
+  border: 2px solid rgba(167,139,250,0.3);
+}
+.fate-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.fate-message {
+  font-size: 0.82rem;
+  color: #a78bfa;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+.fate-emoji {
+  font-size: 5rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.fate-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.fate-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.fate-reason {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #a78bfa;
+  margin-bottom: 12px;
+}
+.fate-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.fate-inner .ott-buttons { justify-content: center; }
+
+/* ===== 오늘의 인기픽 ===== */
+.pp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 8px;
+}
+.pp-item:last-child { border-bottom: none; }
+.pp-item:hover { background: var(--bg); }
+.pp-rank {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.pp-emoji { font-size: 1.4rem; flex-shrink: 0; }
+.pp-info { flex: 1; min-width: 0; }
+.pp-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pp-cat { font-size: 0.75rem; color: var(--text-muted); }
+.pp-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* ===== 이미지 공유 카드 ===== */
+.share-card-el {
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+}
+.sc-inner {
+  width: 400px;
+  background: linear-gradient(135deg, #6c63ff 0%, #ff6584 100%);
+  padding: 36px 32px;
+  border-radius: 20px;
+  color: #fff;
+  text-align: center;
+}
+.sc-header { margin-bottom: 16px; }
+.sc-logo { font-size: 1rem; font-weight: 800; opacity: 0.9; }
+.sc-emoji { font-size: 5rem; line-height: 1; margin-bottom: 10px; }
+.sc-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  padding: 3px 12px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.sc-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+.sc-meta { font-size: 0.85rem; opacity: 0.85; margin-bottom: 8px; }
+.sc-reason { font-size: 0.82rem; font-weight: 700; opacity: 0.9; margin-bottom: 10px; }
+.sc-desc {
+  font-size: 0.82rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  word-break: keep-all;
+}
+.sc-footer { font-size: 0.75rem; opacity: 0.6; }
+
+/* ===== 카드 배지 애니 ===== */
+.card-badge.anime { background: var(--anime); }
+.h-badge.anime { background: var(--anime); color: #fff; }

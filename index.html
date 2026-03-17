@@ -33,6 +33,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1445713983400242" crossorigin="anonymous"></script>
   <!-- Kakao SDK -->
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
+  <!-- html2canvas (이미지 공유) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- preconnect: 외부 API 빠른 연결 -->
   <link rel="preconnect" href="https://api.themoviedb.org">
   <link rel="preconnect" href="https://image.tmdb.org">
@@ -85,6 +87,7 @@
     <section class="hero">
       <h1>오늘 뭐 할지 모르겠다면?</h1>
       <p>버튼 하나로 오늘의 영화, 드라마, 애니, 책, 게임을 랜덤 추천해드려요.</p>
+      <p class="today-counter" id="todayCounter"></p>
     </section>
 
     <!-- 카테고리 탭 -->
@@ -130,6 +133,8 @@
             <div class="card-meta" id="cardMeta"></div>
             <p class="card-desc" id="cardDesc">오늘 뭐 볼지, 뭐 읽을지, 뭐 할지 고민이라면 아래 버튼을 눌러보세요. 매일 새로운 추천이 기다리고 있어요!</p>
             <div class="card-tags" id="cardTags"></div>
+            <p class="card-reason" id="cardReason"></p>
+            <div class="ott-buttons" id="cardOTT"></div>
 
             <!-- 별점 & 봤어요 (카드 안) -->
             <div class="rating-bar" id="ratingBar" style="display:none">
@@ -151,8 +156,14 @@
           <button class="btn-pick" id="pickBtn" onclick="pickRandom()">
             🎲 오늘의 픽 뽑기!
           </button>
+          <button class="btn-fate" onclick="fatePick()">
+            🔮 오늘의 운명 픽
+          </button>
           <button class="btn-share" onclick="shareRecommendation()">
             📤 공유하기
+          </button>
+          <button class="btn-img-share" onclick="shareImage()">
+            🖼 이미지 공유
           </button>
           <button class="btn-kakao" onclick="kakaoShare()">
             💬 카카오 공유
@@ -192,8 +203,9 @@
         <div class="sidebar-widget sidebar-tabbed">
           <div class="stab-row">
             <button class="stab active" data-stab="stats">📊 통계</button>
+            <button class="stab" data-stab="popular">🔥 인기픽</button>
             <button class="stab" data-stab="favs">❤️ 즐겨찾기</button>
-            <button class="stab" data-stab="trend">🔥 트렌딩</button>
+            <button class="stab" data-stab="trend">📈 트렌딩</button>
             <button class="stab" data-stab="badge">🏅 뱃지</button>
           </div>
 
@@ -210,6 +222,11 @@
             <div id="tasteAnalysis" style="margin-top:12px">
               <p class="empty-history">3번 이상 뽑으면 취향을 분석해드려요!</p>
             </div>
+          </div>
+
+          <!-- 오늘의 인기픽 탭 -->
+          <div class="stab-content" id="stab-popular" style="display:none">
+            <div id="popularList"><p class="empty-history">오늘의 인기 픽을 불러오는 중...</p></div>
           </div>
 
           <!-- 즐겨찾기 탭 -->
@@ -310,6 +327,36 @@
         </div>
       </form>
       <p class="suggest-success" id="suggestSuccess" style="display:none">✅ 제보해주셔서 감사합니다!</p>
+    </div>
+  </div>
+
+  <!-- 오늘의 운명 픽 모달 -->
+  <div class="fate-modal" id="fateModal" style="display:none" onclick="if(event.target===this)closeFateModal()">
+    <div class="fate-inner">
+      <button class="fate-close" onclick="closeFateModal()">✕</button>
+      <p class="fate-message" id="fateMessage">오늘 하루 당신을 위한 운명의 픽!</p>
+      <div class="fate-emoji" id="fateEmoji">🎲</div>
+      <h2 class="fate-title" id="fateTitle"></h2>
+      <p class="fate-meta" id="fateMeta"></p>
+      <p class="fate-reason" id="fateReason"></p>
+      <p class="fate-desc" id="fateDesc"></p>
+      <div class="ott-buttons" id="fateOTT"></div>
+    </div>
+  </div>
+
+  <!-- 이미지 공유용 숨김 카드 -->
+  <div id="shareCardEl" class="share-card-el" style="visibility:hidden;position:fixed;left:-9999px;top:0;width:400px;">
+    <div class="sc-inner">
+      <div class="sc-header">
+        <span class="sc-logo">🎲 오늘의 픽</span>
+      </div>
+      <div class="sc-emoji" id="sc-emoji">🎬</div>
+      <span class="sc-badge" id="sc-badge"></span>
+      <h3 class="sc-title" id="sc-title"></h3>
+      <p class="sc-meta" id="sc-meta"></p>
+      <p class="sc-reason" id="sc-reason"></p>
+      <p class="sc-desc" id="sc-desc"></p>
+      <p class="sc-footer">today-pick.vercel.app</p>
     </div>
   </div>
 

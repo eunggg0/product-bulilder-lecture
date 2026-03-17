@@ -1,6 +1,8 @@
 const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
 const TMDB_IMG = "https://image.tmdb.org/t/p/w300";
 const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
+const SUPABASE_URL = "https://inqzrmsnwvtqqtfqfgpq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_oipbUCJqlCvhFegqde2QeA_Lls86Nmx";
 
 // ===== 기존 상태 (localStorage 복원) =====
 let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -21,6 +23,66 @@ let earnedBadges = JSON.parse(localStorage.getItem("earnedBadges") || "[]");
 let currentMood = null;
 let currentYear = "all";
 let currentCategory = "all";
+
+// ===== OTT URL 매핑 =====
+const ottUrlMap = {
+  "넷플릭스": { url: "https://www.netflix.com/search?q=", color: "#e50914", label: "Netflix" },
+  "왓챠": { url: "https://watcha.com/search?query=", color: "#ff0558", label: "Watcha" },
+  "디즈니+": { url: "https://www.disneyplus.com/search?q=", color: "#0063e5", label: "Disney+" },
+  "웨이브": { url: "https://www.wavve.com/search?searchword=", color: "#0088ff", label: "Wavve" },
+  "티빙": { url: "https://www.tving.com/search/all/", color: "#ff153c", label: "Tving" },
+  "쿠팡플레이": { url: "https://www.coupangplay.com/search?keyword=", color: "#c00023", label: "Coupang" },
+  "애플TV+": { url: "https://tv.apple.com/search?term=", color: "#555", label: "Apple TV+" },
+  "스팀": { url: "https://store.steampowered.com/search/?term=", color: "#1b2838", label: "Steam" },
+  "플레이스테이션": { url: "https://store.playstation.com/ko-kr/search/", color: "#003087", label: "PS Store" },
+  "크런치롤": { url: "https://www.crunchyroll.com/search?q=", color: "#f47521", label: "Crunchyroll" },
+  "라프텔": { url: "https://laftel.net/search?keyword=", color: "#00c4b4", label: "Laftel" },
+  "교보문고": { url: "https://search.kyobobook.co.kr/search?keyword=", color: "#e65c1b", label: "교보문고" },
+  "알라딘": { url: "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchWord=", color: "#e50914", label: "알라딘" },
+  "YES24": { url: "https://www.yes24.com/Product/Search?domain=ALL&query=", color: "#f2672a", label: "YES24" },
+  "밀리의서재": { url: "https://www.millie.co.kr/search/book?keyword=", color: "#2baf8c", label: "밀리의서재" },
+};
+
+// ===== 가중치 랜덤 선택 =====
+function weightedRandom(pool) {
+  const currentYr = new Date().getFullYear();
+  const scored = pool.map(item => {
+    const rating = parseFloat(item.rating) || 5;
+    const age = currentYr - parseInt(item.year);
+    const recency = Math.max(0, 10 - age * 0.3);
+    return { item, score: rating * 0.5 + recency * 0.3 + Math.random() * 2 };
+  });
+  scored.sort((a, b) => b.score - a.score);
+  const top = scored.slice(0, Math.max(5, Math.floor(scored.length * 0.4)));
+  return top[Math.floor(Math.random() * top.length)].item;
+}
+
+// ===== 추천 이유 =====
+function getRecommendReason(item) {
+  const rating = parseFloat(item.rating);
+  const age = new Date().getFullYear() - parseInt(item.year);
+  if (rating >= 9.5) return { icon: "🏆", text: "역대 최고 평점 작품" };
+  if (rating >= 9.3) return { icon: "💎", text: "극찬받은 명작" };
+  if (rating >= 9.0) return { icon: "🌟", text: "시대를 초월한 명작" };
+  if (age <= 1) return { icon: "🔥", text: "최신 인기 콘텐츠" };
+  if (age <= 3) return { icon: "✨", text: "최근 화제작" };
+  if (item.tags && item.tags.includes("명작")) return { icon: "🎖", text: "검증된 명작" };
+  if (item.tags && item.tags.includes("힐링")) return { icon: "🌿", text: "힐링 보장 픽" };
+  if (item.tags && item.tags.includes("반전")) return { icon: "⚡", text: "반전의 명수" };
+  return { icon: "🎲", text: "오늘의 랜덤 픽" };
+}
+
+// ===== OTT 버튼 생성 =====
+function getOTTButtons(item) {
+  if (!item.where) return "";
+  const platforms = item.where.split(",").map(p => p.trim()).filter(Boolean);
+  const searchTitle = item.enTitle || item.title;
+  return platforms.map(p => {
+    const info = ottUrlMap[p];
+    if (!info) return `<span class="btn-ott btn-ott-plain">${p}</span>`;
+    return `<a class="btn-ott" href="${info.url}${encodeURIComponent(searchTitle)}" target="_blank" rel="noopener" style="background:${info.color}">${info.label}</a>`;
+  }).join("");
+}
 
 // ===== API 함수 =====
 async function fetchTMDBPoster(title, type) {
@@ -55,6 +117,94 @@ async function fetchBookCover(title) {
 }
 
 const posterCache = {};
+
+// ===== Supabase 함수 =====
+async function recordPick(category, title) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/picks`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify({ category, title }),
+    });
+  } catch { /* silent */ }
+}
+
+async function loadTodayCounter() {
+  const el = document.getElementById("todayCounter");
+  if (!el) return;
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/picks?date=eq.${today}&select=id`,
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Prefer": "count=exact",
+          "Range": "0-0",
+        },
+      }
+    );
+    const range = res.headers.get("Content-Range");
+    const count = range ? parseInt(range.split("/")[1]) || 0 : 0;
+    el.textContent = `오늘 ${count.toLocaleString()}명이 픽을 뽑았습니다 🎲`;
+  } catch {
+    el.textContent = "";
+  }
+}
+
+async function loadPopularPicks() {
+  const el = document.getElementById("popularList");
+  if (!el) return;
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/picks?date=eq.${today}&select=category,title&limit=200`,
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) {
+      el.innerHTML = `<p class="empty-history">오늘 픽이 아직 없어요!</p>`;
+      return;
+    }
+    // 집계
+    const counts = {};
+    data.forEach(({ category, title }) => {
+      const key = `${category}_${title}`;
+      counts[key] = (counts[key] || 0) + 1;
+    });
+    const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a).slice(0, 5);
+    el.innerHTML = sorted.map(([key, cnt], idx) => {
+      const sep = key.indexOf("_");
+      const cat = key.slice(0, sep);
+      const title = key.slice(sep + 1);
+      const item = recommendations[cat]?.find(i => i.title === title);
+      const emoji = item ? item.emoji : categoryEmoji[cat] || "🎲";
+      return `
+        <div class="pp-item" onclick="window.location.href='detail.html?category=${cat}&title=${encodeURIComponent(title)}'">
+          <span class="pp-rank">${idx + 1}</span>
+          <span class="pp-emoji">${emoji}</span>
+          <div class="pp-info">
+            <span class="pp-title">${title}</span>
+            <span class="pp-cat">${categoryLabel[cat] || cat}</span>
+          </div>
+          <span class="pp-count">${cnt}회</span>
+        </div>`;
+    }).join("");
+  } catch {
+    el.innerHTML = `<p class="empty-history">불러오기 실패</p>`;
+  }
+}
 
 // ===== 기분/상황 필터 매핑 =====
 const moodMap = {
@@ -340,14 +490,121 @@ document.getElementById("suggestForm")?.addEventListener("submit", async functio
   }
 });
 
-// ===== 핵심: 뽑기 함수 =====
+// ===== 오늘의 운명 픽 =====
+function fatePick() {
+  const today = new Date().toDateString();
+  const storageKey = `fatePick_${today}`;
+  const existing = localStorage.getItem(storageKey);
+
+  if (existing) {
+    try {
+      const saved = JSON.parse(existing);
+      showFateModal(saved.item, saved.cat, true);
+    } catch {
+      localStorage.removeItem(storageKey);
+      fatePick();
+    }
+    return;
+  }
+
+  // 오늘의 운명 픽 - 전체 풀에서 가중치 랜덤
+  const categories = ["movie", "drama", "anime", "book", "game"];
+  const cat = categories[Math.floor(Math.random() * categories.length)];
+  const pool = [...recommendations[cat]];
+  const item = weightedRandom(pool);
+
+  localStorage.setItem(storageKey, JSON.stringify({ item, cat }));
+  showFateModal(item, cat, false);
+}
+
+function showFateModal(item, cat, isExisting) {
+  const modal = document.getElementById("fateModal");
+  if (!modal) return;
+
+  document.getElementById("fateEmoji").textContent = item.emoji;
+  document.getElementById("fateTitle").textContent = item.title;
+  document.getElementById("fateMeta").textContent = `${categoryLabel[cat]} · ${item.year} · ⭐ ${item.rating}`;
+  document.getElementById("fateDesc").textContent = item.desc;
+  document.getElementById("fateMessage").textContent = isExisting
+    ? "오늘의 운명 픽은 이미 정해졌어요!"
+    : "오늘 하루 당신을 위한 운명의 픽!";
+
+  const ottEl = document.getElementById("fateOTT");
+  if (ottEl) ottEl.innerHTML = getOTTButtons(item);
+
+  const reason = getRecommendReason(item);
+  const reasonEl = document.getElementById("fateReason");
+  if (reasonEl) reasonEl.textContent = `${reason.icon} ${reason.text}`;
+
+  modal.style.display = "flex";
+}
+
+function closeFateModal() {
+  const modal = document.getElementById("fateModal");
+  if (modal) modal.style.display = "none";
+}
+
+// ===== 이미지 카드 공유 =====
+async function shareImage() {
+  if (!lastItem) { alert("먼저 추천을 뽑아보세요!"); return; }
+
+  const cat = document.getElementById("recCard").dataset.category || "movie";
+  const reason = getRecommendReason(lastItem);
+
+  // 공유 카드 요소 채우기
+  const el = document.getElementById("shareCardEl");
+  if (!el) return;
+
+  document.getElementById("sc-emoji").textContent = lastItem.emoji;
+  document.getElementById("sc-badge").textContent = `${categoryEmoji[cat]} ${categoryLabel[cat]}`;
+  document.getElementById("sc-title").textContent = lastItem.title;
+  document.getElementById("sc-meta").textContent = `${lastItem.year} · ⭐ ${lastItem.rating}`;
+  document.getElementById("sc-reason").textContent = `${reason.icon} ${reason.text}`;
+  document.getElementById("sc-desc").textContent = lastItem.desc.slice(0, 80) + "...";
+
+  el.style.visibility = "visible";
+  el.style.position = "fixed";
+  el.style.left = "-9999px";
+  el.style.top = "0";
+
+  try {
+    if (!window.html2canvas) {
+      alert("이미지 생성 라이브러리를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
+      el.style.visibility = "hidden";
+      return;
+    }
+    const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: null });
+    el.style.visibility = "hidden";
+
+    canvas.toBlob(async (blob) => {
+      if (!blob) return;
+      const file = new File([blob], "today-pick.png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "오늘의 픽", text: `🎲 ${lastItem.title}` });
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "today-pick.png";
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+    });
+  } catch {
+    el.style.visibility = "hidden";
+    alert("이미지 생성에 실패했습니다.");
+  }
+}
+
+// ===== 핵심: 뽑기 함수 (슬롯 애니메이션 + 가중치 랜덤) =====
 function pickRandom() {
   const card = document.getElementById("recCard");
+  const categories = ["movie", "drama", "anime", "book", "game"];
 
-  // 스켈레톤 로딩
-  card.classList.add("loading");
+  // 슬롯 애니메이션 시작
+  card.classList.add("slot-spinning");
   document.getElementById("cardBadge").textContent = "";
-  document.getElementById("cardPoster").textContent = "";
+  document.getElementById("cardPoster").textContent = "🎲";
   document.getElementById("cardTitle").innerHTML = `<span class="skeleton skeleton-title"></span>`;
   document.getElementById("cardMeta").innerHTML = `<span class="skeleton skeleton-meta"></span>`;
   document.getElementById("cardDesc").innerHTML = `
@@ -356,128 +613,163 @@ function pickRandom() {
     <span class="skeleton skeleton-line short"></span>`;
   document.getElementById("cardTags").innerHTML = "";
 
-  setTimeout(() => {
-    const categories = ["movie", "drama", "anime", "book", "game"];
-    let cat = currentCategory === "all"
-      ? categories[Math.floor(Math.random() * categories.length)]
-      : currentCategory;
+  const reasonEl = document.getElementById("cardReason");
+  if (reasonEl) reasonEl.innerHTML = "";
+  const ottEl = document.getElementById("cardOTT");
+  if (ottEl) ottEl.innerHTML = "";
 
-    let pool = [...recommendations[cat]];
-
-    // 이미 봤어요 제외
-    const notWatched = pool.filter(i => !watched.includes(`${cat}_${i.title}`));
-    if (notWatched.length > 0) pool = notWatched;
-
-    // 기분 필터
-    if (currentMood && moodMap[currentMood]) {
-      const moodFiltered = pool.filter(moodMap[currentMood]);
-      if (moodFiltered.length > 0) pool = moodFiltered;
+  let frame = 0;
+  const totalFrames = 10;
+  const interval = setInterval(() => {
+    frame++;
+    const fakeCat = categories[Math.floor(Math.random() * categories.length)];
+    const fakePool = recommendations[fakeCat] || [];
+    if (fakePool.length > 0) {
+      const fakeItem = fakePool[Math.floor(Math.random() * fakePool.length)];
+      document.getElementById("cardPoster").textContent = fakeItem.emoji;
+      document.getElementById("cardTitle").textContent = fakeItem.title;
     }
-
-    // 연도 필터
-    if (currentYear !== "all" && yearRanges[currentYear]) {
-      const yearFiltered = pool.filter(yearRanges[currentYear]);
-      if (yearFiltered.length > 0) pool = yearFiltered;
+    if (frame >= totalFrames) {
+      clearInterval(interval);
+      revealPick(card, categories);
     }
+  }, 70);
+}
 
-    // 직전 항목 제외
-    let filtered = pool.filter(i => !lastItem || i.title !== lastItem.title);
-    if (filtered.length === 0) filtered = pool;
+function revealPick(card, categories) {
+  let cat = currentCategory === "all"
+    ? categories[Math.floor(Math.random() * categories.length)]
+    : currentCategory;
 
-    const item = filtered[Math.floor(Math.random() * filtered.length)];
-    lastItem = item;
+  let pool = [...recommendations[cat]];
 
-    // 카드 업데이트
-    card.classList.remove("loading");
-    card.classList.remove("animate");
-    void card.offsetWidth;
-    card.classList.add("animate");
+  // 이미 봤어요 제외
+  const notWatched = pool.filter(i => !watched.includes(`${cat}_${i.title}`));
+  if (notWatched.length > 0) pool = notWatched;
 
-    document.getElementById("cardBadge").textContent = `${categoryEmoji[cat]} ${categoryLabel[cat]}`;
-    document.getElementById("cardBadge").className = `card-badge ${cat}`;
-    document.getElementById("cardTitle").textContent = item.title;
+  // 기분 필터
+  if (currentMood && moodMap[currentMood]) {
+    const moodFiltered = pool.filter(moodMap[currentMood]);
+    if (moodFiltered.length > 0) pool = moodFiltered;
+  }
 
-    // 포스터
-    const imgEl = document.getElementById("cardImg");
-    const emojiEl = document.getElementById("cardPoster");
-    emojiEl.textContent = item.emoji;
-    imgEl.style.display = "none";
-    emojiEl.style.display = "block";
+  // 연도 필터
+  if (currentYear !== "all" && yearRanges[currentYear]) {
+    const yearFiltered = pool.filter(yearRanges[currentYear]);
+    if (yearFiltered.length > 0) pool = yearFiltered;
+  }
 
-    const cacheKey = `${cat}_${item.title}`;
-    (async () => {
-      let imageUrl = posterCache[cacheKey];
-      if (imageUrl === undefined) {
-        const searchTitle = item.enTitle || item.title;
-        if (cat === "movie" || cat === "drama") {
-          imageUrl = await fetchTMDBPoster(searchTitle, cat) || (item.enTitle ? await fetchTMDBPoster(item.title, cat) : "") || "";
-        } else if (cat === "anime") {
-          imageUrl = await fetchTMDBPoster(searchTitle, "drama") || await fetchTMDBPoster(searchTitle, "movie") || (item.enTitle ? "" : await fetchTMDBPoster(item.title, "drama") || await fetchTMDBPoster(item.title, "movie")) || "";
-        } else if (cat === "book") {
-          imageUrl = await fetchBookCover(searchTitle) || (item.enTitle ? await fetchBookCover(item.title) : "") || "";
-        } else if (cat === "game") {
-          imageUrl = item.steamId
-            ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`
-            : await fetchRAWGCover(searchTitle) || "";
-        } else {
-          imageUrl = "";
-        }
-        posterCache[cacheKey] = imageUrl;
+  // 직전 항목 제외
+  let filtered = pool.filter(i => !lastItem || i.title !== lastItem.title);
+  if (filtered.length === 0) filtered = pool;
+
+  // 가중치 랜덤 선택
+  const item = weightedRandom(filtered);
+  lastItem = item;
+
+  // 카드 업데이트
+  card.classList.remove("slot-spinning");
+  card.classList.remove("animate");
+  void card.offsetWidth;
+  card.classList.add("animate");
+
+  document.getElementById("cardBadge").textContent = `${categoryEmoji[cat]} ${categoryLabel[cat]}`;
+  document.getElementById("cardBadge").className = `card-badge ${cat}`;
+  document.getElementById("cardTitle").textContent = item.title;
+
+  // 추천 이유
+  const reason = getRecommendReason(item);
+  const reasonEl = document.getElementById("cardReason");
+  if (reasonEl) reasonEl.innerHTML = `<span class="reason-icon">${reason.icon}</span> ${reason.text}`;
+
+  // OTT 버튼
+  const ottEl = document.getElementById("cardOTT");
+  if (ottEl) ottEl.innerHTML = getOTTButtons(item);
+
+  // 포스터
+  const imgEl = document.getElementById("cardImg");
+  const emojiEl = document.getElementById("cardPoster");
+  emojiEl.textContent = item.emoji;
+  imgEl.style.display = "none";
+  emojiEl.style.display = "block";
+
+  const cacheKey = `${cat}_${item.title}`;
+  (async () => {
+    let imageUrl = posterCache[cacheKey];
+    if (imageUrl === undefined) {
+      const searchTitle = item.enTitle || item.title;
+      if (cat === "movie" || cat === "drama") {
+        imageUrl = await fetchTMDBPoster(searchTitle, cat) || (item.enTitle ? await fetchTMDBPoster(item.title, cat) : "") || "";
+      } else if (cat === "anime") {
+        imageUrl = await fetchTMDBPoster(searchTitle, "drama") || await fetchTMDBPoster(searchTitle, "movie") || "";
+      } else if (cat === "book") {
+        imageUrl = await fetchBookCover(searchTitle) || (item.enTitle ? await fetchBookCover(item.title) : "") || "";
+      } else if (cat === "game") {
+        imageUrl = item.steamId
+          ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`
+          : await fetchRAWGCover(searchTitle) || "";
+      } else {
+        imageUrl = "";
       }
-      if (imageUrl && lastItem?.title === item.title) {
-        imgEl.src = imageUrl;
-        imgEl.alt = item.title;
-        imgEl.style.display = "block";
-        emojiEl.style.display = "none";
-      }
-    })();
+      posterCache[cacheKey] = imageUrl;
+    }
+    if (imageUrl && lastItem?.title === item.title) {
+      imgEl.src = imageUrl;
+      imgEl.alt = item.title;
+      imgEl.style.display = "block";
+      emojiEl.style.display = "none";
+    }
+  })();
 
-    document.getElementById("cardMeta").innerHTML =
-      `<span>📅 ${item.year}</span><span>🎭 ${item.genre}</span><span>⭐ ${item.rating}</span><span>📍 ${item.where}</span>`;
-    document.getElementById("cardDesc").textContent = item.desc;
+  document.getElementById("cardMeta").innerHTML =
+    `<span>📅 ${item.year}</span><span>🎭 ${item.genre}</span><span>⭐ ${item.rating}</span>`;
+  document.getElementById("cardDesc").textContent = item.desc;
 
-    const tagsEl = document.getElementById("cardTags");
-    tagsEl.innerHTML = item.tags.map(t => `<span class="tag">#${t}</span>`).join("");
+  const tagsEl = document.getElementById("cardTags");
+  tagsEl.innerHTML = item.tags.map(t => `<span class="tag">#${t}</span>`).join("");
 
-    // 별점 바 표시
-    const ratingBar = document.getElementById("ratingBar");
-    ratingBar.style.display = "flex";
-    updateStarUI(ratings[cacheKey] || 0);
+  // 별점 바 표시
+  const ratingBar = document.getElementById("ratingBar");
+  ratingBar.style.display = "flex";
+  updateStarUI(ratings[cacheKey] || 0);
 
-    // 봤어요 버튼 상태
-    const wb = document.getElementById("watchedBtn");
-    const isWatched = watched.includes(cacheKey);
-    wb.textContent = isWatched ? "✅ 봤어요!" : "👁 이미 봤어요";
-    wb.classList.toggle("watched-on", isWatched);
+  // 봤어요 버튼 상태
+  const wb = document.getElementById("watchedBtn");
+  const isWatched = watched.includes(cacheKey);
+  wb.textContent = isWatched ? "✅ 봤어요!" : "👁 이미 봤어요";
+  wb.classList.toggle("watched-on", isWatched);
 
-    // 즐겨찾기 버튼 상태
-    card.style.cursor = "pointer";
-    card.dataset.category = cat;
-    card.dataset.title = item.title;
-    const isFav = favorites.some(f => f.key === cacheKey);
-    document.getElementById("favBtn").textContent = isFav ? "❤️" : "🤍";
+  // 즐겨찾기 버튼 상태
+  card.style.cursor = "pointer";
+  card.dataset.category = cat;
+  card.dataset.title = item.title;
+  const isFav = favorites.some(f => f.key === cacheKey);
+  document.getElementById("favBtn").textContent = isFav ? "❤️" : "🤍";
 
-    // 통계 (저장)
-    stats[cat]++;
-    localStorage.setItem("pickStats", JSON.stringify(stats));
-    updateStats();
+  // 통계 (저장)
+  stats[cat]++;
+  localStorage.setItem("pickStats", JSON.stringify(stats));
+  updateStats();
 
-    // 히스토리
-    history.unshift({ ...item, cat });
-    if (history.length > 5) history.pop();
-    updateHistory();
+  // 히스토리
+  history.unshift({ ...item, cat });
+  if (history.length > 5) history.pop();
+  updateHistory();
 
-    // 트렌딩 추적
-    trendingData[cacheKey] = (trendingData[cacheKey] || 0) + 1;
-    localStorage.setItem("trendingData", JSON.stringify(trendingData));
-    updateTrending();
+  // 트렌딩 추적
+  trendingData[cacheKey] = (trendingData[cacheKey] || 0) + 1;
+  localStorage.setItem("trendingData", JSON.stringify(trendingData));
+  updateTrending();
 
-    // 취향 분석
-    updateTasteAnalysis();
+  // 취향 분석
+  updateTasteAnalysis();
 
-    // 뱃지 체크
-    checkBadges();
-  }, 600);
+  // 뱃지 체크
+  checkBadges();
+
+  // Supabase 기록
+  recordPick(cat, item.title);
+  setTimeout(loadTodayCounter, 500);
 }
 
 // ===== 통계 업데이트 =====
@@ -597,6 +889,8 @@ document.querySelectorAll(".stab").forEach(btn => {
     document.querySelectorAll(".stab-content").forEach(c => c.style.display = "none");
     btn.classList.add("active");
     document.getElementById("stab-" + btn.dataset.stab).style.display = "block";
+    // 인기 픽 탭 열 때마다 새로고침
+    if (btn.dataset.stab === "popular") loadPopularPicks();
   });
 });
 
@@ -607,3 +901,5 @@ updateFavorites();
 updateBadgeWidget();
 updateTrending();
 updateTasteAnalysis();
+loadTodayCounter();
+loadPopularPicks();
