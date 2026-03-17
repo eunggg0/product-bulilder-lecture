@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="오늘의 픽 전체 추천 목록 - 영화, 드라마, 책, 게임 100개의 엄선된 추천 작품을 확인하세요.">
+  <meta name="description" content="오늘의 픽 전체 추천 목록 - 영화, 드라마, 애니, 책, 게임 500개의 엄선된 추천 작품을 확인하세요.">
   <meta property="og:title" content="전체 추천 목록 - 오늘의 픽">
-  <meta property="og:description" content="영화, 드라마, 책, 게임 100개의 엄선된 추천 목록">
+  <meta property="og:description" content="영화, 드라마, 애니, 책, 게임 500개의 엄선된 추천 목록">
   <meta property="og:site_name" content="오늘의 픽">
   <title>전체 추천 목록 - 오늘의 픽</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
@@ -134,6 +134,7 @@
 
     .lc-badge.movie { background: var(--movie); }
     .lc-badge.drama { background: var(--drama); color: #333; }
+    .lc-badge.anime { background: var(--anime); }
     .lc-badge.book { background: var(--book); }
     .lc-badge.game { background: var(--game); }
 
@@ -178,6 +179,8 @@
         <a href="index.html">홈</a>
         <a href="list.html" style="color:var(--primary)">전체목록</a>
         <a href="about.html">소개</a>
+        <a href="contact.html">문의</a>
+        <a href="privacy.html">개인정보처리방침</a>
         <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="다크모드 전환">🌙</button>
       </nav>
       <button class="hamburger" onclick="toggleMenu()" title="메뉴">☰</button>
@@ -191,7 +194,7 @@
 
   <div class="list-hero">
     <h1>📋 전체 추천 목록</h1>
-    <p>영화 · 드라마 · 책 · 게임 총 <strong>100개</strong>의 엄선된 추천 작품</p>
+    <p>영화 · 드라마 · 애니 · 책 · 게임 총 <strong>500개</strong>의 엄선된 추천 작품</p>
   </div>
 
   <!-- 검색 -->
@@ -204,6 +207,7 @@
     <button class="tab active" data-category="all" onclick="setCategory(this, 'all')">전체</button>
     <button class="tab" data-category="movie" onclick="setCategory(this, 'movie')">🎬 영화</button>
     <button class="tab" data-category="drama" onclick="setCategory(this, 'drama')">📺 드라마</button>
+    <button class="tab" data-category="anime" onclick="setCategory(this, 'anime')">✨ 애니</button>
     <button class="tab" data-category="book" onclick="setCategory(this, 'book')">📚 책</button>
     <button class="tab" data-category="game" onclick="setCategory(this, 'game')">🎮 게임</button>
   </div>
@@ -226,7 +230,7 @@
   <footer>
     <div class="footer-inner">
       <p>© 2026 오늘의 픽 | <a href="privacy.html">개인정보처리방침</a> | <a href="about.html">소개</a></p>
-      <p class="footer-desc">매일 새로운 영화, 드라마, 책, 게임을 추천해드립니다.</p>
+      <p class="footer-desc">매일 새로운 영화, 드라마, 애니, 책, 게임을 추천해드립니다.</p>
     </div>
   </footer>
 
@@ -235,7 +239,7 @@
     const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
     const TMDB_IMG = "https://image.tmdb.org/t/p/w300";
     const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
-    const categoryLabel = { movie: "영화", drama: "드라마", book: "책", game: "게임" };
+    const categoryLabel = { movie: "영화", drama: "드라마", anime: "애니", book: "책", game: "게임" };
     const posterCache = {};
 
     let currentCategory = "all";
@@ -252,7 +256,7 @@
       const grid = document.getElementById("listGrid");
       const countEl = document.getElementById("listCount");
 
-      const categories = currentCategory === "all" ? ["movie", "drama", "book", "game"] : [currentCategory];
+      const categories = currentCategory === "all" ? ["movie", "drama", "anime", "book", "game"] : [currentCategory];
       let items = [];
       categories.forEach(cat => {
         recommendations[cat].forEach(item => items.push({ ...item, cat }));
@@ -304,17 +308,31 @@
       let imageUrl = posterCache[cacheKey];
 
       if (imageUrl === undefined) {
+        const searchTitle = item.enTitle || item.title;
         if (item.cat === "movie" || item.cat === "drama") {
           const endpoint = item.cat === "drama" ? "tv" : "movie";
           try {
-            const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(item.title)}`);
+            const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
             const data = await res.json();
             const poster = data.results?.[0]?.poster_path;
             imageUrl = poster ? `${TMDB_IMG}${poster}` : "";
           } catch { imageUrl = ""; }
+        } else if (item.cat === "anime") {
+          try {
+            const resTv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
+            const dataTv = await resTv.json();
+            const posterTv = dataTv.results?.[0]?.poster_path;
+            if (posterTv) { imageUrl = `${TMDB_IMG}${posterTv}`; }
+            else {
+              const resM = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
+              const dataM = await resM.json();
+              const posterM = dataM.results?.[0]?.poster_path;
+              imageUrl = posterM ? `${TMDB_IMG}${posterM}` : "";
+            }
+          } catch { imageUrl = ""; }
         } else if (item.cat === "book") {
           try {
-            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(item.title)}&maxResults=1`);
+            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(searchTitle)}&maxResults=1`);
             const data = await res.json();
             const img = data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail;
             imageUrl = img ? img.replace("zoom=1", "zoom=3").replace("http://", "https://") : "";
@@ -324,7 +342,7 @@
             imageUrl = `https://cdn.cloudflare.steamstatic.com/steam/apps/${item.steamId}/library_600x900.jpg`;
           } else {
             try {
-              const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(item.title)}&key=${RAWG_KEY}&page_size=1`);
+              const res = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(searchTitle)}&key=${RAWG_KEY}&page_size=1`);
               const data = await res.json();
               imageUrl = data.results?.[0]?.background_image || "";
             } catch { imageUrl = ""; }
