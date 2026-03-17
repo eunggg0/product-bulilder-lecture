@@ -174,6 +174,12 @@
           </div>
         </div>
 
+        <!-- 오늘의 인기픽 -->
+        <div class="popular-section">
+          <h3>🔥 오늘의 인기픽 TOP 5</h3>
+          <div id="popularList"><p class="empty-history">불러오는 중...</p></div>
+        </div>
+
         <!-- 최근 추천 히스토리 -->
         <div class="history-section">
           <h3>최근 추천 목록</h3>
@@ -196,7 +202,6 @@
         <div class="sidebar-widget sidebar-tabbed">
           <div class="stab-row">
             <button class="stab active" data-stab="stats" title="통계">📊<span>통계</span></button>
-            <button class="stab" data-stab="popular" title="오늘의 인기픽">🔥<span>인기픽</span></button>
             <button class="stab" data-stab="favs" title="즐겨찾기">❤️<span>즐겨찾기</span></button>
             <button class="stab" data-stab="trend" title="내 트렌딩">📈<span>트렌딩</span></button>
             <button class="stab" data-stab="badge" title="뱃지">🏅<span>뱃지</span></button>
@@ -215,11 +220,6 @@
             <div id="tasteAnalysis" style="margin-top:12px">
               <p class="empty-history">3번 이상 뽑으면 취향을 분석해드려요!</p>
             </div>
-          </div>
-
-          <!-- 오늘의 인기픽 탭 -->
-          <div class="stab-content" id="stab-popular" style="display:none">
-            <div id="popularList"><p class="empty-history">오늘의 인기 픽을 불러오는 중...</p></div>
           </div>
 
           <!-- 즐겨찾기 탭 -->

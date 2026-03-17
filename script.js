@@ -914,8 +914,6 @@ document.querySelectorAll(".stab").forEach(btn => {
     document.querySelectorAll(".stab-content").forEach(c => c.style.display = "none");
     btn.classList.add("active");
     document.getElementById("stab-" + btn.dataset.stab).style.display = "block";
-    // 인기 픽 탭 열 때마다 새로고침
-    if (btn.dataset.stab === "popular") loadPopularPicks();
   });
 });
 
