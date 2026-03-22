@@ -570,8 +570,20 @@ function closeFateModal() {
 }
 
 // ===== 이미지 카드 공유 =====
+async function loadHtml2Canvas() {
+  if (window.html2canvas) return;
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
 async function shareImage() {
   if (!lastItem) { alert("먼저 추천을 뽑아보세요!"); return; }
+  await loadHtml2Canvas();
 
   const cat = document.getElementById("recCard").dataset.category || "movie";
   const reason = getRecommendReason(lastItem);
@@ -593,11 +605,6 @@ async function shareImage() {
   el.style.top = "0";
 
   try {
-    if (!window.html2canvas) {
-      alert("이미지 생성 라이브러리를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
-      el.style.visibility = "hidden";
-      return;
-    }
     const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: null });
     el.style.visibility = "hidden";
 
@@ -877,9 +884,12 @@ function kakaoShare() {
 
 // ===== 오늘의 명언 =====
 function initQuote() {
+  if (typeof quotes === "undefined" || !quotes.length) return;
   const q = quotes[Math.floor(Math.random() * quotes.length)];
-  document.getElementById("quoteText").textContent = `"${q.text}"`;
-  document.getElementById("quoteAuthor").textContent = q.author;
+  const textEl = document.getElementById("quoteText");
+  const authorEl = document.getElementById("quoteAuthor");
+  if (textEl) textEl.textContent = `"${q.text}"`;
+  if (authorEl) authorEl.textContent = q.author;
 }
 
 // ===== 다크모드 =====
@@ -926,3 +936,6 @@ updateTrending();
 updateTasteAnalysis();
 loadTodayCounter();
 loadPopularPicks();
+
+// 첫 방문 시 자동 뽑기
+setTimeout(() => pickRandom(), 400);
