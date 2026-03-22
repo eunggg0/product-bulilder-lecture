@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /privacy.html
 
 Sitemap: https://today-pick.vercel.app/sitemap.xml

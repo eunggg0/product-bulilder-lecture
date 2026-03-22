@@ -3,16 +3,16 @@
 
   <url>
     <loc>https://today-pick.vercel.app/</loc>
-    <lastmod>2025-03-15</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://today-pick.vercel.app/about.html</loc>
-    <lastmod>2025-03-15</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
@@ -82,6 +82,23 @@
   <url><loc>https://today-pick.vercel.app/detail.html?category=drama&amp;title=%EC%A7%80%EA%B8%88+%EA%B1%B0%EC%8B%A0+%EC%A0%84%ED%99%94%EB%8A%94</loc><priority>0.7</priority></url>
   <url><loc>https://today-pick.vercel.app/detail.html?category=drama&amp;title=%ED%8E%9C%ED%8A%B8%ED%95%98%EC%9A%B0%EC%8A%A4</loc><priority>0.7</priority></url>
   <url><loc>https://today-pick.vercel.app/detail.html?category=drama&amp;title=%EC%84%A0%EC%9E%AC+%EC%97%85%EA%B3%A0+%ED%8A%80%EC%96%B4</loc><priority>0.7</priority></url>
+
+  <!-- 애니 -->
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EA%B7%80%EB%A9%B8%EC%9D%98+%EC%B9%BC%EB%82%A0</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EA%B3%B5%EA%B2%A9%EC%9D%98+%EA%B1%B0%EC%9D%B8</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EC%A7%80%EB%B8%8C%EB%A6%AC%EC%9D%98+%EC%B2%9C%EC%9E%A5+%EC%84%B1</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EC%8B%A0%EC%84%B8%EA%B8%B0+%EC%97%90%EB%B0%94%EA%B2%8C%EB%A6%AC%EC%98%A8</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%B2%84%EB%B2%84%EA%B0%80+%EC%A3%BD%EC%9D%B4%EA%B3%A0+%EC%8B%B6%EC%96%B4</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EC%9B%90%ED%94%BC%EC%8A%A4</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%82%98%EB%A3%A8%ED%86%A0</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%B3%BC%EB%A6%AC%EB%B3%BC+%EC%A0%9C%ED%8A%B8</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%ED%97%8C%ED%84%B0+x+%ED%97%8C%ED%84%B0</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%AA%A8%EB%85%B8%EB%85%B8%EC%BC%80+%ED%9E%88%EB%A9%94</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%B3%B4%EB%A3%A8%ED%86%A0+%EB%84%A5%EC%8A%A4%ED%8A%B8+%EC%A0%9C%EB%84%A4%EB%A0%88%EC%9D%B4%EC%85%98</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%B0%94%EC%9D%B4%EC%98%AC%EB%A0%9B+%EC%97%90%EB%B2%84%EA%B0%80%EB%93%A0</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EB%82%98%EC%9D%98+%ED%9E%88%EC%96%B4%EB%A1%9C+%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%EC%95%84</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%ED%8F%AC%EC%BC%93+%EB%AA%AC%EC%8A%A4%ED%84%B0</loc><priority>0.7</priority></url>
+  <url><loc>https://today-pick.vercel.app/detail.html?category=anime&amp;title=%EA%B7%B8%EB%9E%80+%EB%B8%94%EB%A3%A8</loc><priority>0.7</priority></url>
 
   <!-- 책 -->
   <url><loc>https://today-pick.vercel.app/detail.html?category=book&amp;title=%EC%B1%84%EC%8B%9D%EC%A3%BC%EC%9D%98%EC%9E%90</loc><priority>0.7</priority></url>
