@@ -3,6 +3,40 @@ const categoryLabel = { movie: "영화", drama: "드라마", anime: "애니", bo
 
 const TMDB_KEY = "8ba8660b9e102dda5f80238ffba806e8";
 const RAWG_KEY = "9aea44926c9e4d56a77b7369cc2f8186";
+const TMDB_IMG = "https://image.tmdb.org/t/p/w300";
+
+const ottUrlMap = {
+  "넷플릭스":   { url: "https://www.netflix.com/search?q=",                        color: "#e50914", label: "Netflix" },
+  "왓챠":       { url: "https://watcha.com/search?query=",                          color: "#ff0558", label: "Watcha" },
+  "디즈니+":    { url: "https://www.disneyplus.com/search?q=",                      color: "#0063e5", label: "Disney+" },
+  "웨이브":     { url: "https://www.wavve.com/search?searchword=",                  color: "#0088ff", label: "Wavve" },
+  "티빙":       { url: "https://www.tving.com/search/all/",                         color: "#ff153c", label: "Tving" },
+  "쿠팡플레이": { url: "https://www.coupangplay.com/search?keyword=",               color: "#c00023", label: "Coupang Play" },
+  "애플TV+":    { url: "https://tv.apple.com/search?term=",                         color: "#555",    label: "Apple TV+" },
+  "스팀":       { url: "https://store.steampowered.com/search/?term=",              color: "#1b2838", label: "Steam" },
+  "플레이스테이션": { url: "https://store.playstation.com/ko-kr/search/",           color: "#003087", label: "PS Store" },
+  "닌텐도":     { url: "https://www.nintendo.com/search/#q=",                       color: "#e4000f", label: "Nintendo" },
+  "엑스박스":   { url: "https://www.xbox.com/ko-KR/Search?q=",                      color: "#107c10", label: "Xbox" },
+  "크런치롤":   { url: "https://www.crunchyroll.com/search?q=",                     color: "#f47521", label: "Crunchyroll" },
+  "라프텔":     { url: "https://laftel.net/search?keyword=",                        color: "#00c4b4", label: "Laftel" },
+  "유튜브":     { url: "https://www.youtube.com/results?search_query=",             color: "#ff0000", label: "YouTube" },
+  "아마존 프라임": { url: "https://www.primevideo.com/search/ref=atv_sr_sug_3?phrase=", color: "#00a8e1", label: "Prime Video" },
+  "교보문고":   { url: "https://search.kyobobook.co.kr/search?keyword=",            color: "#e65c1b", label: "교보문고" },
+  "알라딘":     { url: "https://www.aladin.co.kr/search/wsearchresult.aspx?SearchWord=", color: "#e50914", label: "알라딘" },
+  "YES24":      { url: "https://www.yes24.com/Product/Search?domain=ALL&query=",    color: "#f2672a", label: "YES24" },
+  "밀리의서재": { url: "https://www.millie.co.kr/search/book?keyword=",             color: "#2baf8c", label: "밀리의서재" },
+};
+
+function getOTTButtonsDetail(item) {
+  if (!item.where) return `<p style="color:var(--text-muted)">정보 없음</p>`;
+  const platforms = item.where.split(",").map(p => p.trim()).filter(Boolean);
+  const searchTitle = item.enTitle || item.title;
+  return platforms.map(p => {
+    const info = ottUrlMap[p];
+    if (!info) return `<span class="btn-ott btn-ott-plain">${p}</span>`;
+    return `<a class="btn-ott" href="${info.url}${encodeURIComponent(searchTitle)}" target="_blank" rel="noopener" style="background:${info.color};font-size:0.95rem;padding:10px 20px">${info.label}에서 보기 →</a>`;
+  }).join("");
+}
 
 // 햄버거 메뉴
 function toggleMenu() {
@@ -30,27 +64,44 @@ function toggleFavoriteDetail() {
 async function loadDetailPoster() {
   let imageUrl = "";
   const searchTitle = item.enTitle || item.title;
+
+  async function fetchById(id, type) {
+    try {
+      const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=${TMDB_KEY}&language=ko-KR`);
+      const d = await res.json();
+      return d.poster_path ? `${TMDB_IMG}${d.poster_path}` : null;
+    } catch { return null; }
+  }
+
   if (category === "anime") {
-    try {
-      const resTv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
-      const dataTv = await resTv.json();
-      const posterTv = dataTv.results?.[0]?.poster_path;
-      if (posterTv) { imageUrl = `https://image.tmdb.org/t/p/w300${posterTv}`; }
-      else {
-        const resM = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
-        const dataM = await resM.json();
-        const posterM = dataM.results?.[0]?.poster_path;
-        if (posterM) imageUrl = `https://image.tmdb.org/t/p/w300${posterM}`;
-      }
-    } catch {}
+    if (item.tmdbId) {
+      imageUrl = await fetchById(item.tmdbId, item.tmdbType || "tv") || "";
+    } else {
+      try {
+        const resTv = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
+        const dataTv = await resTv.json();
+        const posterTv = dataTv.results?.[0]?.poster_path;
+        if (posterTv) { imageUrl = `${TMDB_IMG}${posterTv}`; }
+        else {
+          const resM = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
+          const dataM = await resM.json();
+          const posterM = dataM.results?.[0]?.poster_path;
+          if (posterM) imageUrl = `${TMDB_IMG}${posterM}`;
+        }
+      } catch {}
+    }
   } else if (category === "movie" || category === "drama") {
-    const endpoint = category === "drama" ? "tv" : "movie";
-    try {
-      const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
-      const data = await res.json();
-      const poster = data.results?.[0]?.poster_path;
-      imageUrl = poster ? `https://image.tmdb.org/t/p/w300${poster}` : "";
-    } catch {}
+    if (item.tmdbId) {
+      imageUrl = await fetchById(item.tmdbId, category === "drama" ? "tv" : "movie") || "";
+    } else {
+      const endpoint = category === "drama" ? "tv" : "movie";
+      try {
+        const res = await fetch(`https://api.themoviedb.org/3/search/${endpoint}?api_key=${TMDB_KEY}&language=ko-KR&query=${encodeURIComponent(searchTitle)}`);
+        const data = await res.json();
+        const poster = data.results?.[0]?.poster_path;
+        imageUrl = poster ? `${TMDB_IMG}${poster}` : "";
+      } catch {}
+    }
   } else if (category === "book") {
     try {
       const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(searchTitle)}&maxResults=1`);
@@ -185,7 +236,7 @@ if (!item) {
       <p>${item.desc}</p>
       <div class="detail-platform">
         <h3>📍 어디서 볼 수 있나요?</h3>
-        <p>${item.where}</p>
+        <div class="ott-buttons" style="margin-top:10px;flex-wrap:wrap;gap:10px">${getOTTButtonsDetail(item)}</div>
       </div>
       <div class="detail-actions">
         <button class="btn-pick" style="flex:1" onclick="shareDetail()">📤 공유하기</button>
