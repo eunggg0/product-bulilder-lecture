@@ -153,7 +153,7 @@ main {
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 }
 
 .tab {
@@ -718,6 +718,14 @@ footer a:hover { color: #fff; }
   font-weight: 700;
   cursor: pointer;
 }
+.year-select option {
+  background: #fff;
+  color: #2d2d2d;
+}
+body.dark .year-select option {
+  background: #1e1e2e;
+  color: #e8e8f0;
+}
 
 /* ===== 별점 & 봤어요 ===== */
 .rating-bar {
@@ -891,12 +899,17 @@ footer a:hover { color: #fff; }
 
 /* ===== 오늘의 픽 카운터 ===== */
 .today-counter {
-  font-size: 0.85rem;
+  display: inline-block;
+  font-size: 0.82rem;
   color: var(--primary);
   font-weight: 700;
-  margin-top: 6px;
-  opacity: 0.85;
+  margin-top: 10px;
+  background: rgba(108, 99, 255, 0.08);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 50px;
+  padding: 4px 14px;
 }
+.today-counter:empty { display: none; }
 
 /* ===== 추천 이유 ===== */
 .card-reason {
