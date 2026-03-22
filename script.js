@@ -23,6 +23,7 @@ let earnedBadges = JSON.parse(localStorage.getItem("earnedBadges") || "[]");
 let currentMood = null;
 let currentYear = "all";
 let currentCategory = "all";
+let forcedNextPick = null; // { cat, item } — URL 파라미터로 특정 작품 지정 시 사용
 
 // ===== OTT URL 매핑 =====
 const ottUrlMap = {
@@ -93,6 +94,15 @@ async function fetchTMDBPoster(title, type) {
     const data = await res.json();
     const result = data.results?.[0];
     return result?.poster_path ? `${TMDB_IMG}${result.poster_path}` : null;
+  } catch { return null; }
+}
+
+async function fetchTMDBById(id, type = "tv") {
+  try {
+    const url = `https://api.themoviedb.org/3/${type}/${id}?api_key=${TMDB_KEY}&language=ko-KR`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data.poster_path ? `${TMDB_IMG}${data.poster_path}` : null;
   } catch { return null; }
 }
 
@@ -669,34 +679,43 @@ function pickRandom() {
 }
 
 function revealPick(card, categories) {
-  let cat = currentCategory === "all"
-    ? categories[Math.floor(Math.random() * categories.length)]
-    : currentCategory;
+  let cat, item;
 
-  let pool = [...recommendations[cat]];
+  if (forcedNextPick) {
+    cat = forcedNextPick.cat;
+    item = forcedNextPick.item;
+    forcedNextPick = null;
+  } else {
+    cat = currentCategory === "all"
+      ? categories[Math.floor(Math.random() * categories.length)]
+      : currentCategory;
 
-  // 이미 봤어요 제외
-  const notWatched = pool.filter(i => !watched.includes(`${cat}_${i.title}`));
-  if (notWatched.length > 0) pool = notWatched;
+    let pool = [...recommendations[cat]];
 
-  // 기분 필터
-  if (currentMood && moodMap[currentMood]) {
-    const moodFiltered = pool.filter(moodMap[currentMood]);
-    if (moodFiltered.length > 0) pool = moodFiltered;
+    // 이미 봤어요 제외
+    const notWatched = pool.filter(i => !watched.includes(`${cat}_${i.title}`));
+    if (notWatched.length > 0) pool = notWatched;
+
+    // 기분 필터
+    if (currentMood && moodMap[currentMood]) {
+      const moodFiltered = pool.filter(moodMap[currentMood]);
+      if (moodFiltered.length > 0) pool = moodFiltered;
+    }
+
+    // 연도 필터
+    if (currentYear !== "all" && yearRanges[currentYear]) {
+      const yearFiltered = pool.filter(yearRanges[currentYear]);
+      if (yearFiltered.length > 0) pool = yearFiltered;
+    }
+
+    // 직전 항목 제외
+    let filtered = pool.filter(i => !lastItem || i.title !== lastItem.title);
+    if (filtered.length === 0) filtered = pool;
+
+    // 가중치 랜덤 선택
+    item = weightedRandom(filtered);
   }
 
-  // 연도 필터
-  if (currentYear !== "all" && yearRanges[currentYear]) {
-    const yearFiltered = pool.filter(yearRanges[currentYear]);
-    if (yearFiltered.length > 0) pool = yearFiltered;
-  }
-
-  // 직전 항목 제외
-  let filtered = pool.filter(i => !lastItem || i.title !== lastItem.title);
-  if (filtered.length === 0) filtered = pool;
-
-  // 가중치 랜덤 선택
-  const item = weightedRandom(filtered);
   lastItem = item;
 
   // 카드 업데이트
@@ -731,9 +750,13 @@ function revealPick(card, categories) {
     if (imageUrl === undefined) {
       const searchTitle = item.enTitle || item.title;
       if (cat === "movie" || cat === "drama") {
-        imageUrl = await fetchTMDBPoster(searchTitle, cat) || (item.enTitle ? await fetchTMDBPoster(item.title, cat) : "") || "";
+        imageUrl = item.tmdbId
+          ? await fetchTMDBById(item.tmdbId, cat === "drama" ? "tv" : "movie") || ""
+          : await fetchTMDBPoster(searchTitle, cat) || (item.enTitle ? await fetchTMDBPoster(item.title, cat) : "") || "";
       } else if (cat === "anime") {
-        imageUrl = await fetchTMDBPoster(searchTitle, "drama") || await fetchTMDBPoster(searchTitle, "movie") || "";
+        imageUrl = item.tmdbId
+          ? await fetchTMDBById(item.tmdbId, item.tmdbType || "tv") || ""
+          : await fetchTMDBPoster(searchTitle, "drama") || await fetchTMDBPoster(searchTitle, "movie") || "";
       } else if (cat === "book") {
         imageUrl = await fetchBookCover(searchTitle) || (item.enTitle ? await fetchBookCover(item.title) : "") || "";
       } else if (cat === "game") {
@@ -852,13 +875,14 @@ function twitterShare() {
 
 function shareRecommendation() {
   if (!lastItem) { alert("먼저 추천을 뽑아보세요!"); return; }
-  const text = `🎲 오늘의 픽 추천: ${lastItem.title}\n${lastItem.desc}\n\n오늘의 픽에서 확인하세요!`;
+  const cat = document.getElementById("recCard").dataset.category || "movie";
+  const shareUrl = `https://today-pick.vercel.app/?category=${cat}&title=${encodeURIComponent(lastItem.title)}`;
   if (navigator.share) {
-    navigator.share({ title: "오늘의 픽", text });
+    navigator.share({ title: `오늘의 픽: ${lastItem.title}`, text: lastItem.desc.slice(0, 100), url: shareUrl });
   } else if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => alert("클립보드에 복사되었습니다!"));
+    navigator.clipboard.writeText(shareUrl).then(() => alert("링크가 클립보드에 복사되었습니다!"));
   } else {
-    alert(text);
+    alert(shareUrl);
   }
 }
 
@@ -937,5 +961,23 @@ updateTasteAnalysis();
 loadTodayCounter();
 loadPopularPicks();
 
-// 첫 방문 시 자동 뽑기
-setTimeout(() => pickRandom(), 400);
+// URL 파라미터로 특정 작품 지정 시 해당 작품, 없으면 랜덤
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const paramCat = params.get("category");
+  const paramTitle = params.get("title");
+  if (paramCat && paramTitle && recommendations[paramCat]) {
+    const decodedTitle = decodeURIComponent(paramTitle);
+    const found = recommendations[paramCat].find(i => i.title === decodedTitle);
+    if (found) {
+      currentCategory = paramCat;
+      document.querySelectorAll(".tab").forEach(t => {
+        t.classList.toggle("active", t.dataset.category === paramCat);
+      });
+      forcedNextPick = { cat: paramCat, item: found };
+      setTimeout(() => pickRandom(), 400);
+      return;
+    }
+  }
+  setTimeout(() => pickRandom(), 400);
+})();

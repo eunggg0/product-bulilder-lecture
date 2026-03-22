@@ -4812,6 +4812,7 @@ const recommendations = {
       tags: ["액션", "반전", "명작", "판타지"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 1429, tmdbType: "tv",
     },
     {
       title: "귀멸의 칼날",
@@ -4824,6 +4825,7 @@ const recommendations = {
       tags: ["액션", "가족", "판타지", "감동"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 85937, tmdbType: "tv",
     },
     {
       title: "나의 히어로 아카데미아",
@@ -4836,6 +4838,7 @@ const recommendations = {
       tags: ["슈퍼히어로", "성장", "액션", "청춘"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 65930, tmdbType: "tv",
     },
     {
       title: "원피스",
@@ -4848,6 +4851,7 @@ const recommendations = {
       tags: ["해적", "모험", "우정", "명작"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 37854, tmdbType: "tv",
     },
     {
       title: "나루토",
@@ -4860,6 +4864,7 @@ const recommendations = {
       tags: ["닌자", "성장", "우정", "액션"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 31910, tmdbType: "tv",
     },
     {
       title: "드래곤볼 Z",
@@ -4920,6 +4925,7 @@ const recommendations = {
       tags: ["헌터", "전략", "명작", "성장"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 46298, tmdbType: "tv",
     },
     {
       title: "강철의 연금술사: 브라더후드",
@@ -4932,6 +4938,7 @@ const recommendations = {
       tags: ["철학", "형제", "명작", "판타지"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 31911, tmdbType: "tv",
     },
     {
       title: "코드 기아스: 반역의 를르슈",
@@ -4992,6 +4999,7 @@ const recommendations = {
       tags: ["액션", "코미디", "유머", "슈퍼히어로"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 63926, tmdbType: "tv",
     },
     {
       title: "소드 아트 온라인",
@@ -5412,6 +5420,7 @@ const recommendations = {
       tags: ["추리", "미스터리", "명작", "장수"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 4177, tmdbType: "tv",
     },
     {
       title: "원래 히어로",

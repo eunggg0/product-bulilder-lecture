@@ -1,0 +1,18 @@
+{
+  "name": "오늘의 픽",
+  "short_name": "오늘의 픽",
+  "description": "매일 달라지는 랜덤 콘텐츠 추천 - 영화, 드라마, 애니, 책, 게임",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f3ff",
+  "theme_color": "#6c63ff",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "/og-image.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
