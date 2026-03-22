@@ -4812,7 +4812,7 @@ const recommendations = {
       tags: ["액션", "반전", "명작", "판타지"],
       where: "넷플릭스",
       image: "",
-      tmdbId: 1429, tmdbType: "tv",
+      tmdbId: 70626, tmdbType: "tv",
     },
     {
       title: "귀멸의 칼날",
@@ -4925,7 +4925,7 @@ const recommendations = {
       tags: ["헌터", "전략", "명작", "성장"],
       where: "넷플릭스",
       image: "",
-      tmdbId: 46298, tmdbType: "tv",
+      tmdbId: 60572, tmdbType: "tv",
     },
     {
       title: "강철의 연금술사: 브라더후드",
@@ -4999,7 +4999,7 @@ const recommendations = {
       tags: ["액션", "코미디", "유머", "슈퍼히어로"],
       where: "넷플릭스",
       image: "",
-      tmdbId: 63926, tmdbType: "tv",
+      tmdbId: 15137, tmdbType: "movie",
     },
     {
       title: "소드 아트 온라인",
@@ -5252,6 +5252,7 @@ const recommendations = {
       tags: ["SF", "자연", "지브리", "명작"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 81, tmdbType: "movie",
     },
     {
       title: "바람이 분다",
@@ -5420,7 +5421,7 @@ const recommendations = {
       tags: ["추리", "미스터리", "명작", "장수"],
       where: "넷플릭스",
       image: "",
-      tmdbId: 4177, tmdbType: "tv",
+      tmdbId: 128, tmdbType: "movie",
     },
     {
       title: "원래 히어로",
@@ -5505,6 +5506,7 @@ const recommendations = {
       tags: ["스포츠", "농구", "성장", "명작"],
       where: "넷플릭스",
       image: "",
+      tmdbId: 42573, tmdbType: "tv",
     },
     {
       title: "하이큐!!",
