@@ -5022,7 +5022,7 @@ const recommendations = {
       rating: "9.2",
       desc: "죽을 때마다 시간을 되돌리는 능력을 가진 소년의 이세계 이야기. 충격적인 전개.",
       tags: ["이세계", "타임루프", "반전", "판타지"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5034,7 +5034,7 @@ const recommendations = {
       rating: "9.0",
       desc: "이세계로 전이한 히키코모리 소년의 엉뚱한 모험. 유쾌하고 웃긴 이세계물의 대표작.",
       tags: ["이세계", "코미디", "유머", "판타지"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5046,7 +5046,7 @@ const recommendations = {
       rating: "8.9",
       desc: "게임에서 최강 보스 캐릭터가 된 채 게임 세계로 전이한 플레이어의 이야기.",
       tags: ["이세계", "판타지", "RPG", "강함"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5058,7 +5058,7 @@ const recommendations = {
       rating: "8.8",
       desc: "지하 던전에서 모험하는 벨 크래넬과 헤스티아의 이야기. 던전 탐험의 정석.",
       tags: ["판타지", "던전", "모험", "로맨스"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5070,7 +5070,7 @@ const recommendations = {
       rating: "8.8",
       desc: "이세계의 존재들이 찾아오는 일본 식당의 이야기. 음식과 다양한 손님들의 따뜻한 에피소드.",
       tags: ["이세계", "음식", "힐링", "판타지"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5082,7 +5082,7 @@ const recommendations = {
       rating: "8.8",
       desc: "방패 영웅으로 소환된 뒤 배신당하고 혼자 싸워나가는 이야기.",
       tags: ["이세계", "판타지", "성장", "복수"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5118,7 +5118,7 @@ const recommendations = {
       rating: "9.0",
       desc: "멸망한 세계를 여행하는 두 소녀의 이야기. 조용하고 서정적인 포스트 아포칼립스.",
       tags: ["SF", "포스트아포칼립스", "힐링", "서정"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5444,7 +5444,7 @@ const recommendations = {
       rating: "8.9",
       desc: "시골 마을에서 살인 사건을 해결하는 고등학생들의 이야기. 게임 원작.",
       tags: ["판타지", "추리", "학원", "게임원작"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5456,7 +5456,7 @@ const recommendations = {
       rating: "9.1",
       desc: "모든 것을 게임으로 결정하는 세계로 전이한 천재 남매의 이야기. 두뇌 게임의 극치.",
       tags: ["판타지", "게임", "전략", "두뇌"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5529,7 +5529,7 @@ const recommendations = {
       rating: "9.1",
       desc: "환상의 6번째 선수 쿠로코와 최고의 팀을 만드는 이야기.",
       tags: ["스포츠", "농구", "팀워크", "열정"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5541,7 +5541,7 @@ const recommendations = {
       rating: "9.2",
       desc: "일본 축구를 혁명하기 위해 최강 스트라이커를 육성하는 프로그램. 독창적인 스포츠 애니.",
       tags: ["스포츠", "축구", "독창적", "경쟁"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5601,7 +5601,7 @@ const recommendations = {
       rating: "8.9",
       desc: "현대 소녀가 악마에게 능력을 받아 이세계에서 살아남는 이야기. 재미있는 비틀기.",
       tags: ["이세계", "코미디", "판타지", "유머"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5625,7 +5625,7 @@ const recommendations = {
       rating: "9.0",
       desc: "악마와 합체한 소년의 악마 사냥 이야기. 독창적이고 충격적인 전개.",
       tags: ["액션", "다크", "독창적", "충격"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5685,7 +5685,7 @@ const recommendations = {
       rating: "9.0",
       desc: "과학 도시 아카데미 시티에서 초능력을 사용하는 소녀들의 이야기.",
       tags: ["SF", "액션", "학원", "슈퍼히어로"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5697,7 +5697,7 @@ const recommendations = {
       rating: "8.5",
       desc: "친구를 만들기 위해 클럽을 만든 소년의 이야기. 독특한 학원 코미디.",
       tags: ["코미디", "학원", "우정", "유머"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5709,7 +5709,7 @@ const recommendations = {
       rating: "9.2",
       desc: "인간 관계에 냉소적인 고등학생의 성장과 사랑 이야기. 깊이 있는 캐릭터와 섬세한 감정.",
       tags: ["로맨스", "청춘", "학원", "성장"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5721,7 +5721,7 @@ const recommendations = {
       rating: "8.7",
       desc: "히로인 자리를 두고 벌어지는 소녀들의 이야기. 귀여운 라이벌 로맨스.",
       tags: ["로맨스", "학원", "코미디", "귀여움"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5733,7 +5733,7 @@ const recommendations = {
       rating: "8.8",
       desc: "절대 행복해지지 않겠다고 다짐한 소녀와 그녀를 좋아하는 소년의 이야기.",
       tags: ["로맨스", "코미디", "학원", "유머"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5745,7 +5745,7 @@ const recommendations = {
       rating: "9.3",
       desc: "가장 약한 헌터가 최강자로 성장하는 이야기. 한국 웹툰 원작. 전 세계에서 화제.",
       tags: ["판타지", "한국웹툰", "성장", "액션"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5757,7 +5757,7 @@ const recommendations = {
       rating: "8.8",
       desc: "슬라임에게 잡아먹혀 이세계의 마왕이 된 소년의 이야기. 한국 웹툰을 원작으로 한 애니.",
       tags: ["이세계", "판타지", "코미디", "한국웹툰"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5769,7 +5769,7 @@ const recommendations = {
       rating: "9.0",
       desc: "죽어서 슬라임으로 전생한 남자가 국가를 건설하는 이야기.",
       tags: ["이세계", "판타지", "성장", "힐링"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5781,7 +5781,7 @@ const recommendations = {
       rating: "9.1",
       desc: "나혼자만 레벨업의 2기. 성진우가 더욱 강해지며 더 큰 위협과 맞닥뜨리는 이야기.",
       tags: ["판타지", "한국웹툰", "액션", "성장"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5817,7 +5817,7 @@ const recommendations = {
       rating: "8.6",
       desc: "이세계로 전이한 소녀가 아이돌로 활약하는 판타지.",
       tags: ["이세계", "음악", "아이돌", "코미디"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5877,7 +5877,7 @@ const recommendations = {
       rating: "9.0",
       desc: "기억을 잃고 이세계를 여행하는 소녀 프리아의 이야기. 감동적인 모험과 성장.",
       tags: ["판타지", "이세계", "성장", "감동"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5889,7 +5889,7 @@ const recommendations = {
       rating: "9.4",
       desc: "마왕을 물리친 영웅 파티의 엘프 마법사가 수백 년 후 혼자 남겨진 이야기. 시간과 이별, 인연을 그린 감동적 판타지.",
       tags: ["판타지", "감동", "철학", "명작"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5901,7 +5901,7 @@ const recommendations = {
       rating: "8.6",
       desc: "안경 쓴 소녀를 사랑하는 소년의 학원 로맨스.",
       tags: ["로맨스", "학원", "귀여움", "순수"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5913,7 +5913,7 @@ const recommendations = {
       rating: "9.2",
       desc: "인류가 부활하는 세계를 그린 웅장한 SF 판타지. 2024년 화제작.",
       tags: ["SF", "판타지", "명작", "2024"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5925,7 +5925,7 @@ const recommendations = {
       rating: "8.6",
       desc: "일본 고등학교 생활의 소소한 일상과 오타쿠 문화를 그린 힐링 코미디.",
       tags: ["코미디", "일상", "힐링", "오타쿠"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5937,7 +5937,7 @@ const recommendations = {
       rating: "9.1",
       desc: "경음악부에서 기타를 연주하는 소녀들의 일상과 음악. 가장 사랑받는 힐링 음악 애니.",
       tags: ["음악", "힐링", "여고생", "감성"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5949,7 +5949,7 @@ const recommendations = {
       rating: "8.9",
       desc: "약한 축구팀을 이끄는 독특한 감독의 이야기. 이변을 만들어내는 전략.",
       tags: ["스포츠", "축구", "전략", "성장"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5997,7 +5997,7 @@ const recommendations = {
       rating: "8.8",
       desc: "중학교 시절 사귀었던 두 남녀가 고등학교에서 다시 만나는 이야기.",
       tags: ["로맨스", "청춘", "학원", "재회"],
-      where: "크런치롤",
+      where: "라프텔",
       image: "",
     },
     {
