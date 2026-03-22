@@ -4875,7 +4875,7 @@ const recommendations = {
       rating: "9.2",
       desc: "지구를 지키기 위해 싸우는 손오공의 이야기. 배틀 애니의 원점. 세대를 초월한 명작.",
       tags: ["액션", "배틀", "명작", "고전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -4887,7 +4887,7 @@ const recommendations = {
       rating: "8.8",
       desc: "포켓몬 마스터를 꿈꾸는 지우와 피카츄의 모험. 전 세계 어린이의 꿈을 키운 애니.",
       tags: ["포켓몬", "모험", "우정", "고전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -4899,7 +4899,7 @@ const recommendations = {
       rating: "8.2",
       desc: "나루토의 아들 보루토의 닌자 이야기. 나루토의 후속작.",
       tags: ["닌자", "성장", "액션", "후속작"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -4949,7 +4949,7 @@ const recommendations = {
       rating: "9.5",
       desc: "세계 정복을 꿈꾸는 천재 왕자의 전략적 반란. 체스 같은 두뇌 게임과 드라마틱한 전개.",
       tags: ["전략", "두뇌", "SF", "반전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -4985,7 +4985,7 @@ const recommendations = {
       rating: "9.3",
       desc: "거대로봇 에반게리온을 타고 싸우는 소년의 이야기. 심층적 심리 묘사와 충격적 결말.",
       tags: ["SF", "심리", "로봇", "명작"],
-      where: "아마존 프라임",
+      where: "넷플릭스",
       image: "",
     },
     {
@@ -5094,7 +5094,7 @@ const recommendations = {
       rating: "9.4",
       desc: "귀여운 마법소녀 이야기처럼 시작하지만... 장르 전복의 충격적인 명작.",
       tags: ["마법소녀", "반전", "철학", "충격"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5106,7 +5106,7 @@ const recommendations = {
       rating: "8.5",
       desc: "사이보그 소녀와 일반 소년의 이야기를 담은 SF 로맨스.",
       tags: ["SF", "로맨스", "학원", "감동"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5130,7 +5130,7 @@ const recommendations = {
       rating: "8.9",
       desc: "가상 세계 OZ에서 벌어지는 위기와 가족의 유대를 그린 호소다 마모루 감독 극장 애니.",
       tags: ["SF", "가족", "감동", "호소다"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5142,7 +5142,7 @@ const recommendations = {
       rating: "9.0",
       desc: "늑대인간과 인간 사이에서 태어난 두 아이를 키우는 어머니의 이야기. 감동적인 성장 이야기.",
       tags: ["가족", "성장", "감동", "호소다"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5154,7 +5154,7 @@ const recommendations = {
       rating: "8.7",
       desc: "네 살 소년이 미래의 여동생과 만나는 환상적인 이야기. 호소다 마모루 감독.",
       tags: ["판타지", "가족", "성장", "호소다"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5166,7 +5166,7 @@ const recommendations = {
       rating: "9.0",
       desc: "가상 세계 U에서 유명 가수가 된 소녀의 이야기. 미녀와 야수를 재해석한 호소다 마모루 감독 작품.",
       tags: ["SF", "음악", "성장", "호소다"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5371,7 +5371,7 @@ const recommendations = {
       rating: "9.0",
       desc: "마법 카드를 모으는 소녀 사쿠라의 이야기. 세대를 초월한 사랑스러운 마법소녀 애니.",
       tags: ["마법소녀", "귀여움", "고전", "명작"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5383,7 +5383,7 @@ const recommendations = {
       rating: "9.0",
       desc: "달의 전사로 각성하는 소녀 사쿠라의 사랑과 전투. 마법소녀 장르의 원형.",
       tags: ["마법소녀", "고전", "명작", "우정"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5395,7 +5395,7 @@ const recommendations = {
       rating: "9.2",
       desc: "미래에서 온 로봇 고양이 도라에몽과 노비타의 이야기. 세대를 초월한 국민 애니.",
       tags: ["코미디", "SF", "고전", "어린이"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5407,7 +5407,7 @@ const recommendations = {
       rating: "8.9",
       desc: "5살 짱구의 엉뚱하고 귀여운 일상. 어른도 공감하는 가족 애니.",
       tags: ["코미디", "가족", "일상", "고전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5432,7 +5432,7 @@ const recommendations = {
       rating: "8.5",
       desc: "다양한 히어로들의 이야기. 초창기 히어로 애니",
       tags: ["히어로", "액션", "가족", "모험"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5468,7 +5468,7 @@ const recommendations = {
       rating: "8.8",
       desc: "파괴자라 불리는 저주받은 공주와 그녀를 지키는 오빠들의 이야기.",
       tags: ["판타지", "판타지", "모험", "감동"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5480,7 +5480,7 @@ const recommendations = {
       rating: "9.0",
       desc: "현대 소녀가 봉건 시대 일본으로 떨어져 반요 이누야샤와 함께 모험하는 이야기.",
       tags: ["판타지", "로맨스", "모험", "고전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5492,7 +5492,7 @@ const recommendations = {
       rating: "8.7",
       desc: "마녀 학교에 다니는 귀여운 소녀 노코의 이야기.",
       tags: ["마법소녀", "귀여움", "어린이", "고전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5553,7 +5553,7 @@ const recommendations = {
       rating: "8.7",
       desc: "레슬링을 통해 성장하는 이야기. 스포츠 애니의 고전.",
       tags: ["스포츠", "레슬링", "성장", "고전"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5565,7 +5565,7 @@ const recommendations = {
       rating: "8.5",
       desc: "어린이 교육 애니. 호랑이 캐릭터 시마지로의 일상과 교육.",
       tags: ["어린이", "교육", "고전", "귀여움"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5577,7 +5577,7 @@ const recommendations = {
       rating: "8.8",
       desc: "일본의 평범한 가족 이야기. 가족의 따뜻함과 웃음을 담은 홈 코미디.",
       tags: ["가족", "코미디", "일상", "힐링"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5673,7 +5673,7 @@ const recommendations = {
       rating: "8.9",
       desc: "고등학교 때의 첫사랑을 그린 감성 로맨스 애니.",
       tags: ["로맨스", "청춘", "학원", "감동"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5829,7 +5829,7 @@ const recommendations = {
       rating: "9.0",
       desc: "기억을 잃고 막대한 돈을 가진 채 발견된 청년의 미스터리. 현대 일본을 배경으로 한 독창적인 SF 스릴러.",
       tags: ["SF", "미스터리", "독창적", "반전"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5841,7 +5841,7 @@ const recommendations = {
       rating: "9.5",
       desc: "학원 로맨스로 시작해 삶과 가족의 의미를 탐구하는 깊은 드라마. '애프터 스토리'와 함께 역대 최고의 감동 애니.",
       tags: ["로맨스", "가족", "감동", "눈물"],
-      where: "왓챠",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5853,7 +5853,7 @@ const recommendations = {
       rating: "8.8",
       desc: "여신이 평범한 청년과 함께 살게 되는 판타지 로맨스. 순수하고 달콤한 사랑 이야기.",
       tags: ["로맨스", "판타지", "고전", "힐링"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5973,7 +5973,7 @@ const recommendations = {
       rating: "8.9",
       desc: "현대 소녀가 고대 중국의 왕을 모시기 위해 이세계로 들어가는 이야기.",
       tags: ["판타지", "역사", "이세계", "로맨스"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -5985,7 +5985,7 @@ const recommendations = {
       rating: "8.8",
       desc: "천재 중학생 테니스 선수 에치젠 료마의 이야기. 스포츠 애니의 명작.",
       tags: ["스포츠", "테니스", "성장", "학원"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
     {
@@ -6009,7 +6009,7 @@ const recommendations = {
       rating: "9.1",
       desc: "동명이인 두 나나의 우정과 사랑, 음악을 담은 성숙한 청춘 로맨스.",
       tags: ["로맨스", "음악", "청춘", "우정"],
-      where: "유튜브",
+      where: "라프텔",
       image: "",
     },
   ],
