@@ -24,6 +24,7 @@ let currentMood = null;
 let currentYear = "all";
 let currentCategory = "all";
 let forcedNextPick = null; // { cat, item } — URL 파라미터로 특정 작품 지정 시 사용
+const seenItems = {}; // { cat: Set<title> } — 세션 내 중복 방지
 
 // ===== OTT URL 매핑 =====
 const ottUrlMap = {
@@ -680,11 +681,13 @@ function pickRandom() {
 
 function revealPick(card, categories) {
   let cat, item;
+  let isForced = false;
 
   if (forcedNextPick) {
     cat = forcedNextPick.cat;
     item = forcedNextPick.item;
     forcedNextPick = null;
+    isForced = true;
   } else {
     cat = currentCategory === "all"
       ? categories[Math.floor(Math.random() * categories.length)]
@@ -708,15 +711,23 @@ function revealPick(card, categories) {
       if (yearFiltered.length > 0) pool = yearFiltered;
     }
 
-    // 직전 항목 제외
-    let filtered = pool.filter(i => !lastItem || i.title !== lastItem.title);
-    if (filtered.length === 0) filtered = pool;
+    // 세션 중복 제외 (다 뽑으면 초기화)
+    if (!seenItems[cat]) seenItems[cat] = new Set();
+    let filtered = pool.filter(i => !seenItems[cat].has(i.title));
+    if (filtered.length === 0) {
+      seenItems[cat].clear(); // 전부 뽑았으면 초기화
+      filtered = pool;
+    }
 
     // 가중치 랜덤 선택
     item = weightedRandom(filtered);
   }
 
   lastItem = item;
+  if (!isForced) {
+    if (!seenItems[cat]) seenItems[cat] = new Set();
+    seenItems[cat].add(item.title);
+  }
 
   // 카드 업데이트
   card.classList.remove("slot-spinning");
