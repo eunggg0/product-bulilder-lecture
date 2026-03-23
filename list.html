@@ -171,6 +171,38 @@
       .list-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .list-hero h1 { font-size: 1.4rem; }
     }
+
+    .list-static-section {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 36px 20px;
+      margin-top: 16px;
+    }
+    .list-static-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .list-static-inner h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .list-static-inner > p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+    .list-static-cats {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .list-static-cats strong { color: var(--text); }
   </style>
 </head>
 <body>
@@ -188,11 +220,6 @@
       <button class="hamburger" onclick="toggleMenu()" title="메뉴">☰</button>
     </div>
   </header>
-
-  <!-- 상단 광고 -->
-  <div class="ad-container ad-top">
-    <div class="ad-placeholder"><span>광고</span></div>
-  </div>
 
   <div class="list-hero">
     <h1>📋 전체 추천 목록</h1>
@@ -215,19 +242,24 @@
   </div>
 
   <div class="list-container">
-    <!-- 중간 광고 -->
-    <div class="ad-container ad-middle" style="padding:0 0 20px">
-      <div class="ad-placeholder"><span>광고</span></div>
-    </div>
-
     <div class="list-count" id="listCount"></div>
     <div class="list-grid" id="listGrid"></div>
   </div>
 
-  <!-- 하단 광고 -->
-  <div class="ad-container ad-bottom">
-    <div class="ad-placeholder"><span>광고</span></div>
-  </div>
+  <!-- 정적 콘텐츠 섹션 -->
+  <section class="list-static-section">
+    <div class="list-static-inner">
+      <h2>500개 엄선 콘텐츠 목록이란?</h2>
+      <p>오늘의 픽은 영화 100편, 드라마 100편, 애니메이션 100편, 책 100권, 게임 100개 — 총 500개의 작품을 전문가 기준으로 엄선하여 제공합니다. 평점, 수상 이력, 대중성, OTT 접근성을 종합적으로 고려해 선정한 목록입니다.</p>
+      <div class="list-static-cats">
+        <div><strong>🎬 영화</strong> — 기생충, 인터스텔라, 올드보이, 센과 치히로의 행방불명 등 국내외 명작 100편</div>
+        <div><strong>📺 드라마</strong> — 오징어 게임, 브레이킹 배드, 더 글로리, 도깨비 등 화제작 100편</div>
+        <div><strong>✨ 애니</strong> — 진격의 거인, 귀멸의 칼날, 지브리 시리즈 등 명작 100편</div>
+        <div><strong>📚 책</strong> — 채식주의자, 삼체, 어린 왕자, 해리포터 등 베스트셀러 100권</div>
+        <div><strong>🎮 게임</strong> — 엘든 링, 젤다의 전설, 발로란트, 스텔라블레이드 등 100개</div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="footer-inner">
