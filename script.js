@@ -25,6 +25,7 @@ let currentYear = "all";
 let currentCategory = "all";
 let forcedNextPick = null; // { cat, item } — URL 파라미터로 특정 작품 지정 시 사용
 const seenItems = {}; // { cat: Set<title> } — 세션 내 중복 방지
+let isAnimating = false; // 중복 클릭 방지
 
 // ===== OTT URL 매핑 =====
 const ottUrlMap = {
@@ -648,6 +649,12 @@ async function shareImage() {
 
 // ===== 핵심: 뽑기 함수 (슬롯 애니메이션 + 가중치 랜덤) =====
 function pickRandom() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  const pickBtn = document.getElementById("pickBtn");
+  if (pickBtn) pickBtn.disabled = true;
+
   const card = document.getElementById("recCard");
   const categories = ["movie", "drama", "anime", "book", "game"];
 
@@ -843,6 +850,11 @@ function revealPick(card, categories) {
   // Supabase 기록
   recordPick(cat, item.title);
   setTimeout(loadTodayCounter, 500);
+
+  // 애니메이션 완료 — 버튼 재활성화
+  isAnimating = false;
+  const pickBtn = document.getElementById("pickBtn");
+  if (pickBtn) pickBtn.disabled = false;
 }
 
 // ===== 통계 업데이트 =====

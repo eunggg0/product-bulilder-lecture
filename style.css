@@ -357,6 +357,7 @@ main {
 }
 
 .btn-pick:active { transform: translateY(0); }
+.btn-pick:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
 .btn-secondary-row {
   display: flex;
