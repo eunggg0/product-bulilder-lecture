@@ -2260,7 +2260,6 @@ const recommendations = {
       image: "",
     },
     {
-    {
       title: "비밀의 숲2",
       enTitle: "Forest of Secrets 2",
       emoji: "🌲",
@@ -3549,7 +3548,6 @@ const recommendations = {
       where: "교보문고/알라딘",
       image: "",
     },
-    {
     {
       title: "어서오세요, 휴남동 서점입니다",
       enTitle: "Welcome to the Hyunam-dong Bookshop",
@@ -5968,7 +5966,6 @@ const recommendations = {
       image: "",
     },
     {
-    {
       title: "토라도라!",
       enTitle: "Toradora",
       emoji: "🐯",
@@ -5980,7 +5977,6 @@ const recommendations = {
       where: "라프텔",
       image: "",
     },
-    {
     {
       title: "목소리의 형태",
       enTitle: "A Silent Voice",
