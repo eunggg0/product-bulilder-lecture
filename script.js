@@ -367,6 +367,13 @@ function updateFavorites() {
 function toggleMenu() {
   document.getElementById("mainNav").classList.toggle("open");
 }
+document.addEventListener("click", function (e) {
+  const nav = document.getElementById("mainNav");
+  const hamburger = document.getElementById("hamburger");
+  if (nav && nav.classList.contains("open") && !nav.contains(e.target) && e.target !== hamburger) {
+    nav.classList.remove("open");
+  }
+});
 
 // ===== 뱃지 정의 =====
 const badgeDefs = [

@@ -299,6 +299,8 @@ main {
   font-weight: 800;
   margin-bottom: 8px;
   color: var(--text);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .card-meta {
@@ -606,17 +608,25 @@ footer a:hover { color: #fff; }
   .hero { padding: 24px 16px 14px; }
   .hero h1 { font-size: 1.5rem; }
   .hero-sub { font-size: 0.9rem; }
-  .recommendation-card { flex-direction: column; align-items: center; text-align: center; padding: 20px 16px; gap: 16px; }
+  .recommendation-card { flex-direction: column; align-items: center; text-align: center; padding: 20px 16px; gap: 16px; min-height: unset; }
   .card-poster-wrap { width: 100px; min-width: 100px; }
   .card-poster-img { width: 100px; height: 150px; }
   .card-poster { font-size: 4rem; }
+  .card-info h2 { font-size: 1.2rem; word-break: keep-all; overflow-wrap: break-word; }
   .card-tags { justify-content: center; }
   .ott-buttons { justify-content: center; }
   .card-reason { justify-content: center; }
   .btn-pick { font-size: 1rem; padding: 15px 20px; }
-  .btn-fate { padding: 10px 14px; font-size: 0.82rem; }
-  .btn-share-icon { width: 34px; height: 34px; font-size: 0.9rem; }
-  .filter-row { border-radius: 16px; padding: 8px 10px; }
+  .btn-fate { padding: 10px 14px; font-size: 0.82rem; white-space: normal; flex: 1; }
+  .btn-secondary-row { flex-wrap: wrap; }
+  .share-icon-group { margin-left: 0; justify-content: center; width: 100%; }
+  .btn-share-icon { width: 36px; height: 36px; font-size: 0.9rem; }
+  .category-tabs { gap: 6px; }
+  .tab { padding: 7px 14px; font-size: 0.85rem; }
+  .filter-row { border-radius: 16px; padding: 8px 10px; gap: 6px; }
+  .mood-btn { padding: 5px 10px; font-size: 0.75rem; }
+  .fate-inner { padding: 32px 20px 24px; max-height: 85vh; overflow-y: auto; }
+  .suggest-inner { padding: 28px 20px; max-height: 90vh; overflow-y: auto; }
   .hamburger { display: block; }
   nav {
     display: none;
