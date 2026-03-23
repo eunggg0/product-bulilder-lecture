@@ -173,6 +173,8 @@ async function loadTodayCounter() {
 async function loadPopularPicks() {
   const el = document.getElementById("popularList");
   if (!el) return;
+  // 3초 안에 안 오면 fallback
+  const timeout = setTimeout(() => renderPopularFallback(el), 3000);
   try {
     const today = new Date().toISOString().slice(0, 10);
     const res = await fetch(
@@ -184,6 +186,8 @@ async function loadPopularPicks() {
         },
       }
     );
+    clearTimeout(timeout);
+    if (!res.ok) { renderPopularFallback(el); return; }
     const data = await res.json();
     if (!Array.isArray(data) || data.length === 0) {
       renderPopularFallback(el);
@@ -214,6 +218,7 @@ async function loadPopularPicks() {
         </div>`;
     }).join("");
   } catch {
+    clearTimeout(timeout);
     renderPopularFallback(el);
   }
 }
@@ -688,7 +693,18 @@ function pickRandom() {
     }
     if (frame >= totalFrames) {
       clearInterval(interval);
-      revealPick(card, categories);
+      try {
+        revealPick(card, categories);
+      } catch (e) {
+        console.error("revealPick error:", e);
+        card.classList.remove("slot-spinning");
+        document.getElementById("cardTitle").textContent = "다시 시도해주세요";
+        document.getElementById("cardDesc").textContent = "";
+      } finally {
+        isAnimating = false;
+        const pickBtn = document.getElementById("pickBtn");
+        if (pickBtn) pickBtn.disabled = false;
+      }
     }
   }, 70);
 }
@@ -850,11 +866,6 @@ function revealPick(card, categories) {
   // Supabase 기록
   recordPick(cat, item.title);
   setTimeout(loadTodayCounter, 500);
-
-  // 애니메이션 완료 — 버튼 재활성화
-  isAnimating = false;
-  const pickBtn = document.getElementById("pickBtn");
-  if (pickBtn) pickBtn.disabled = false;
 }
 
 // ===== 통계 업데이트 =====
